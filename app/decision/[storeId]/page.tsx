@@ -4,13 +4,15 @@ export const instant = false; // blocking route (Next 16 cache components): para
 import { notFound } from "next/navigation";
 import DecisionCard from "@/components/DecisionCard";
 import SampleBadge from "@/components/SampleBadge";
-import { getStore, getDecision } from "@/lib/data";
+import { getStore } from "@/lib/data";
+import { getDecisionForStore } from "@/lib/decision";
 import { copy } from "@/content/copy";
 
 export default async function DecisionPage({ params }: { params: Promise<{ storeId: string }> }) {
   const { storeId } = await params;
   const store = getStore(storeId);
-  const decision = getDecision(storeId);
+  const out = await getDecisionForStore(storeId);
+  const decision = out?.decision;
   if (!store || !decision) notFound();
   return (
     <div className="space-y-4">

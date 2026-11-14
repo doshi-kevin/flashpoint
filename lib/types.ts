@@ -10,12 +10,34 @@ export type HypothesisStatus =
   | "Weak"
   | "Contradicted"
   | "Insufficient info";
-export type Hypothesis = { claim: string; supporting: string[]; counter: string[]; status: HypothesisStatus };
+export type Hypothesis = {
+  claim: string;
+  supporting: string[];
+  counter: string[];
+  status: HypothesisStatus;
+  /** Added by the Challenger agent (optional). */
+  challenge?: string;
+};
+export type VerdictLabel = "temporary" | "structural" | "unclear";
+export type Verdict = { label: VerdictLabel; reason: string };
+export type Challenge = { claim: string; challenge: string; newStatus: HypothesisStatus };
+export type TraceStep = { step: string; detail: string; source: string };
 export type Investigation = {
   hypotheses: Hypothesis[];
   unknown: string;
   question: { text: string; options: string[] };
   rationale: string;
+  /** Optional additions (all computed server-side). */
+  verdict?: Verdict;
+  challenges?: Challenge[];
+  trace?: TraceStep[];
+};
+export type TrafficPoint = { date: string; visits: number; avgTicket: number };
+export type StudyVerdict = {
+  strength: "Strongly supported" | "Plausible" | "Insufficient info";
+  predictionHeld: boolean;
+  realTop: string;
+  syntheticTop: string;
 };
 export type StudyResults = {
   question: string;
