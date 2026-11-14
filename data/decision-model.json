@@ -1,0 +1,69 @@
+{
+  "_label": "DESIGNED: editable assumptions for the decision model. Every number here is an assumption the sensitivity analysis varies; nothing here is measured.",
+  "14": {
+    "horizonWeeks": 8,
+    "contributionMargin": 0.6,
+    "hypotheses": [
+      { "id": "speed", "label": "Speed and access (drive-thru queue, lane closure)", "option": "Faster line", "prior": 0.4 },
+      { "id": "price", "label": "Price (rival's $5 deal)", "option": "$1 off", "prior": 0.35 },
+      { "id": "menu", "label": "Menu or something else", "option": "Extra cheese", "prior": 0.25 }
+    ],
+    "priorStrength": 6,
+    "actions": [
+      {
+        "id": "promo",
+        "label": "Run a $1-off lunch promo",
+        "fixedCost": 0,
+        "costPerWeek": 0,
+        "costPerLunchVisit": 0.4,
+        "recovery": { "speed": 0.1, "price": 0.7, "menu": 0.15 },
+        "note": "$1 off, used on about 40% of lunch orders"
+      },
+      {
+        "id": "speed_fix",
+        "label": "Second order-taker on the lunch drive-thru until the roadworks end",
+        "fixedCost": 300,
+        "costPerWeek": 540,
+        "costPerLunchVisit": 0,
+        "recovery": { "speed": 0.65, "price": 0.1, "menu": 0.05 },
+        "note": "3.5 h a day at $22/h, plus $300 of signage and map updates"
+      },
+      {
+        "id": "menu_perk",
+        "label": "Free extra cheese at lunch",
+        "fixedCost": 0,
+        "costPerWeek": 0,
+        "costPerLunchVisit": 0.35,
+        "recovery": { "speed": 0.05, "price": 0.2, "menu": 0.6 },
+        "note": "Food cost of the perk"
+      },
+      {
+        "id": "wait",
+        "label": "Do nothing and wait for the roadworks to end",
+        "fixedCost": 0,
+        "costPerWeek": 0,
+        "costPerLunchVisit": 0,
+        "recovery": { "speed": 0, "price": 0, "menu": 0 },
+        "note": "Baseline"
+      }
+    ],
+    "evidenceRungs": [
+      {
+        "id": "own_list",
+        "label": "Flashpoint survey to our own lapsed customers",
+        "completes": 120,
+        "cost": 116,
+        "costNote": "2,000 invites at $0.01 (Flashpoint pay-as-you-go) + the same $2 coupon for every respondent, ~40% redeemed",
+        "latency": "hours"
+      },
+      {
+        "id": "panel",
+        "label": "Flashpoint ZIP-targeted panel of local residents",
+        "completes": 120,
+        "cost": 1140,
+        "costNote": "PLACEHOLDER until Kevin gets a real Flashpoint panel quote (~$9.50 per complete)",
+        "latency": "1-7 days"
+      }
+    ]
+  }
+}

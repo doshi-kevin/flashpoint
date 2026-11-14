@@ -1,0 +1,609 @@
+{
+  "14": {
+    "label": "REPLAY: arrival order of the study answers; counts from study-results.json",
+    "question": "What would bring you back to Store 14 for lunch?",
+    "targetN": 120,
+    "answers": [
+      {
+        "n": 1,
+        "at": "2026-11-14T14:00:51Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 2,
+        "at": "2026-11-14T14:01:39Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 3,
+        "at": "2026-11-14T14:02:04Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 4,
+        "at": "2026-11-14T14:02:36Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 5,
+        "at": "2026-11-14T14:04:06Z",
+        "option": "Extra cheese"
+      },
+      {
+        "n": 6,
+        "at": "2026-11-14T14:04:40Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 7,
+        "at": "2026-11-14T14:04:54Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 8,
+        "at": "2026-11-14T14:05:53Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 9,
+        "at": "2026-11-14T14:06:53Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 10,
+        "at": "2026-11-14T14:07:44Z",
+        "option": "$1 off"
+      },
+      {
+        "n": 11,
+        "at": "2026-11-14T14:07:55Z",
+        "option": "$1 off"
+      },
+      {
+        "n": 12,
+        "at": "2026-11-14T14:07:56Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 13,
+        "at": "2026-11-14T14:07:59Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 14,
+        "at": "2026-11-14T14:08:08Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 15,
+        "at": "2026-11-14T14:08:28Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 16,
+        "at": "2026-11-14T14:08:55Z",
+        "option": "$1 off"
+      },
+      {
+        "n": 17,
+        "at": "2026-11-14T14:10:03Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 18,
+        "at": "2026-11-14T14:11:50Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 19,
+        "at": "2026-11-14T14:12:22Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 20,
+        "at": "2026-11-14T14:12:25Z",
+        "option": "$1 off"
+      },
+      {
+        "n": 21,
+        "at": "2026-11-14T14:13:02Z",
+        "option": "$1 off"
+      },
+      {
+        "n": 22,
+        "at": "2026-11-14T14:13:26Z",
+        "option": "Extra cheese"
+      },
+      {
+        "n": 23,
+        "at": "2026-11-14T14:14:04Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 24,
+        "at": "2026-11-14T14:14:47Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 25,
+        "at": "2026-11-14T14:14:47Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 26,
+        "at": "2026-11-14T14:15:08Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 27,
+        "at": "2026-11-14T14:15:48Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 28,
+        "at": "2026-11-14T14:16:33Z",
+        "option": "$1 off"
+      },
+      {
+        "n": 29,
+        "at": "2026-11-14T14:16:38Z",
+        "option": "Extra cheese"
+      },
+      {
+        "n": 30,
+        "at": "2026-11-14T14:21:22Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 31,
+        "at": "2026-11-14T14:21:50Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 32,
+        "at": "2026-11-14T14:21:54Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 33,
+        "at": "2026-11-14T14:22:37Z",
+        "option": "$1 off"
+      },
+      {
+        "n": 34,
+        "at": "2026-11-14T14:23:01Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 35,
+        "at": "2026-11-14T14:23:43Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 36,
+        "at": "2026-11-14T14:24:38Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 37,
+        "at": "2026-11-14T14:24:42Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 38,
+        "at": "2026-11-14T14:26:36Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 39,
+        "at": "2026-11-14T14:27:03Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 40,
+        "at": "2026-11-14T14:27:47Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 41,
+        "at": "2026-11-14T14:28:03Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 42,
+        "at": "2026-11-14T14:28:09Z",
+        "option": "Extra cheese"
+      },
+      {
+        "n": 43,
+        "at": "2026-11-14T14:28:58Z",
+        "option": "Extra cheese"
+      },
+      {
+        "n": 44,
+        "at": "2026-11-14T14:29:46Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 45,
+        "at": "2026-11-14T14:30:33Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 46,
+        "at": "2026-11-14T14:31:58Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 47,
+        "at": "2026-11-14T14:33:18Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 48,
+        "at": "2026-11-14T14:33:19Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 49,
+        "at": "2026-11-14T14:34:06Z",
+        "option": "Extra cheese"
+      },
+      {
+        "n": 50,
+        "at": "2026-11-14T14:34:27Z",
+        "option": "$1 off"
+      },
+      {
+        "n": 51,
+        "at": "2026-11-14T14:34:35Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 52,
+        "at": "2026-11-14T14:35:00Z",
+        "option": "$1 off"
+      },
+      {
+        "n": 53,
+        "at": "2026-11-14T14:35:24Z",
+        "option": "Extra cheese"
+      },
+      {
+        "n": 54,
+        "at": "2026-11-14T14:35:27Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 55,
+        "at": "2026-11-14T14:37:06Z",
+        "option": "$1 off"
+      },
+      {
+        "n": 56,
+        "at": "2026-11-14T14:38:10Z",
+        "option": "$1 off"
+      },
+      {
+        "n": 57,
+        "at": "2026-11-14T14:38:14Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 58,
+        "at": "2026-11-14T14:39:29Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 59,
+        "at": "2026-11-14T14:39:50Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 60,
+        "at": "2026-11-14T14:39:58Z",
+        "option": "Extra cheese"
+      },
+      {
+        "n": 61,
+        "at": "2026-11-14T14:42:37Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 62,
+        "at": "2026-11-14T14:43:16Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 63,
+        "at": "2026-11-14T14:43:21Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 64,
+        "at": "2026-11-14T14:43:21Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 65,
+        "at": "2026-11-14T14:45:09Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 66,
+        "at": "2026-11-14T14:45:15Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 67,
+        "at": "2026-11-14T14:45:18Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 68,
+        "at": "2026-11-14T14:45:20Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 69,
+        "at": "2026-11-14T14:45:29Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 70,
+        "at": "2026-11-14T14:46:16Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 71,
+        "at": "2026-11-14T14:47:57Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 72,
+        "at": "2026-11-14T14:48:07Z",
+        "option": "$1 off"
+      },
+      {
+        "n": 73,
+        "at": "2026-11-14T14:49:01Z",
+        "option": "$1 off"
+      },
+      {
+        "n": 74,
+        "at": "2026-11-14T14:50:03Z",
+        "option": "$1 off"
+      },
+      {
+        "n": 75,
+        "at": "2026-11-14T14:50:40Z",
+        "option": "$1 off"
+      },
+      {
+        "n": 76,
+        "at": "2026-11-14T14:53:03Z",
+        "option": "$1 off"
+      },
+      {
+        "n": 77,
+        "at": "2026-11-14T14:53:17Z",
+        "option": "Extra cheese"
+      },
+      {
+        "n": 78,
+        "at": "2026-11-14T14:53:51Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 79,
+        "at": "2026-11-14T14:54:34Z",
+        "option": "$1 off"
+      },
+      {
+        "n": 80,
+        "at": "2026-11-14T14:54:35Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 81,
+        "at": "2026-11-14T14:55:14Z",
+        "option": "$1 off"
+      },
+      {
+        "n": 82,
+        "at": "2026-11-14T14:55:26Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 83,
+        "at": "2026-11-14T14:56:03Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 84,
+        "at": "2026-11-14T14:57:51Z",
+        "option": "$1 off"
+      },
+      {
+        "n": 85,
+        "at": "2026-11-14T14:58:39Z",
+        "option": "$1 off"
+      },
+      {
+        "n": 86,
+        "at": "2026-11-14T14:58:55Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 87,
+        "at": "2026-11-14T15:00:08Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 88,
+        "at": "2026-11-14T15:00:58Z",
+        "option": "Extra cheese"
+      },
+      {
+        "n": 89,
+        "at": "2026-11-14T15:01:14Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 90,
+        "at": "2026-11-14T15:02:48Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 91,
+        "at": "2026-11-14T15:04:54Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 92,
+        "at": "2026-11-14T15:06:23Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 93,
+        "at": "2026-11-14T15:06:38Z",
+        "option": "$1 off"
+      },
+      {
+        "n": 94,
+        "at": "2026-11-14T15:07:12Z",
+        "option": "$1 off"
+      },
+      {
+        "n": 95,
+        "at": "2026-11-14T15:08:04Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 96,
+        "at": "2026-11-14T15:08:15Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 97,
+        "at": "2026-11-14T15:08:19Z",
+        "option": "$1 off"
+      },
+      {
+        "n": 98,
+        "at": "2026-11-14T15:08:34Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 99,
+        "at": "2026-11-14T15:08:46Z",
+        "option": "$1 off"
+      },
+      {
+        "n": 100,
+        "at": "2026-11-14T15:09:22Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 101,
+        "at": "2026-11-14T15:10:20Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 102,
+        "at": "2026-11-14T15:10:42Z",
+        "option": "$1 off"
+      },
+      {
+        "n": 103,
+        "at": "2026-11-14T15:12:08Z",
+        "option": "$1 off"
+      },
+      {
+        "n": 104,
+        "at": "2026-11-14T15:12:44Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 105,
+        "at": "2026-11-14T15:13:28Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 106,
+        "at": "2026-11-14T15:13:39Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 107,
+        "at": "2026-11-14T15:14:19Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 108,
+        "at": "2026-11-14T15:15:33Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 109,
+        "at": "2026-11-14T15:16:17Z",
+        "option": "Extra cheese"
+      },
+      {
+        "n": 110,
+        "at": "2026-11-14T15:17:05Z",
+        "option": "$1 off"
+      },
+      {
+        "n": 111,
+        "at": "2026-11-14T15:17:20Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 112,
+        "at": "2026-11-14T15:17:45Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 113,
+        "at": "2026-11-14T15:18:57Z",
+        "option": "$1 off"
+      },
+      {
+        "n": 114,
+        "at": "2026-11-14T15:20:04Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 115,
+        "at": "2026-11-14T15:20:13Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 116,
+        "at": "2026-11-14T15:20:45Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 117,
+        "at": "2026-11-14T15:22:53Z",
+        "option": "$1 off"
+      },
+      {
+        "n": 118,
+        "at": "2026-11-14T15:23:01Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 119,
+        "at": "2026-11-14T15:24:13Z",
+        "option": "Faster line"
+      },
+      {
+        "n": 120,
+        "at": "2026-11-14T15:25:03Z",
+        "option": "Faster line"
+      }
+    ]
+  }
+}
