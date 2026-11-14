@@ -40,11 +40,12 @@ const precedents = [
   },
 ];
 
-const tone = { Observed: "good", Inferred: "warn", Unknown: "bad" } as const;
+const tone = { Observed: "good", Inferred: "warn", Unknown: "neutral" } as const;
+const icon = { Observed: "●", Inferred: "◐", Unknown: "○" } as const;
 
 export default function PrecedentsPanel() {
   return (
-    <div className="space-y-3 rounded border border-line bg-panel p-4">
+    <div className="space-y-4 rounded-2xl border border-line/80 bg-card/85 p-4">
       <div className="flex items-center justify-between gap-2">
         <p className="label">News and precedents</p>
         <Badge tone="sample">Sample data</Badge>
@@ -52,19 +53,21 @@ export default function PrecedentsPanel() {
       <ul className="space-y-2">
         {signals.map((s) => (
           <li key={s.text} className="flex items-start gap-2 text-sm">
-            <Badge tone={tone[s.label]}>{s.label}</Badge>
+            <Badge tone={tone[s.label]}>
+              <span aria-hidden>{icon[s.label]}</span> {s.label}
+            </Badge>
             <span>{s.text}</span>
           </li>
         ))}
       </ul>
       <div className="flex items-center gap-2 pt-1">
         <p className="label">Precedents</p>
-        <Badge tone="neutral">Analogy, not proof</Badge>
+        <Badge tone="designed">Analogy, not proof</Badge>
       </div>
       <div className="grid gap-3 md:grid-cols-2">
         {precedents.map((p) => (
-          <div key={p.name} className="rounded border border-line p-3 text-sm">
-            <p className="font-semibold">{p.name}</p>
+          <div key={p.name} className="rounded-2xl border border-line/80 bg-paper/70 p-3 text-sm">
+            <p className="font-extrabold">{p.name}</p>
             <p className="mt-1"><span className="font-medium">What happened:</span> {p.worked}</p>
             <p><span className="font-medium">Why:</span> {p.why}</p>
             <p><span className="font-medium">What&apos;s different today:</span> {p.different}</p>

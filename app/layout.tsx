@@ -1,26 +1,28 @@
-// Root layout: app shell (left sidebar + top bar + content). Font: Inter.
+// Root layout: top header + content + footer. Fonts: Hanken Grotesk (UI), DM Mono (data, labels), Newsreader (quoted words).
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Hanken_Grotesk, DM_Mono, Newsreader } from "next/font/google";
 import "./globals.css";
-import Sidebar from "@/components/Sidebar";
-import TopBar from "@/components/TopBar";
+import AppHeader from "@/components/AppHeader";
 import { copy } from "@/content/copy";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const hanken = Hanken_Grotesk({ subsets: ["latin"], variable: "--font-hanken" });
+const dmMono = DM_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-dmmono" });
+const newsreader = Newsreader({ subsets: ["latin"], style: ["normal", "italic"], variable: "--font-newsreader" });
 
 export const metadata: Metadata = { title: copy.appName, description: copy.tagline };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${hanken.variable} ${dmMono.variable} ${newsreader.variable}`}>
       <body className="antialiased">
-        <div className="flex min-h-screen">
-          <Sidebar />
-          <div className="flex min-w-0 flex-1 flex-col">
-            <TopBar />
-            <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-6">{children}</main>
+        <AppHeader />
+        <main className="mx-auto w-full max-w-[1120px] px-4 pb-16 pt-8 sm:px-8">{children}</main>
+        <footer className="border-t border-line/60 bg-soft/60 backdrop-blur-md">
+          <div className="mx-auto flex max-w-[1120px] flex-col justify-between gap-2 px-4 py-5 font-mono text-xs text-muted sm:flex-row sm:px-8">
+            <span className="uppercase tracking-wider">{copy.footer.left}</span>
+            <span>{copy.footer.right}</span>
           </div>
-        </div>
+        </footer>
       </body>
     </html>
   );

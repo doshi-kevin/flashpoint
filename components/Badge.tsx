@@ -1,24 +1,25 @@
-// Status lozenge (Jira style). Props: children (text), tone ("neutral" | "info" | "sample" | "good" | "warn" | "bad").
-// Always uppercase words, so status is never shown by colour alone.
+// Status pill. Props: children (text), tone (see `tones`).
+// Every tone differs by fill, outline or pattern as well as color, so status never relies on color alone.
+// "info" = in progress (filled ink). "real" = lime (real people). "synthetic" = grey hatched (AI-predicted).
 const tones = {
-  neutral: "bg-soft text-muted",
-  info: "bg-[#e9f2ff] text-info",
-  sample: "bg-[#fff1ec] text-accent-ink",
-  good: "bg-[#dcfff1] text-good",
-  warn: "bg-[#fff7d6] text-warn",
-  bad: "bg-[#ffeceb] text-[#ae2e24]",
+  neutral: "bg-line text-ink-2",
+  info: "bg-ink text-paper",
+  sample: "border border-dashed border-line-strong text-ink-2",
+  replay: "border border-dashed border-line-strong text-ink-2",
+  designed: "border border-ink-2 text-ink-2",
+  synthetic: "hatch text-ink",
+  real: "bg-lime text-ink ring-1 ring-ink/25",
+  good: "bg-moss-soft text-moss",
+  warn: "bg-ochre-soft text-ochre",
+  bad: "bg-crimson-soft text-crimson",
 };
 
-export default function Badge({
-  children,
-  tone = "neutral",
-}: {
-  children: React.ReactNode;
-  tone?: keyof typeof tones;
-}) {
+export type BadgeTone = keyof typeof tones;
+
+export default function Badge({ children, tone = "neutral" }: { children: React.ReactNode; tone?: BadgeTone }) {
   return (
     <span
-      className={`inline-block shrink-0 rounded-[3px] px-1.5 py-0.5 text-[11px] font-bold uppercase tracking-wide ${tones[tone]}`}
+      className={`inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded px-1.5 py-0.5 font-mono text-[11px] font-medium uppercase tracking-wide ${tones[tone]}`}
     >
       {children}
     </span>
