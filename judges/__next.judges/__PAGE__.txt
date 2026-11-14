@@ -1,0 +1,30 @@
+1:"$Sreact.fragment"
+2:"/flashpoint/_next/static/chunks/3b7d35nsyfqw4.js"
+3:I[35235,["$2"],"default"]
+4:I[39756,["$2"],"default"]
+5:I[37457,["$2"],"default"]
+c:"/flashpoint/_next/static/chunks/1qhprz2rp-91q.js"
+d:I[1152,["$2","$c"],"default"]
+e:I[97367,["$2"],"OutletBoundary"]
+f:"$Sreact.suspense"
+12:"ViewportBoundary"
+13:I[97367,["$2"],"$12"]
+14:"MetadataBoundary"
+15:I[97367,["$2"],"$14"]
+16:I[27201,["$2"],"IconMark"]
+:HL["/flashpoint/_next/static/chunks/2_52uc1h2_stz.css","style"]
+7:X
+a:X
+a:C
+b:[["children",{"s":"__PAGE__","h":160,"d":{"r":["$","$1","c",{"children":[["$","div",null,{"className":"space-y-8","children":[["$","div",null,{"className":"space-y-2","children":[["$","p",null,{"className":"label","children":"Judge feedback"}],["$","h1",null,{"className":"text-4xl font-black tracking-tight sm:text-6xl","children":"What did you think?"}],["$","p",null,{"className":"max-w-2xl text-lg font-semibold text-ink-2","children":"Three quick questions. Your answers tell us what to build for our first customers."}]]}],["$","div",null,{"className":"amber-card grid items-center gap-8 p-6 sm:p-10 md:grid-cols-[auto_1fr]","children":[["$","div",null,{"className":"truth-card flex justify-center p-5","children":["$","$Ld",null,{"url":"https://flashpointopinions.com/1a0f8808-6a43-4880-9f03-49c8e689095a","size":240}]}],["$","div",null,{"className":"space-y-4","children":[["$","ul",null,{"className":"space-y-2 text-2xl font-black leading-tight","children":[["$","li",null,{"children":"1. Would you use this?"}],["$","li",null,{"children":"2. What convinced you most?"}],["$","li",null,{"children":"3. What would make you a customer?"}]]}],["$","span",null,{"className":"inline-flex items-center gap-2 rounded-md border border-ink/15 bg-card py-1 pl-1 pr-2.5 text-xs font-semibold text-ink","children":[["$","span",null,{"className":"grid h-5 w-5 place-items-center rounded bg-lime","aria-hidden":"true","children":["$","svg",null,{"width":"12","height":"12","viewBox":"0 0 12 12","children":["$","path",null,{"d":"M7 1L2.5 7H6l-1 4 4.5-6H6l1-4z","fill":"#1c1b18"}]}]}],"Survey run on Flashpoint","$undefined"]}]]}]]}]]}],[["$","script","script-0",{"src":"/flashpoint/_next/static/chunks/1qhprz2rp-91q.js","async":true}]],["$","$Le",null,{"children":["$","$f",null,{"name":"Next.MetadataOutlet","children":"$@10"}]}]]}],"p":"$@11","v":null,"s":"$7"}}]]
+8:[["children",{"s":"judges","h":96,"d":{"r":["$","$1","c",{"children":[null,["$","$L4",null,{"parallelRouterKey":"children","template":["$","$L5",null,{}]}]]}],"p":"$@9","v":"$a","s":"$7"},"c":"$Qb"}]]
+0:{"t":{"t":{"s":"","h":80,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/flashpoint/_next/static/chunks/2_52uc1h2_stz.css","precedence":"next"}],["$","script","script-0",{"src":"/flashpoint/_next/static/chunks/3b7d35nsyfqw4.js","async":true}]],["$","html",null,{"lang":"en","className":"Uixioq_variable IGKjBW_variable NYp6Iq_variable","children":["$","body",null,{"className":"antialiased","children":[["$","$L3",null,{}],["$","main",null,{"className":"mx-auto w-full max-w-[1120px] px-4 pb-16 pt-8 sm:px-8","children":["$","$L4",null,{"parallelRouterKey":"children","template":["$","$L5",null,{}],"notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]]}]}],["$","footer",null,{"className":"border-t border-line/60 bg-soft/60 backdrop-blur-md","children":["$","div",null,{"className":"mx-auto flex max-w-[1120px] flex-col justify-between gap-2 px-4 py-5 font-mono text-xs text-muted sm:flex-row sm:px-8","children":[["$","span",null,{"className":"uppercase tracking-wider","children":"Case dossier · demo with sample data from a fictional chain"}],["$","span",null,{"children":"Numbers computed in code · real answers via Flashpoint"}]]}]}]]}]}]]}],"p":"$@6","v":null,"s":"$7"},"c":"$Q8"},"h":{"r":["$","$1","h",{"children":[null,["$","$L13",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","$L15",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$f",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Unknown"}],["$","meta","1",{"name":"description","content":"Claude knows what it doesn't know. Flashpoint goes and asks."}],["$","link","2",{"rel":"icon","href":"/flashpoint/favicon.ico?favicon.117ezoe8m31dk.ico","sizes":"48x48","type":"image/x-icon"}],["$","$L16","3",{}]]}]}],null]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"p":"$@17","v":null,"s":"$7"}},"a":"$@18","u":"$@19","b":"1kxXIv3MmGcb_l0xni3cP"}
+10:null
+7:300
+19:true
+7:C
+18:0
+9:"$undefined"
+6:"$undefined"
+17:"$undefined"
+11:"$undefined"
