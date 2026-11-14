@@ -1,0 +1,280 @@
+{
+  "_labels": {
+    "desk": "SYNTHETIC: fictional trade areas; desk data stands in for census, traffic and listings data",
+    "assumptions": "DESIGNED: editable economics; the sensitivity analysis varies these",
+    "survey": "SIMULATED Flashpoint ZIP-panel results until the study is fielded (spec below is ready to run)",
+    "experiment": "SIMULATED Flashpoint Market Experiment results until run (spec below is ready to run)"
+  },
+  "decision": "Where should Kevin open store #51, and with which menu concept?",
+  "assumptions": {
+    "buildCost": 2000000,
+    "contributionMargin": 0.2,
+    "years": 10,
+    "discountRate": 0.1,
+    "visitsPerUserPerWeek": 1.1,
+    "sayDoBase": 0.45,
+    "sayDoPerPullPoint": 0.004,
+    "competitorDrag": 0.08,
+    "passByCapture": 0.006
+  },
+  "candidates": [
+    {
+      "id": "A",
+      "name": "Ridgeway Junction",
+      "zips": [
+        "Z-101",
+        "Z-102"
+      ],
+      "story": "Busy commuter corridor off the highway. Looks best on paper.",
+      "desk": {
+        "adults3mi": 52000,
+        "medianIncome": 84000,
+        "dailyTraffic": 46000,
+        "burgerCompetitors": 7,
+        "rentPerYear": 140000
+      },
+      "survey": {
+        "completes": 300,
+        "burgerQsrWeeklyShare": 0.31,
+        "wouldVisitShare": 0.17,
+        "avgTicket": 12.4,
+        "topConcept": "Classic burger, fast drive-thru",
+        "verbatims": [
+          "There are already five burger places on that exit. I have my spot.",
+          "I'd only stop if it was faster than what I have now."
+        ]
+      }
+    },
+    {
+      "id": "B",
+      "name": "Maple Crossing",
+      "zips": [
+        "Z-201"
+      ],
+      "story": "Growing suburb, young families, one ageing burger option.",
+      "desk": {
+        "adults3mi": 38000,
+        "medianIncome": 76000,
+        "dailyTraffic": 21000,
+        "burgerCompetitors": 2,
+        "rentPerYear": 95000
+      },
+      "survey": {
+        "completes": 300,
+        "burgerQsrWeeklyShare": 0.36,
+        "wouldVisitShare": 0.41,
+        "avgTicket": 13.1,
+        "topConcept": "Breakfast till 2pm",
+        "verbatims": [
+          "Nothing open near here after the school run. We drive 15 minutes.",
+          "I would love a proper breakfast that runs late, we never make it before 10:30."
+        ]
+      }
+    },
+    {
+      "id": "C",
+      "name": "Harbor South",
+      "zips": [
+        "Z-301",
+        "Z-302"
+      ],
+      "story": "Dense, younger, late-night crowd near a college. Lower incomes.",
+      "desk": {
+        "adults3mi": 61000,
+        "medianIncome": 52000,
+        "dailyTraffic": 30000,
+        "burgerCompetitors": 5,
+        "rentPerYear": 120000
+      },
+      "survey": {
+        "completes": 300,
+        "burgerQsrWeeklyShare": 0.39,
+        "wouldVisitShare": 0.24,
+        "avgTicket": 9.6,
+        "topConcept": "Late-night drive-thru",
+        "verbatims": [
+          "Open till 2am and I'm there.",
+          "Price matters most. Under $10 or I go elsewhere."
+        ]
+      }
+    }
+  ],
+  "concepts": [
+    "Classic burger, fast drive-thru",
+    "$6 family bundle",
+    "Breakfast till 2pm",
+    "Late-night drive-thru"
+  ],
+  "experiment": {
+    "_note": "Pull = response rate indexed to the average of all cells (100). Equal budget, days and format per cell; only the message changes.",
+    "days": 6,
+    "spendPerCell": 320,
+    "pullByArea": {
+      "A": {
+        "Classic burger, fast drive-thru": [
+          96,
+          82,
+          112
+        ],
+        "$6 family bundle": [
+          88,
+          75,
+          103
+        ],
+        "Breakfast till 2pm": [
+          79,
+          66,
+          94
+        ],
+        "Late-night drive-thru": [
+          84,
+          71,
+          99
+        ]
+      },
+      "B": {
+        "Classic burger, fast drive-thru": [
+          104,
+          90,
+          120
+        ],
+        "$6 family bundle": [
+          168,
+          146,
+          192
+        ],
+        "Breakfast till 2pm": [
+          121,
+          104,
+          140
+        ],
+        "Late-night drive-thru": [
+          72,
+          60,
+          86
+        ]
+      },
+      "C": {
+        "Classic burger, fast drive-thru": [
+          98,
+          84,
+          114
+        ],
+        "$6 family bundle": [
+          92,
+          78,
+          108
+        ],
+        "Breakfast till 2pm": [
+          86,
+          73,
+          101
+        ],
+        "Late-night drive-thru": [
+          151,
+          131,
+          174
+        ]
+      }
+    }
+  },
+  "researchRungs": [
+    {
+      "id": "desk",
+      "label": "Desk research only (census, traffic, listings)",
+      "cost": 0,
+      "days": 1
+    },
+    {
+      "id": "survey",
+      "label": "Flashpoint ZIP-targeted survey, 300 completes per area",
+      "cost": 8550,
+      "costNote": "PLACEHOLDER: 900 completes at ~$9.50 until Kevin gets a real Flashpoint panel quote",
+      "days": 5
+    },
+    {
+      "id": "survey_experiment",
+      "label": "Survey + Flashpoint Market Experiment (4 concepts x 3 areas)",
+      "cost": 12390,
+      "costNote": "Survey above + 12 cells x $320 media (CPM-only pricing); platform fee not published",
+      "days": 7
+    }
+  ],
+  "studySpecs": {
+    "_note": "Ready to field via Flashpoint (Kevin, MCP). ZIP targeting is documented for survey panels (Cint ZIP list); ad geography below ZIP-level is not documented for Market Experiments, so confirm metro/radius targeting with Flashpoint.",
+    "survey": {
+      "audience": "Adults 18-65 living in the candidate ZIPs (Cint ZIP targeting), quotas per area",
+      "completesPerArea": 300,
+      "questions": [
+        {
+          "id": "Q1",
+          "type": "single",
+          "text": "How often do you buy from a burger restaurant or drive-thru?",
+          "options": [
+            "Several times a week",
+            "About once a week",
+            "A few times a month",
+            "Rarely or never"
+          ]
+        },
+        {
+          "id": "Q2",
+          "type": "single",
+          "text": "Where do you usually go for a quick burger now?",
+          "options": [
+            "Chain A",
+            "Chain B",
+            "Local independent",
+            "Other",
+            "Nowhere nearby"
+          ]
+        },
+        {
+          "id": "Q3",
+          "type": "maxdiff",
+          "text": "Which of these would make you most and least likely to visit a new burger restaurant near you?",
+          "items": [
+            "Classic burger, fast drive-thru",
+            "$6 family bundle",
+            "Breakfast till 2pm",
+            "Late-night drive-thru"
+          ]
+        },
+        {
+          "id": "Q4",
+          "type": "van_westendorp",
+          "text": "At what price would a burger meal be too cheap / a bargain / getting expensive / too expensive?"
+        },
+        {
+          "id": "Q5",
+          "type": "single",
+          "text": "If a new burger restaurant opened within 5 minutes of you with your top pick, how likely are you to visit in the first month?",
+          "options": [
+            "Definitely",
+            "Probably",
+            "Might or might not",
+            "Probably not",
+            "Definitely not"
+          ]
+        },
+        {
+          "id": "Q6",
+          "type": "open",
+          "text": "What's missing from burger options near you?"
+        }
+      ]
+    },
+    "experiment": {
+      "platform": "Meta (documented in Flashpoint's case study)",
+      "audience": "Adults 18-65 in the candidate metro areas",
+      "cells": [
+        "Classic burger, fast drive-thru",
+        "$6 family bundle",
+        "Breakfast till 2pm",
+        "Late-night drive-thru"
+      ],
+      "design": "Unbranded native ad + landing guide per cell; equal budget, days and format; only the message changes",
+      "metric": "Pull (indexed response rate) with 95% intervals"
+    }
+  }
+}
