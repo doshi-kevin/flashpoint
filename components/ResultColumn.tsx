@@ -12,18 +12,18 @@ export default function ResultColumn({
   highlightIndex?: number;
 }) {
   return (
-    <div className="rounded border border-gray-200 p-4">
-      <h3 className="mb-3 font-semibold">{title}</h3>
-      <ul className="space-y-3">
+    <div className="rounded-lg border border-line bg-panel p-5">
+      <h3 className="mb-4 font-serif text-xl">{title}</h3>
+      <ul className="space-y-4">
         {options.map((o, i) => (
           <li key={o}>
             <div className="flex justify-between text-sm">
-              <span className={i === highlightIndex ? "font-bold" : ""}>{o}</span>
-              <span>{values[i]}%</span>
+              <span className={i === highlightIndex ? "font-semibold" : "text-muted"}>{o}</span>
+              <span className="font-mono">{values[i]}%</span>
             </div>
-            <div className="h-3 rounded bg-gray-100">
+            <div className="mt-1 h-3 rounded bg-line">
               <div
-                className={`h-3 rounded ${i === highlightIndex ? "bg-black" : "bg-gray-400"}`}
+                className={`h-3 rounded ${i === highlightIndex ? "bg-accent" : "bg-muted/60"}`}
                 style={{ width: `${values[i]}%` }}
               />
             </div>

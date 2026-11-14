@@ -21,9 +21,9 @@ const tone: Record<HypothesisStatus, "good" | "warn" | "bad" | "neutral"> = {
 export default function SuspectList({ hypotheses, max = 3 }: { hypotheses: Hypothesis[]; max?: number }) {
   const top = [...hypotheses].sort((a, b) => rank[a.status] - rank[b.status]).slice(0, max);
   return (
-    <ul className="divide-y divide-gray-100">
+    <ul className="divide-y divide-line">
       {top.map((h) => (
-        <li key={h.claim} className="flex items-start justify-between gap-3 py-2">
+        <li key={h.claim} className="flex items-start justify-between gap-3 py-3">
           <span>{h.claim}</span>
           <Badge tone={tone[h.status]}>{h.status}</Badge>
         </li>

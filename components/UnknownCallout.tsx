@@ -3,9 +3,9 @@ import { copy } from "@/content/copy";
 
 export default function UnknownCallout({ text }: { text: string }) {
   return (
-    <div className="rounded border-2 border-purple-500 bg-purple-50 p-4">
-      <h3 className="mb-1 text-lg font-bold">{copy.why.unknownTitle}</h3>
-      <p>{text}</p>
+    <div className="rounded-lg border border-accent/60 bg-accent/10 p-4">
+      <h3 className="mb-1 font-serif text-xl font-semibold text-accent">{copy.why.unknownTitle}</h3>
+      <p className="text-cream/90">{text}</p>
     </div>
   );
 }

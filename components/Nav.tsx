@@ -4,13 +4,14 @@ import { copy } from "@/content/copy";
 
 export default function Nav() {
   return (
-    <header className="border-b border-gray-200">
-      <nav className="mx-auto flex max-w-3xl items-center justify-between gap-4 p-4">
-        <Link href="/" className="font-bold">
+    <header className="border-b border-line">
+      <nav className="mx-auto flex max-w-3xl items-center justify-between gap-4 px-5 py-4">
+        <Link href="/" className="flex items-center gap-2 font-semibold">
+          <span className="h-2.5 w-2.5 rounded-full bg-accent" aria-hidden />
           {copy.appName}
         </Link>
-        <span className="hidden text-sm italic text-gray-500 sm:inline">{copy.tagline}</span>
-        <Link href="/judges" className="text-sm text-gray-600 hover:underline">
+        <span className="hidden font-serif text-sm italic text-muted sm:inline">{copy.tagline}</span>
+        <Link href="/judges" className="text-sm text-muted hover:text-cream">
           {copy.nav.judges}
         </Link>
       </nav>

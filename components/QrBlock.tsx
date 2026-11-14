@@ -6,11 +6,11 @@ import { copy } from "@/content/copy";
 export default function QrBlock({ url }: { url: string }) {
   return (
     <div className="flex flex-col items-center gap-3">
-      <div className="rounded border border-gray-300 bg-white p-4">
-        <QRCodeSVG value={url} size={256} />
+      <div className="rounded-xl bg-cream p-5">
+        <QRCodeSVG value={url} size={256} bgColor="#f3f1ec" fgColor="#121110" />
       </div>
-      <p className="text-lg font-semibold">{copy.judges.scan}</p>
-      <p className="text-xs text-gray-500">{url}</p>
+      <p className="font-serif text-2xl">{copy.judges.scan}</p>
+      <p className="text-xs text-muted">{url}</p>
     </div>
   );
 }

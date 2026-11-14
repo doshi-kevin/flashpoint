@@ -1,4 +1,4 @@
-// Progress dots at the top of the dashboard. Props: step (1-4, the current step).
+// Progress bar at the top of the dashboard. Props: step (1-4, the current step).
 import { copy } from "@/content/copy";
 
 export default function Stepper({ step }: { step: number }) {
@@ -11,15 +11,19 @@ export default function Stepper({ step }: { step: number }) {
         return (
           <li key={label} className="flex items-center gap-2">
             <span
-              className={`flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold ${
-                active ? "bg-black text-white" : done ? "bg-gray-400 text-white" : "bg-gray-200 text-gray-600"
+              className={`flex h-6 w-6 items-center justify-center rounded-full border text-xs font-semibold ${
+                active
+                  ? "border-accent bg-accent text-ink"
+                  : done
+                    ? "border-cream/40 text-cream"
+                    : "border-line text-muted"
               }`}
               aria-current={active ? "step" : undefined}
             >
               {done ? "✓" : n}
             </span>
-            <span className={active ? "font-semibold" : "text-gray-500"}>{label}</span>
-            {n < 4 && <span className="mx-1 text-gray-300">—</span>}
+            <span className={active ? "font-semibold" : "text-muted"}>{label}</span>
+            {n < 4 && <span className="mx-1 text-line">—</span>}
           </li>
         );
       })}

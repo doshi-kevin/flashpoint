@@ -198,7 +198,11 @@ export async function runInvestigation(
     return { result: { ...inv, trace }, source: "claude" };
   } catch (e) {
     console.error("investigate fallback:", (e as Error).message);
-    trace.push({ step: "Replay", detail: "Showing the saved investigation (replay).", source: "data/fallback-investigation.json" });
-    return { result: { ...getFallbackInvestigation(), trace }, source: "fallback" };
+    const saved = getFallbackInvestigation();
+    const src = "saved replay (data/fallback-investigation.json)";
+    trace.push({ step: "Named suspects", detail: `${saved.hypotheses.length} suspects, from roadworks to a rival's lunch deal.`, source: src });
+    trace.push({ step: "Checked alibis", detail: "Challenger tested each suspect on timing and evidence.", source: src });
+    trace.push({ step: "Admitted what is unknown", detail: saved.unknown, source: src });
+    return { result: { ...saved, trace }, source: "fallback" };
   }
 }

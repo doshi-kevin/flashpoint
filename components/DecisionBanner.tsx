@@ -6,20 +6,21 @@ export default function DecisionBanner({ decision: d }: { decision: Decision }) 
   return (
     <div className="space-y-3">
       <div className="grid items-stretch gap-3 sm:grid-cols-[1fr_auto_1fr]">
-        <div className="rounded border border-gray-200 p-4">
-          <p className="text-xs font-semibold uppercase text-gray-500">{copy.decide.before}</p>
-          <p className="text-lg font-semibold text-gray-500 line-through">{d.before.title}</p>
+        <div className="rounded-lg border border-line p-4">
+          <p className="eyebrow">{copy.decide.before}</p>
+          <p className="mt-1 text-lg text-muted line-through">{d.before.title}</p>
         </div>
-        <div className="flex items-center justify-center text-2xl" aria-hidden>
+        <div className="flex items-center justify-center text-2xl text-accent" aria-hidden>
           →
         </div>
-        <div className="rounded border-2 border-green-600 bg-green-50 p-4">
-          <p className="text-xs font-semibold uppercase text-gray-500">{copy.decide.after}</p>
-          <p className="text-lg font-bold">{d.after.title}</p>
+        <div className="rounded-lg border border-accent bg-accent/10 p-4">
+          <p className="eyebrow">{copy.decide.after}</p>
+          <p className="mt-1 font-serif text-xl font-semibold">{d.after.title}</p>
         </div>
       </div>
-      <p className="text-sm text-gray-600">
-        <strong>{copy.decide.owner}:</strong> {d.owner} · <strong>{copy.decide.review}:</strong> {d.reviewDate}
+      <p className="text-sm text-muted">
+        <strong className="text-cream">{copy.decide.owner}:</strong> {d.owner} ·{" "}
+        <strong className="text-cream">{copy.decide.review}:</strong> {d.reviewDate}
       </p>
     </div>
   );
