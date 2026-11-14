@@ -12,6 +12,8 @@ import UnknownCallout from "./UnknownCallout";
 import QuestionCard from "./QuestionCard";
 import FieldingPanel from "./FieldingPanel";
 import StudyCompare from "./StudyCompare";
+import PrecedentsPanel from "./PrecedentsPanel";
+import AdCard from "./AdCard";
 import DecisionBanner from "./DecisionBanner";
 import QrBlock from "./QrBlock";
 import Badge from "./Badge";
@@ -273,6 +275,7 @@ export default function CaseView({ caseKey, title, problem, initialStoreId, init
                   <SuspectList hypotheses={r.hypotheses} />
                   <UnknownCallout text={r.unknown} />
                   <QuestionCard text={r.question.text} options={r.question.options} rationale={r.rationale} />
+                  <PrecedentsPanel />
                 </>
               )}
             </div>
@@ -282,6 +285,7 @@ export default function CaseView({ caseKey, title, problem, initialStoreId, init
             <div className="space-y-4">
               {study && <FieldingPanel sampleSize={study.sampleSize} onFinished={onFieldDone} />}
               {study && fieldDone && <StudyCompare results={study} />}
+              {study && fieldDone && <AdCard results={study} />}
               {noStudy && (
                 <div className="flex flex-col items-center gap-3 rounded border border-line bg-panel p-6 text-center">
                   <p className="max-w-md text-muted">{copy.study.noStudy}</p>
