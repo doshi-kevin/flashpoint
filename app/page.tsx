@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Badge from "@/components/Badge";
 import SampleBadge from "@/components/SampleBadge";
+import AgentTag from "@/components/AgentTag";
 import { sign } from "@/components/CaseFacts";
 import { getStores, getSales } from "@/lib/data";
 import { anomaly, salesChangePct } from "@/lib/metrics";
@@ -14,19 +15,18 @@ export default function CasesPage() {
     return { store: s, change: salesChangePct(sales), flagged: anomaly(sales).flagged };
   });
   const cases = rows.filter((r) => r.flagged);
-  const th = "px-4 py-2 font-semibold";
-
+  const th = "px-4 py-2.5 font-medium";
   return (
-    <div className="space-y-8">
-      <div className="flex items-end justify-between gap-3">
-        <div>
-          <h1 className="text-xl font-semibold">{copy.cases.title}</h1>
-          <p className="text-sm text-muted">{copy.cases.sub}</p>
+    <div className="space-y-10">
+      <div className="flex flex-wrap items-end justify-between gap-3">
+        <div className="space-y-1.5">
+          <h1 className="text-4xl font-black tracking-tight sm:text-5xl">{copy.cases.title}</h1>
+          <p className="text-ink-2">{copy.cases.sub}</p>
         </div>
         <SampleBadge />
       </div>
 
-      <div className="overflow-x-auto rounded border border-line bg-panel">
+      <div className="sculpt overflow-x-auto px-2 py-1">
         <table className="w-full text-left text-sm">
           <thead className="label border-b border-line">
             <tr>
@@ -40,30 +40,38 @@ export default function CasesPage() {
           </thead>
           <tbody className="divide-y divide-line">
             {cases.map((c) => (
-              <tr key={c.store.id} className="hover:bg-soft">
-                <td className="px-4 py-3 font-mono text-xs">
-                  <Link href={`/case/${c.store.id}`} className="text-info hover:underline">
+              <tr key={c.store.id} className="hover:bg-soft/60">
+                <td className="whitespace-nowrap px-4 py-3.5 font-mono text-xs font-medium">
+                  <Link href={`/case/${c.store.id}`} className="underline decoration-ink/40 underline-offset-4 hover:decoration-ink">
                     EP-{c.store.id}
                   </Link>
                 </td>
-                <td className="px-4 py-3">
-                  <Link href={`/case/${c.store.id}`} className="font-medium hover:underline">
+                <td className="px-4 py-3.5">
+                  <Link href={`/case/${c.store.id}`} className="font-bold hover:underline">
                     Weekday lunch sales {sign(c.change)} at {c.store.name}
                   </Link>
                 </td>
-                <td className="px-4 py-3">
+                <td className="px-4 py-3.5 text-ink-2">
                   {c.store.name} · {c.store.area}
                 </td>
-                <td className="px-4 py-3 font-semibold text-accent-ink">{sign(c.change)}</td>
-                <td className="px-4 py-3">
+                <td className="whitespace-nowrap px-4 py-3.5 font-mono text-base font-medium text-crimson">
+                  <span aria-hidden className="mr-1 text-xs">
+                    ▼
+                  </span>
+                  {sign(c.change)}
+                </td>
+                <td className="px-4 py-3.5">
                   <Badge tone="neutral">{copy.stages[0]}</Badge>
                 </td>
-                <td className="px-4 py-3 text-muted">{copy.cases.detectedBy}</td>
+                <td className="px-4 py-3.5">
+                  <AgentTag agent="Code" />
+                  <span className="ml-2 text-ink-2">{copy.cases.detectedBy}</span>
+                </td>
               </tr>
             ))}
             {cases.length === 0 && (
               <tr>
-                <td colSpan={6} className="px-4 py-6 text-center text-muted">
+                <td colSpan={6} className="px-4 py-8 text-center text-muted">
                   No open cases.
                 </td>
               </tr>
@@ -72,9 +80,9 @@ export default function CasesPage() {
         </table>
       </div>
 
-      <section>
-        <h2 className="mb-2 text-base font-semibold">{copy.cases.stores}</h2>
-        <div className="overflow-x-auto rounded border border-line bg-panel">
+      <section className="space-y-3">
+        <h2 className="text-xl font-extrabold">{copy.cases.stores}</h2>
+        <div className="sculpt overflow-x-auto px-2 py-1">
           <table className="w-full text-left text-sm">
             <thead className="label border-b border-line">
               <tr>
@@ -87,11 +95,18 @@ export default function CasesPage() {
             <tbody className="divide-y divide-line">
               {rows.map((r) => (
                 <tr key={r.store.id}>
-                  <td className="px-4 py-2.5 font-medium">{r.store.name}</td>
-                  <td className="px-4 py-2.5 text-muted">{r.store.area}</td>
-                  <td className="px-4 py-2.5 font-mono text-xs">{sign(r.change)}</td>
+                  <td className="px-4 py-2.5 font-semibold">{r.store.name}</td>
+                  <td className="px-4 py-2.5 text-ink-2">{r.store.area}</td>
+                  <td className={`px-4 py-2.5 font-mono text-sm ${r.flagged ? "font-medium text-crimson" : ""}`}>
+                    <span aria-hidden className="mr-1 text-xs">
+                      {r.change < 0 ? "▼" : "▲"}
+                    </span>
+                    {sign(r.change)}
+                  </td>
                   <td className="px-4 py-2.5">
-                    <Badge tone={r.flagged ? "bad" : "good"}>{r.flagged ? copy.cases.attention : copy.cases.normal}</Badge>
+                    <Badge tone={r.flagged ? "bad" : "good"}>
+                      <span aria-hidden>{r.flagged ? "●" : "✓"}</span> {r.flagged ? copy.cases.attention : copy.cases.normal}
+                    </Badge>
                   </td>
                 </tr>
               ))}
