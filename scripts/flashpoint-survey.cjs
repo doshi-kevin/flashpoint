@@ -8,7 +8,9 @@ const post = async (body, extra = {}) => { const r = await fetch(cfg.url, { meth
   const i = await post({ jsonrpc: "2.0", id: 1, method: "initialize", params: { protocolVersion: "2025-03-26", capabilities: {}, clientInfo: { name: "pulse", version: "1" } } });
   const x = { "mcp-session-id": i.r.headers.get("mcp-session-id") };
   await post({ jsonrpc: "2.0", method: "notifications/initialized" }, x);
-  const args = { brief: process.argv[2], survey_id: SID };
+  const args = { brief: process.argv[2] };
+  if (process.argv[5]) args.survey_id = process.argv[5];
+  else if (process.argv[4] !== "new") args.survey_id = SID;
   if (process.argv[3]) args.conversation_id = process.argv[3];
   const c = await post({ jsonrpc: "2.0", id: 2, method: "tools/call", params: { name: "tool_survey", arguments: args } }, x);
   const m = [...c.t.matchAll(/data: (.*)/g)].map((y) => JSON.parse(y[1])).find((o) => o.id);
