@@ -51,7 +51,7 @@ export default function AppHeader() {
               <p className="font-mono text-[11px] text-muted">{copy.persona.role}</p>
             </div>
             <span className="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-tr from-ink to-muted p-[1.5px] shadow-md" aria-hidden>
-              <span className="grid h-full w-full place-items-center rounded-full bg-card text-xs font-black">DV</span>
+              <span className="grid h-full w-full place-items-center rounded-full bg-card text-xs font-black">KV</span>
             </span>
           </div>
         </div>

@@ -6,7 +6,7 @@ export const copy = {
   nav: { cases: "Cases", survey: "Judge feedback" },
   badges: { sample: "Sample data", replay: "Replay", synthetic: "Synthetic", real: "Real", live: "Live" },
   flashpoint: { mark: "Asked via Flashpoint", launch: "Launch on Flashpoint" },
-  persona: { name: "DM Dana V.", role: "District 04" },
+  persona: { name: "Kevin", role: "Owner, 50 stores" },
   footer: { left: "Case dossier · demo with sample data from a fictional chain", right: "Numbers computed in code · real answers via Flashpoint" },
   canvas: {
     ribbon: ["Case dossier", "Revenue divergence detected"],
