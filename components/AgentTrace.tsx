@@ -1,54 +1,59 @@
 "use client";
-// Shows the agent working: steps appear one by one with a spinner, then a check.
-// Props: steps (TraceStep[], empty while the API is still running), onFinished (called once all steps are shown).
+// Shows the agents working. Steps arrive from the server as they finish; each is revealed with a short delay.
+// Props: steps (TraceStep[], grows over time), done (stream finished), onFinished (called once when all shown).
 import { useEffect, useRef, useState } from "react";
 import { copy } from "@/content/copy";
 import type { TraceStep } from "@/lib/types";
 
-const STEP_MS = 550;
+const STEP_MS = 450;
 
-export default function AgentTrace({ steps, onFinished }: { steps: TraceStep[]; onFinished: () => void }) {
+export default function AgentTrace({
+  steps,
+  done,
+  onFinished,
+}: {
+  steps: TraceStep[];
+  done: boolean;
+  onFinished: () => void;
+}) {
   const [shown, setShown] = useState(0);
   const finished = useRef(false);
 
   useEffect(() => {
-    if (!steps.length) return;
-    if (shown >= steps.length) {
-      if (!finished.current) {
-        finished.current = true;
-        onFinished();
-      }
-      return;
+    if (shown < steps.length) {
+      const t = setTimeout(() => setShown((n) => n + 1), STEP_MS);
+      return () => clearTimeout(t);
     }
-    const t = setTimeout(() => setShown((n) => n + 1), STEP_MS);
-    return () => clearTimeout(t);
-  }, [steps, shown, onFinished]);
+    if (done && steps.length && !finished.current) {
+      finished.current = true;
+      onFinished();
+    }
+  }, [steps, shown, done, onFinished]);
 
-  const waiting = !steps.length;
-  const working = waiting || shown < steps.length;
-
+  const allShown = shown >= steps.length;
   return (
     <div>
       <p className="eyebrow mb-3">{copy.agent.title}</p>
-      <ul className="space-y-2 font-mono text-sm">
-        {steps.slice(0, shown).map((s) => (
-          <li key={s.step} className="flex gap-2">
-            <span className="text-good" aria-hidden>
-              ✓
-            </span>
-            <span>
-              <span className="text-cream">{s.step}</span>
-              <span className="text-muted"> — {s.detail}</span>
-              <span className="block text-xs text-muted/70">{s.source}</span>
-            </span>
-          </li>
-        ))}
-        {working && (
-          <li className="flex items-center gap-2 text-muted">
-            <span className="h-2 w-2 animate-pulse rounded-full bg-accent" aria-hidden />
-            {copy.agent.thinking}
-          </li>
-        )}
+      <ul className="space-y-3 text-sm">
+        {steps.slice(0, shown).map((s, i) => {
+          const working = i === shown - 1 && allShown && !done;
+          return (
+            <li key={`${s.step}-${i}`} className="flex gap-3">
+              {working ? (
+                <span className="mt-1.5 h-2.5 w-2.5 shrink-0 animate-pulse rounded-full bg-accent" aria-hidden />
+              ) : (
+                <span className="mt-0.5 shrink-0 text-good" aria-hidden>
+                  ✓
+                </span>
+              )}
+              <span>
+                <span className="font-semibold">{s.step}</span>
+                <span className="text-muted"> · {s.detail}</span>
+                <span className="block text-xs text-muted/80">{s.source}</span>
+              </span>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

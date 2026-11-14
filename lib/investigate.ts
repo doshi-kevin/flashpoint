@@ -13,8 +13,20 @@ const VERDICTS: VerdictLabel[] = ["temporary", "structural", "unclear"];
 export function extractJson(raw: string): Record<string, unknown> {
   const cleaned = raw.replace(/^\s*```(?:json)?\s*/i, "").replace(/\s*```\s*$/, "").trim();
   const start = cleaned.indexOf("{");
-  const end = cleaned.lastIndexOf("}");
-  return JSON.parse(start >= 0 ? cleaned.slice(start, end + 1) : cleaned);
+  if (start < 0) return JSON.parse(cleaned);
+  // Walk to the end of the FIRST complete object, ignoring braces inside strings (models sometimes add trailing text).
+  let depth = 0;
+  let inStr = false;
+  for (let i = start; i < cleaned.length; i++) {
+    const c = cleaned[i];
+    if (inStr) {
+      if (c === "\\") i++;
+      else if (c === '"') inStr = false;
+    } else if (c === '"') inStr = true;
+    else if (c === "{") depth++;
+    else if (c === "}" && --depth === 0) return JSON.parse(cleaned.slice(start, i + 1));
+  }
+  return JSON.parse(cleaned.slice(start));
 }
 
 const strs = (x: unknown) => (Array.isArray(x) ? x.map(String) : []);
@@ -66,7 +78,7 @@ export function parseChallenges(raw: string, hypotheses: Investigation["hypothes
     }));
 }
 
-const INVESTIGATOR = `You are the lead detective agent investigating why a store's weekday lunch sales dropped. You work from public signals and calendar events only.
+const INVESTIGATOR = `You are the lead detective agent investigating a business problem described by the user (usually why a store's weekday lunch sales dropped). You work from the described problem, public signals and calendar events only. If no store data or signals are provided, say so and keep most statuses at "Insufficient info".
 Open the case, collect clues, name suspects, and be honest about what public data cannot answer.
 Rules:
 - Never invent, estimate or compute numbers. Refer to figures only as given in the input.
@@ -132,77 +144,109 @@ function applyChallenges(inv: Investigation, challenges: Challenge[]): Investiga
   };
 }
 
+/** Finds "Store 14" / "store #14" in the problem text and returns that store id if it exists. */
+export function storeFromProblem(problem: string): string | null {
+  const m = problem.match(/store\s*#?\s*(\d+)/i);
+  return m && getStore(m[1]) ? m[1] : null;
+}
+
+/** Facts + chart data for a store, used for the "case file". Null when no store matches. */
+export function caseFile(storeId: string | null) {
+  if (!storeId) return null;
+  const store = getStore(storeId);
+  if (!store) return null;
+  return { store, facts: computeFacts(storeId), sales: getSales(storeId), events: getEvents(storeId) };
+}
+
+type Emit = (s: TraceStep) => void;
+
 export async function runInvestigation(
-  storeId: string,
+  storeId: string | null,
   live = true,
+  problem = "",
+  emit?: Emit,
 ): Promise<{ result: Investigation; source: "claude" | "fallback" }> {
   const trace: TraceStep[] = [];
-  const facts = (() => {
-    try {
-      return computeFacts(storeId);
-    } catch {
-      return null;
-    }
-  })();
-  if (facts) {
-    trace.push({
-      step: "Opened the case",
-      detail: `Weekday lunch sales ${facts.weekdayLunchSalesChangePct}% vs prior 6 weeks; comparison stores ${facts.comparisonStoresAvgChangePct}%; anomaly rule ${facts.anomaly.flagged ? "fired" : "did not fire"}.`,
-      source: "lib/metrics.ts (computed in code)",
+  const push = (t: TraceStep) => {
+    trace.push(t);
+    emit?.(t);
+  };
+  const store = storeId ? getStore(storeId) : undefined;
+  const facts = store && storeId ? computeFacts(storeId) : null;
+  const signals = storeId ? getSignals(storeId) : [];
+  const events = storeId ? getEvents(storeId) : [];
+
+  push({
+    step: "Read the problem",
+    detail: problem ? `“${problem.slice(0, 140)}”` : "No description given.",
+    source: "your input",
+  });
+  if (facts && store) {
+    push({
+      step: `Checked the numbers for ${store.name}`,
+      detail: `Weekday lunch sales ${facts.weekdayLunchSalesChangePct}% vs the prior 6 weeks; other stores ${facts.comparisonStoresAvgChangePct}%; ${
+        facts.anomaly.flagged ? "this is outside normal variation" : "this is within normal variation"
+      }.`,
+      source: "computed in code (lib/metrics.ts)",
+    });
+  } else {
+    push({
+      step: "No store data matched",
+      detail: "Reasoning from your description only. Mention a store (for example “Store 14”) to use its sales data.",
+      source: "agent",
     });
   }
-  const signals = getSignals(storeId);
-  const events = getEvents(storeId);
-  trace.push({
-    step: "Collected clues",
-    detail: `${signals.length} public signals and ${events.length} calendar events.`,
+  push({
+    step: "Collected public clues",
+    detail: `${signals.length} public signals and ${events.length} calendar events (sample data).`,
     source: "data/signals.json, data/events.json",
   });
 
   try {
     if (!live) throw new Error("replay requested");
     if (!process.env.ANTHROPIC_API_KEY) throw new Error("no API key");
-    const store = getStore(storeId);
-    if (!store || !facts) throw new Error("unknown store");
     const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+    const model = process.env.ANTHROPIC_MODEL || "claude-sonnet-5-5";
 
-    let inv = parseInvestigation(await ask(client, INVESTIGATOR, { store, facts, events, publicSignals: signals }, 2500));
-    trace.push({
-      step: "Named suspects",
-      detail: `${inv.hypotheses.length} suspects; verdict so far: ${inv.verdict?.label ?? "none"}.`,
-      source: `Claude (${process.env.ANTHROPIC_MODEL || "claude-sonnet-5-5"})`,
+    push({ step: "Detective agent is naming suspects", detail: "Weighing the evidence for and against each cause.", source: `Claude (${model})` });
+    let inv = parseInvestigation(
+      await ask(client, INVESTIGATOR, { problem, store, facts, events, publicSignals: signals }, 2500),
+    );
+    push({
+      step: "Suspects named",
+      detail: `${inv.hypotheses.length} suspects. First read: ${inv.verdict?.label ?? "unclear"}.`,
+      source: "Claude (Detective)",
     });
 
+    push({ step: "Challenger agent is trying to clear them", detail: "Checking timing and evidence for every suspect.", source: `Claude (${model})` });
     try {
       const challenges = parseChallenges(
-        await ask(client, CHALLENGER, { facts, events, publicSignals: signals, suspects: inv.hypotheses }, 1500),
+        await ask(client, CHALLENGER, { problem, facts, events, publicSignals: signals, suspects: inv.hypotheses }, 1500),
         inv.hypotheses,
       );
       const before = new Map(inv.hypotheses.map((h) => [h.claim, h.status]));
       const changed = challenges.filter((c) => before.get(c.claim) !== c.newStatus).length;
       inv = applyChallenges(inv, challenges);
-      trace.push({
-        step: "Checked alibis",
-        detail: `Challenger reviewed ${challenges.length} suspects and changed ${changed} status${changed === 1 ? "" : "es"}.`,
-        source: "Claude (Challenger agent)",
+      push({
+        step: "Alibis checked",
+        detail: `Changed ${changed} of ${challenges.length} verdicts after challenge.`,
+        source: "Claude (Challenger)",
       });
     } catch (e) {
       console.error("challenger skipped:", (e as Error).message);
-      trace.push({ step: "Checked alibis", detail: "Challenger unavailable; suspects left as named.", source: "skipped" });
+      push({ step: "Alibis checked", detail: "Challenger unavailable; suspects left as named.", source: "skipped" });
     }
-    trace.push({
-      step: "Admitted what is unknown",
-      detail: inv.unknown,
-      source: "Claude (Investigator)",
-    });
+    push({ step: "Found the gap", detail: inv.unknown, source: "Claude (Detective)" });
+    push({ step: "Designed the one question to ask", detail: inv.question.text, source: "Claude (Detective)" });
     return { result: { ...inv, trace }, source: "claude" };
   } catch (e) {
     console.error("investigate fallback:", (e as Error).message);
     const saved = getFallbackInvestigation();
-    const src = "saved replay (data/fallback-investigation.json)";
-    trace.push({ step: "Named suspects", detail: `${saved.hypotheses.length} suspects, from roadworks to a rival's lunch deal.`, source: src });
-    trace.push({ step: "Checked alibis", detail: "Challenger tested each suspect on timing and evidence.", source: src });
-    trace.push({ step: "Admitted what is unknown", detail: saved.unknown, source: src });
+    const src = "saved replay";
+    push({ step: "Suspects named", detail: `${saved.hypotheses.length} suspects, from roadworks to a rival's lunch deal.`, source: src });
+    push({ step: "Alibis checked", detail: "Challenger tested each suspect on timing and evidence.", source: src });
+    push({ step: "Found the gap", detail: saved.unknown, source: src });
+    push({ step: "Designed the one question to ask", detail: saved.question.text, source: src });
     return { result: { ...saved, trace }, source: "fallback" };
   }
 }

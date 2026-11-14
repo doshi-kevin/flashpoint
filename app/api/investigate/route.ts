@@ -4,5 +4,5 @@ import { runInvestigation } from "@/lib/investigate";
 
 export async function POST(req: Request) {
   const body = await req.json().catch(() => ({}));
-  return NextResponse.json(await runInvestigation(String(body.storeId ?? "14"), body.live !== false));
+  return NextResponse.json(await runInvestigation(String(body.storeId ?? "14"), body.live !== false, String(body.problem ?? "")));
 }

@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${inter.variable} ${newsreader.variable}`}>
       <body className="min-h-screen antialiased">
         <Nav />
-        <main className="mx-auto max-w-3xl px-5 py-8">{children}</main>
+        <main className="mx-auto max-w-4xl px-5 py-10">{children}</main>
       </body>
     </html>
   );

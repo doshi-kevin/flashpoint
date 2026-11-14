@@ -29,7 +29,7 @@ Without an API key the app still works: `/api/investigate` falls back to `data/f
 
 ## Screens
 
-1. `/` One-page demo (about 45 s): **Drop** (sales chart, -12%) → **Why** (suspects + "the internet doesn't know") → **Ask** (AI predicted vs real people) → **Decide** (before/after). One button per step. Default is instant replay; tick "Live Claude" for a real investigation.
+1. `/` One page. A judge types a business problem (or picks an example). Live Claude agents (Detective + Challenger) investigate, streaming each step; the page shows suspects, "the internet doesn't know", and the one question to ask. "Send to real people on Flashpoint" shows the study (replay of saved results for Store 14) and the decision. "Instant replay" mode skips Claude.
 2. `/judges` Closing slide: QR + synthetic judges vs "You said".
 
 ## File map
@@ -47,7 +47,7 @@ Without an API key the app still works: `/api/investigate` falls back to `data/f
 
 Edit freely, no logic changes needed:
 
-- `components/*.tsx` (Tailwind classes; `Dashboard.tsx` holds the step state and fetch calls, keep those)
+- `components/*.tsx` (Tailwind classes; `Workspace.tsx` holds the stream/fetch code and state, keep those)
 - `app/layout.tsx`, `app/globals.css` global look and nav
 - `app/*/page.tsx` page layout (grid/spacing)
 - `content/copy.ts` wording

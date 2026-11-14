@@ -25,12 +25,12 @@ export default function StudyCompare({ results }: { results: StudyResults }) {
             <p className="mb-1 text-sm font-medium">{r.option}</p>
             <div className="space-y-1.5">
               {[
-                { label: copy.ask.predicted, value: r.synthetic, color: "bg-muted/60" },
+                { label: copy.ask.predicted, value: r.synthetic, color: "bg-muted/50" },
                 { label: copy.ask.real, value: r.real, color: "bg-accent" },
               ].map((b) => (
                 <div key={b.label} className="flex items-center gap-2 text-xs">
                   <span className="w-28 shrink-0 text-muted">{b.label}</span>
-                  <div className="h-3 flex-1 rounded bg-line">
+                  <div className="h-3 flex-1 rounded bg-soft">
                     <div
                       className={`h-3 rounded transition-[width] duration-700 ease-out ${b.color}`}
                       style={{ width: on ? `${b.value}%` : "0%" }}
@@ -43,7 +43,7 @@ export default function StudyCompare({ results }: { results: StudyResults }) {
           </li>
         ))}
       </ul>
-      {miss && <p className="text-sm font-semibold text-accent">{copy.ask.miss(miss.option, Math.abs(miss.gap))}</p>}
+      {miss && <p className="text-sm font-semibold text-accent-ink">{copy.ask.miss(miss.option, Math.abs(miss.gap))}</p>}
       <p className="text-xs text-muted">
         n = {results.sampleSize} {copy.ask.respondents}
       </p>

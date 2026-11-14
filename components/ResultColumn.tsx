@@ -12,7 +12,7 @@ export default function ResultColumn({
   highlightIndex?: number;
 }) {
   return (
-    <div className="rounded-lg border border-line bg-panel p-5">
+    <div className="rounded-xl border border-line bg-panel p-5">
       <h3 className="mb-4 font-serif text-xl">{title}</h3>
       <ul className="space-y-4">
         {options.map((o, i) => (
@@ -21,9 +21,9 @@ export default function ResultColumn({
               <span className={i === highlightIndex ? "font-semibold" : "text-muted"}>{o}</span>
               <span className="font-mono">{values[i]}%</span>
             </div>
-            <div className="mt-1 h-3 rounded bg-line">
+            <div className="mt-1 h-3 rounded bg-soft">
               <div
-                className={`h-3 rounded ${i === highlightIndex ? "bg-accent" : "bg-muted/60"}`}
+                className={`h-3 rounded ${i === highlightIndex ? "bg-accent" : "bg-muted/50"}`}
                 style={{ width: `${values[i]}%` }}
               />
             </div>

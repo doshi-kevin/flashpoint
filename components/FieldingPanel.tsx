@@ -39,7 +39,7 @@ export default function FieldingPanel({ sampleSize, onFinished }: { sampleSize: 
       </div>
       <ul className="space-y-2 text-sm">
         {copy.fielding.phases.map((label, i) => (
-          <li key={label} className={`flex items-center gap-2 ${i > phase ? "text-muted/50" : ""}`}>
+          <li key={label} className={`flex items-center gap-2 ${i > phase ? "text-muted/60" : ""}`}>
             {i < phase ? (
               <span className="text-good" aria-hidden>
                 ✓
@@ -60,7 +60,7 @@ export default function FieldingPanel({ sampleSize, onFinished }: { sampleSize: 
         </span>
       </div>
       <div className="mt-2 h-1.5 rounded bg-line">
-        <div className="h-1.5 rounded bg-accent transition-[width]" style={{ width: `${answering * 100}%` }} />
+        <div className="h-1.5 rounded bg-accent" style={{ width: `${answering * 100}%` }} />
       </div>
     </div>
   );
