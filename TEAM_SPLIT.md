@@ -1,5 +1,7 @@
 # Team split: who owns which files
 
+Start with `MERGED_PLAN.md` (the one combined idea). Detailed task lists: `WORK_KEVIN.md` and `WORK_ADI.md`. `.env` is committed on purpose (team decision); `.env.local` is ignored.
+
 Goal: three people, one repo, no merge conflicts. **Edit only files you own.** Need a change in someone else's file? Message them (or open a tiny PR to them).
 
 | Person | Role | Owns |
@@ -39,7 +41,7 @@ Shared, touch rarely and tell the others: `package.json` (add dependencies only 
 2. **Data shapes are frozen** in `lib/types.ts` and the `data/*.json` files. Adi may change values, not keys; Kevin may add optional fields and will announce them.
 3. **No new dependencies** without asking the group (QR, Recharts, Anthropic SDK are already in).
 4. **All text in `content/copy.ts`**, all numbers computed in `lib/metrics.ts`, never typed into components or the LLM.
-5. `.env.local` is never committed. Each person makes their own from `.env.example`.
+5. `.env` is committed on purpose (team decision). Use `.env.local` for personal overrides; it is ignored.
 
 ## Handoffs
 - Adi's real numbers -> `data/*.json` -> Janvi's screens update with no code change.

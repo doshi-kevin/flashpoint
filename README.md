@@ -10,7 +10,7 @@ Stack: Next.js (App Router) + TypeScript + Tailwind, Recharts, `@anthropic-ai/sd
 
 ```bash
 npm install
-cp .env.example .env.local   # then fill in ANTHROPIC_API_KEY
+# .env is committed; put ANTHROPIC_API_KEY in it (or in .env.local to override)
 npm run dev                  # http://localhost:3000
 ```
 
@@ -25,7 +25,7 @@ Without an API key the app still works: `/api/investigate` falls back to `data/f
 | `FLASHPOINT_MODE` | `mock` | `mock` reads `data/study-results.json`; `live` is a stub (see `lib/flashpoint.ts`) |
 | `NEXT_PUBLIC_JUDGE_SURVEY_URL` | placeholder | URL encoded in the QR on `/judges` |
 
-`.env*` is git-ignored except `.env.example`.
+`.env` is committed on purpose (team decision); `.env.local` is git-ignored.
 
 ## Screens
 
