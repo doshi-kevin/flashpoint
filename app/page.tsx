@@ -26,6 +26,17 @@ export default function CasesPage() {
         <SampleBadge />
       </div>
 
+      <Link href="/expansion" className="amber-card block p-6 transition hover:-translate-y-0.5 sm:p-8">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div className="space-y-1">
+            <p className="label !text-ink-2">Featured case · EP-51</p>
+            <p className="text-3xl font-black leading-tight tracking-tight sm:text-4xl">Kevin opens Store 51</p>
+            <p className="font-semibold text-ink/85">What do people want near the store, and what will they actually do?</p>
+          </div>
+          <span className="btn-lime px-6 py-3 text-base font-black text-ink">Open case →</span>
+        </div>
+      </Link>
+
       <div className="sculpt overflow-x-auto px-2 py-1">
         <table className="w-full text-left text-sm">
           <thead className="label border-b border-line">

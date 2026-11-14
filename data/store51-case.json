@@ -1,0 +1,13 @@
+{
+  "owner": "Kevin",
+  "fleet": { "stores": 50, "avgTicket": 11.8, "grossMarginPct": 68 },
+  "unit": { "cheeseCost": 0.3, "label": "Sample unit economics (designed assumptions)" },
+  "land": { "rentPerSqft": 32, "label": "Sample assumption" },
+  "question": {
+    "text": "Which would you rather pay for extra cheese on your burger?",
+    "options": ["$1 cheese", "$1.50 cheese", "No extra cheese"]
+  },
+  "prices": [1, 1.5],
+  "say": { "label": "Sample: what people SAY (replace with Flashpoint survey results)", "pct": [58, 27, 15], "n": 120 },
+  "do": { "label": "Sample: what people DO (coupon redemptions)", "issued": [100, 100], "redeemed": [31, 29] }
+}

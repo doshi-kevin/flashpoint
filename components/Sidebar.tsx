@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { copy } from "@/content/copy";
 
 const items = [
-  { href: "/expansion", label: "Open Store 51", match: (p: string) => p.startsWith("/expansion") },
+  { href: "/expansion", label: "Case: Store 51", match: (p: string) => p.startsWith("/expansion") },
   { href: "/", label: copy.nav.cases, match: (p: string) => p === "/" || p.startsWith("/case") },
   { href: "/judges", label: copy.nav.survey, match: (p: string) => p.startsWith("/judges") },
 ];
