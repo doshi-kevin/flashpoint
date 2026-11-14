@@ -1,0 +1,9 @@
+{
+  "14": {
+    "before": { "title": "Run a $1-off lunch promo", "why": "Synthetic customers predicted price was the main lever (62%)." },
+    "after": { "title": "Add a second register and pre-order lane at lunch", "why": "Real lapsed customers said a faster line would bring them back (67%)." },
+    "owner": "Store 14 General Manager",
+    "metric": "Weekday lunch sales back to within 3% of the prior 6-week average",
+    "reviewDate": "2026-12-05"
+  }
+}

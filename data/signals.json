@@ -1,0 +1,10 @@
+{
+  "14": [
+    { "id": "s1", "source": "Local news", "text": "Harbor St resurfacing to run through mid-November; one lane closed at lunchtime.", "label": "Observed" },
+    { "id": "s2", "source": "Weather log", "text": "Two heavy-rain weekdays in the last three weeks.", "label": "Observed" },
+    { "id": "s3", "source": "Reddit r/localfood", "text": "\"The new place on Dock Rd has a $5 sandwich + chips thing, going there instead.\"", "label": "Observed" },
+    { "id": "s4", "source": "Review site", "text": "\"Used to love it but the line at noon is brutal now. Gave up.\"", "label": "Inferred" },
+    { "id": "s5", "source": "Review site", "text": "\"Same great sandwiches, parking is a nightmare with the roadworks.\"", "label": "Inferred" },
+    { "id": "s6", "source": "Public data", "text": "Why individual regulars stopped coming, and what would bring them back.", "label": "Unknown" }
+  ]
+}

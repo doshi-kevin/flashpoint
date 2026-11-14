@@ -1,0 +1,8 @@
+{
+  "14": [
+    { "date": "2026-10-26", "type": "roadworks", "label": "Roadworks begin on Harbor St" },
+    { "date": "2026-10-28", "type": "competitor", "label": "Nearby rival launches $5 lunch deal" },
+    { "date": "2026-11-03", "type": "rain", "label": "Heavy rain" },
+    { "date": "2026-11-10", "type": "rain", "label": "Heavy rain" }
+  ]
+}

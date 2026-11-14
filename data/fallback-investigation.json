@@ -1,0 +1,11 @@
+{
+  "hypotheses": [
+    { "claim": "Roadworks on Harbor St are reducing foot and car traffic at lunch.", "supporting": ["Lane closure confirmed in local news", "Drop began the same week roadworks started"], "counter": ["Other stores without roadworks also saw a small dip on rain days"], "status": "Plausible" },
+    { "claim": "A competitor's $5 lunch deal is pulling price-sensitive customers away.", "supporting": ["Reddit post mentions switching", "Deal launched two days after roadworks"], "counter": ["Reviews don't mention price"], "status": "Plausible" },
+    { "claim": "Heavy rain explains the drop.", "supporting": ["Two rain days with lower sales"], "counter": ["Only 2 of 15 weekdays; drop is persistent"], "status": "Weak" },
+    { "claim": "Long lunchtime lines are causing customers to give up.", "supporting": ["Review complains about noon line"], "counter": ["Single anecdotal review"], "status": "Insufficient info" }
+  ],
+  "unknown": "Public data can't tell us why lost regulars actually left, or which single change would bring them back. Price, speed, and convenience all look plausible from the outside.",
+  "question": { "text": "What would bring you back to Store 14 for lunch?", "options": ["Extra cheese", "$1 off", "Faster line"] },
+  "rationale": "Three hypotheses (price, access, speed) map to three concrete levers. One question forces a clear trade-off from people who actually stopped visiting."
+}
