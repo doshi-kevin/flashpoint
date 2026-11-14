@@ -1,26 +1,19 @@
-// Top navigation between the 5 screens. Uses the demo store (14) for store-specific routes. No props.
+// Slim top bar: app name, tagline, and a link to the closing Judges page. No props.
 import Link from "next/link";
 import { copy } from "@/content/copy";
 
-const DEMO_STORE = "14";
-
 export default function Nav() {
-  const links = [
-    { href: "/", label: copy.nav.portfolio },
-    { href: `/investigate/${DEMO_STORE}`, label: copy.nav.investigate },
-    { href: `/study/${DEMO_STORE}`, label: copy.nav.study },
-    { href: `/decision/${DEMO_STORE}`, label: copy.nav.decision },
-    { href: "/judges", label: copy.nav.judges },
-  ];
   return (
-    <header className="border-b border-gray-200">
-      <nav className="mx-auto flex max-w-5xl items-center gap-6 p-4">
-        <span className="font-bold">{copy.appName}</span>
-        {links.map((l) => (
-          <Link key={l.href} href={l.href} className="text-sm text-gray-600 hover:underline">
-            {l.label}
-          </Link>
-        ))}
+    <header className="border-b border-line">
+      <nav className="mx-auto flex max-w-3xl items-center justify-between gap-4 px-5 py-4">
+        <Link href="/" className="flex items-center gap-2 font-semibold">
+          <span className="h-2.5 w-2.5 rounded-full bg-accent" aria-hidden />
+          {copy.appName}
+        </Link>
+        <span className="hidden font-serif text-sm italic text-muted sm:inline">{copy.tagline}</span>
+        <Link href="/judges" className="text-sm text-muted hover:text-cream">
+          {copy.nav.judges}
+        </Link>
       </nav>
     </header>
   );

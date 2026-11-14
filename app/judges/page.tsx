@@ -12,10 +12,10 @@ export default function JudgesPage() {
   return (
     <div className="space-y-8 text-center">
       <div className="flex items-center justify-center gap-2">
-        <h1 className="text-3xl font-bold">{copy.judges.title}</h1>
+        <h1 className="font-serif text-4xl font-semibold">{copy.judges.title}</h1>
         <SampleBadge kind="replay" />
       </div>
-      <p className="text-xl">{j.question}</p>
+      <p className="font-serif text-xl text-muted">{j.question}</p>
       <QrBlock url={url} />
       <div className="grid gap-4 text-left md:grid-cols-2">
         <ResultColumn
