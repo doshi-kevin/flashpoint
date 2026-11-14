@@ -4,6 +4,7 @@
 import { useState } from "react";
 import Badge from "@/components/Badge";
 import QrBlock from "@/components/QrBlock";
+import SiteDecision from "@/components/SiteDecision";
 
 type Sent = { label: "Observed" | "Inferred" | "Unknown"; text: string };
 type Result = {
@@ -169,6 +170,9 @@ export default function ExpansionPage() {
           </section>
         </>
       )}
+
+      {/* After the agent's research: the site and menu decision from Flashpoint survey + Market Experiment results. */}
+      {result && <SiteDecision />}
     </div>
   );
 }

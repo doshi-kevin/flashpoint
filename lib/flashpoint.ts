@@ -19,9 +19,21 @@
 // option strings. Nothing Flashpoint returns is rendered as text or passed to a model.
 import studyResults from "@/data/study-results.json";
 import judges from "@/data/judges.json";
+import replay from "@/data/flashpoint-replay.json";
 import type { StudyResults } from "./types";
 
 export type FlashpointMode = "mock" | "live";
+
+/** Raw answer counts for the study question, for the sensitivity core. */
+export type StudyCounts = {
+  question: string;
+  options: string[];
+  counts: number[]; // aligned with options
+  n: number;
+  targetN: number;
+  /** Answers in arrival order (replay only; live Flashpoint returns totals, not order). */
+  arrivals: string[] | null;
+};
 
 export interface FlashpointAdapter {
   /** Where the LAST result came from. "mock" = saved data (shown as Replay). */
@@ -29,6 +41,20 @@ export interface FlashpointAdapter {
   getStudyResults(storeId: string): Promise<StudyResults | null>;
   /** Judges' closing-slide question, same shape. */
   getJudgeResults(): Promise<StudyResults>;
+  /** Answer counts so far. In mock mode, `upTo` replays the first N answers in arrival order. */
+  getStudyCounts(storeId: string, upTo?: number): Promise<StudyCounts | null>;
+}
+
+type ReplayFile = Record<string, { question: string; targetN: number; answers: { n: number; at: string; option: string }[] }>;
+
+/** Counts from the saved replay (data/flashpoint-replay.json), optionally only the first `upTo` answers. */
+function replayCounts(storeId: string, upTo?: number): StudyCounts | null {
+  const saved = (studyResults as Record<string, StudyResults>)[storeId];
+  const r = (replay as ReplayFile)[storeId];
+  if (!saved || !r) return null;
+  const arrivals = r.answers.slice(0, upTo === undefined ? undefined : Math.max(0, upTo)).map((a) => a.option);
+  const counts = saved.options.map((o) => arrivals.filter((a) => a === o).length);
+  return { question: saved.question, options: saved.options, counts, n: arrivals.length, targetN: r.targetN, arrivals };
 }
 
 const DEFAULT_BASE_URL = "https://api.flashpoint.ai/api/v1";
@@ -106,16 +132,20 @@ export function toPercentages(counts: number[]): number[] {
  * Map one Flashpoint frequencies item onto our fixed option list (from the saved file).
  * Throws if none of our options appear: that means the wrong survey or question label.
  */
-export function mapFrequency(freq: Frequency | Frequency[], saved: StudyResults): StudyResults {
+export function frequencyCounts(freq: Frequency | Frequency[], options: string[]): number[] {
   const item = Array.isArray(freq) ? freq[0] : freq;
   const dist = item?.distribution;
   if (!Array.isArray(dist)) throw new FlashpointError("unexpected frequencies shape");
-  const counts = saved.options.map((opt) => {
+  const matched = options.some((opt) => dist.some((d) => norm(d.value) === norm(opt)));
+  if (!matched && dist.length) throw new FlashpointError("no Flashpoint answer matches our options");
+  return options.map((opt) => {
     const hit = dist.find((d) => norm(d.value) === norm(opt));
     return hit ? Number(hit.count) || 0 : 0;
   });
-  const matched = saved.options.some((opt) => dist.some((d) => norm(d.value) === norm(opt)));
-  if (!matched && dist.length) throw new FlashpointError("no Flashpoint answer matches our options");
+}
+
+export function mapFrequency(freq: Frequency | Frequency[], saved: StudyResults): StudyResults {
+  const counts = frequencyCounts(freq, saved.options);
   return {
     question: saved.question,
     options: saved.options,
@@ -128,11 +158,18 @@ export function mapFrequency(freq: Frequency | Frequency[], saved: StudyResults)
 const savedStudy = (storeId: string) => (studyResults as Record<string, StudyResults>)[storeId] ?? null;
 const savedJudges = () => judges as StudyResults;
 
-async function liveResults(surveyId: string | undefined, label: string, saved: StudyResults) {
+async function liveFrequency(surveyId: string | undefined, label: string) {
   if (!surveyId) throw new FlashpointError("survey id not set");
   const path = `/surveys/${encodeURIComponent(surveyId)}/analytics/frequencies/${encodeURIComponent(label)}`;
-  return mapFrequency(await fpGet<Frequency | Frequency[]>(path), saved);
+  return fpGet<Frequency | Frequency[]>(path);
 }
+
+async function liveResults(surveyId: string | undefined, label: string, saved: StudyResults) {
+  return mapFrequency(await liveFrequency(surveyId, label), saved);
+}
+
+// Only Store 14 has a fielded study; other stores have no survey id.
+const studySurveyId = (storeId: string) => (storeId === "14" ? process.env.FLASHPOINT_STUDY_SURVEY_ID : undefined);
 
 function mockAdapter(): FlashpointAdapter {
   return {
@@ -142,6 +179,9 @@ function mockAdapter(): FlashpointAdapter {
     },
     async getJudgeResults() {
       return savedJudges();
+    },
+    async getStudyCounts(storeId, upTo) {
+      return replayCounts(storeId, upTo);
     },
   };
 }
@@ -153,10 +193,8 @@ function liveAdapter(): FlashpointAdapter {
     async getStudyResults(storeId) {
       const saved = savedStudy(storeId);
       if (!saved) return null;
-      // Only Store 14 has a fielded study; other stores have no survey id.
-      const surveyId = storeId === "14" ? process.env.FLASHPOINT_STUDY_SURVEY_ID : undefined;
       try {
-        const r = await liveResults(surveyId, process.env.FLASHPOINT_STUDY_QUESTION || "Q1", saved);
+        const r = await liveResults(studySurveyId(storeId), process.env.FLASHPOINT_STUDY_QUESTION || "Q1", saved);
         adapter.mode = "live";
         return r;
       } catch (e) {
@@ -179,6 +217,23 @@ function liveAdapter(): FlashpointAdapter {
         console.warn("flashpoint judges -> replay:", (e as Error).message);
         adapter.mode = "mock";
         return saved;
+      }
+    },
+    async getStudyCounts(storeId, upTo) {
+      const saved = savedStudy(storeId);
+      if (!saved) return null;
+      try {
+        const counts = frequencyCounts(
+          await liveFrequency(studySurveyId(storeId), process.env.FLASHPOINT_STUDY_QUESTION || "Q1"),
+          saved.options,
+        );
+        adapter.mode = "live";
+        const n = counts.reduce((t, c) => t + c, 0);
+        return { question: saved.question, options: saved.options, counts, n, targetN: Math.max(saved.sampleSize, n), arrivals: null };
+      } catch (e) {
+        console.warn("flashpoint counts -> replay:", (e as Error).message);
+        adapter.mode = "mock";
+        return replayCounts(storeId, upTo);
       }
     },
   };

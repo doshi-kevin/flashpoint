@@ -71,6 +71,7 @@ test("all generated files match the generator byte-for-byte (reproducible)", () 
   assert.deepEqual(g.events, events);
   assert.deepEqual(g.dataQuality, quality);
   assert.deepEqual(g.calendar, load("calendar.json"));
+  assert.deepEqual(g.replay, load("flashpoint-replay.json"));
 });
 
 test("stores.json keeps the Store shape; original demo stores still exist", () => {

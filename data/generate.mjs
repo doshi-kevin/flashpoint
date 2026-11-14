@@ -9,7 +9,7 @@
 //   weather.json (CACHED)          City weather by daypart ; calendar.json (CACHED)  holidays, promos, local shocks
 //   events.json (CACHED)           Chart markers per store ; data-quality.json      known POS issues
 // Benchmarks and assumptions are listed in data/README.md.
-import { writeFileSync, mkdirSync } from "node:fs";
+import { writeFileSync, mkdirSync, readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 
 const SEED = 20261114;
@@ -375,7 +375,42 @@ export function generate() {
     calendar: CALENDAR,
     events,
     dataQuality,
+    replay: makeReplay(),
   };
+}
+
+// ---- Flashpoint response replay (REPLAY) ------------------------------------------------------
+// The answers to the Store 14 question in arrival order, so the live sensitivity analysis can be
+// replayed without network. Counts come from data/study-results.json (the hand-edited source of
+// truth); order and timestamps are seeded. Replace with live Flashpoint responses when available.
+export function makeReplay() {
+  const study = JSON.parse(readFileSync(new URL("study-results.json", import.meta.url), "utf8"));
+  const out = {};
+  for (const [storeId, r] of Object.entries(study)) {
+    const raw = r.real.map((p) => (p / 100) * r.sampleSize);
+    const counts = raw.map(Math.floor);
+    const order = raw.map((x, i) => [x - Math.floor(x), i]).sort((a, b) => b[0] - a[0]);
+    const remainder = r.sampleSize - counts.reduce((t, x) => t + x, 0);
+    for (let k = 0; k < remainder; k++) counts[order[k][1]]++;
+    const answers = [];
+    r.options.forEach((o, i) => { for (let k = 0; k < counts[i]; k++) answers.push(o); });
+    const rand = rng(SEED + 9000 + Number(storeId));
+    for (let i = answers.length - 1; i > 0; i--) {
+      const j = Math.floor(rand() * (i + 1));
+      [answers[i], answers[j]] = [answers[j], answers[i]];
+    }
+    let t = Date.parse("2026-11-14T14:00:00Z");
+    out[storeId] = {
+      label: "REPLAY: arrival order of the study answers; counts from study-results.json",
+      question: r.question,
+      targetN: r.sampleSize,
+      answers: answers.map((option, i) => {
+        t += Math.round(-Math.log(1 - rand()) * 45_000); // ~45 s between completes
+        return { n: i + 1, at: new Date(t).toISOString().slice(0, 19) + "Z", option };
+      }),
+    };
+  }
+  return out;
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
@@ -392,5 +427,6 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   json("calendar.json", out.calendar);
   json("events.json", out.events);
   json("data-quality.json", out.dataQuality);
+  json("flashpoint-replay.json", out.replay);
   console.log(`wrote ${out.stores.length} stores, ${out.csv.split("\n").length - 2} POS rows, ${out.sales["14"].length} weekdays`);
 }
