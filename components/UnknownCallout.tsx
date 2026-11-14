@@ -4,7 +4,7 @@ import { copy } from "@/content/copy";
 export default function UnknownCallout({ text }: { text: string }) {
   return (
     <div className="rounded border-2 border-purple-500 bg-purple-50 p-4">
-      <h3 className="mb-1 text-lg font-bold">{copy.investigate.unknownTitle}</h3>
+      <h3 className="mb-1 text-lg font-bold">{copy.why.unknownTitle}</h3>
       <p>{text}</p>
     </div>
   );

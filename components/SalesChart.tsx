@@ -9,7 +9,7 @@ const eventColor = { rain: "#3b82f6", roadworks: "#f59e0b", competitor: "#ef4444
 export default function SalesChart({ data, events }: { data: SalesPoint[]; events: StoreEvent[] }) {
   return (
     <div>
-      <div className="h-64 w-full">
+      <div className="h-48 w-full">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={data}>
             <XAxis dataKey="date" tick={{ fontSize: 10 }} minTickGap={30} />

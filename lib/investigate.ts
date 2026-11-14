@@ -134,6 +134,7 @@ function applyChallenges(inv: Investigation, challenges: Challenge[]): Investiga
 
 export async function runInvestigation(
   storeId: string,
+  live = true,
 ): Promise<{ result: Investigation; source: "claude" | "fallback" }> {
   const trace: TraceStep[] = [];
   const facts = (() => {
@@ -159,6 +160,7 @@ export async function runInvestigation(
   });
 
   try {
+    if (!live) throw new Error("replay requested");
     if (!process.env.ANTHROPIC_API_KEY) throw new Error("no API key");
     const store = getStore(storeId);
     if (!store || !facts) throw new Error("unknown store");
@@ -196,7 +198,7 @@ export async function runInvestigation(
     return { result: { ...inv, trace }, source: "claude" };
   } catch (e) {
     console.error("investigate fallback:", (e as Error).message);
-    trace.push({ step: "Replay", detail: "Live call unavailable; showing the saved investigation.", source: "data/fallback-investigation.json" });
+    trace.push({ step: "Replay", detail: "Showing the saved investigation (replay).", source: "data/fallback-investigation.json" });
     return { result: { ...getFallbackInvestigation(), trace }, source: "fallback" };
   }
 }

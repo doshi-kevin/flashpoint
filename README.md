@@ -29,11 +29,8 @@ Without an API key the app still works: `/api/investigate` falls back to `data/f
 
 ## Screens
 
-1. `/` Portfolio (Store 14 flagged)
-2. `/investigate/14` Chart, public signals, hypotheses, "The internet doesn't know"
-3. `/study/14` One question, synthetic vs real, gap
-4. `/decision/14` Before vs after
-5. `/judges` QR + synthetic judges vs "You said"
+1. `/` One-page demo (about 45 s): **Drop** (sales chart, -12%) → **Why** (suspects + "the internet doesn't know") → **Ask** (AI predicted vs real people) → **Decide** (before/after). One button per step. Default is instant replay; tick "Live Claude" for a real investigation.
+2. `/judges` Closing slide: QR + synthetic judges vs "You said".
 
 ## File map
 
@@ -50,7 +47,7 @@ Without an API key the app still works: `/api/investigate` falls back to `data/f
 
 Edit freely, no logic changes needed:
 
-- `components/*.tsx` (Tailwind classes only; logic lives in `InvestigationWorkspace`, `StudyView`, `SalesChart` fetch/chart wiring)
+- `components/*.tsx` (Tailwind classes; `Dashboard.tsx` holds the step state and fetch calls, keep those)
 - `app/layout.tsx`, `app/globals.css` global look and nav
 - `app/*/page.tsx` page layout (grid/spacing)
 - `content/copy.ts` wording
