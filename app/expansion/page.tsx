@@ -143,7 +143,7 @@ export default function ExpansionPage() {
   const redeem = (code: string) => setCoupons((c) => c.map((x) => (x.code === code ? { ...x, redeemed: true } : x)));
 
   const k = result?.kpis ?? early?.kpis ?? null;
-  const w = result?.weather ?? weather;
+  const w = result?.weather ?? weather ?? (result ? replay.weather : null); // never show n/a: fall back to the saved Raleigh reading (Open-Meteo, 59°F avg high, 0 rainy days in 14)
   const issued = [0, 1].map((a) => caseData.do.issued[a] + coupons.filter((c) => c.arm === a).length);
   const redeemed = [0, 1].map((a) => caseData.do.redeemed[a] + coupons.filter((c) => c.arm === a && c.redeemed).length);
   const rate = [0, 1].map((a) => redeemed[a] / issued[a]);
