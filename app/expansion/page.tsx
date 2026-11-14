@@ -6,6 +6,7 @@ import Badge from "@/components/Badge";
 import QrBlock from "@/components/QrBlock";
 import SiteDecision from "@/components/SiteDecision";
 import caseData from "@/data/store51-case.json";
+import replay from "@/data/expansion-fallback.json";
 
 type Sent = { label: "Observed" | "Inferred" | "Unknown"; text: string };
 type Kpis = { population?: number; medianAge?: number; medianIncome?: number; lowConfidence?: boolean };
@@ -113,11 +114,18 @@ export default function ExpansionPage() {
           else if (ev.type === "result") {
             setResult(ev.result);
             setSource(ev.source);
-          } else if (ev.type === "error") throw new Error(ev.message);
+          } else if (ev.type === "error") throw Object.assign(new Error(ev.message), { fromServer: true });
         }
       }
     } catch (e) {
-      setError((e as Error).message);
+      if ((e as { fromServer?: boolean }).fromServer) {
+        setError((e as Error).message);
+        return;
+      }
+      // No server (for example the GitHub Pages copy): show the saved replay, clearly labeled.
+      setEarly({ kpis: replay.kpis });
+      setResult(replay as unknown as Result);
+      setSource("replay");
     } finally {
       setBusy(false);
     }
