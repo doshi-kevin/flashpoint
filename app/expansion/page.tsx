@@ -1,12 +1,13 @@
 "use client";
-// "Open Store 51" workspace: an agent researches a new region (economics via Flashpoint, public sentiment),
-// names what public data can't answer, designs ONE pricing question, and hands it to real people via a QR link.
-import { useState } from "react";
+// "Open Store 51" demo workspace, built for a 30-second live run: type a region, watch the agent work,
+// read three big numbers, see the one question, then ask people two ways (QR survey and a tap-to-answer ad).
+import { useEffect, useState } from "react";
 import Badge from "@/components/Badge";
 import QrBlock from "@/components/QrBlock";
 import SiteDecision from "@/components/SiteDecision";
 
 type Sent = { label: "Observed" | "Inferred" | "Unknown"; text: string };
+type Kpis = { population?: number; medianAge?: number; medianIncome?: number; lowConfidence?: boolean };
 type Result = {
   region: string;
   economics: string;
@@ -14,6 +15,7 @@ type Result = {
   pricing: { low: number; mid: number; high: number };
   question: { text: string; options: string[] };
   recommendation: string;
+  kpis?: Kpis | null;
   toolsUsed?: string[];
 };
 type Step = { step: string; detail: string; source: string };
@@ -21,6 +23,48 @@ type Step = { step: string; detail: string; source: string };
 const tone = { Observed: "good", Inferred: "warn", Unknown: "bad" } as const;
 const SURVEY_URL =
   process.env.NEXT_PUBLIC_EXPANSION_SURVEY_URL || "https://flashpointopinions.com/35808758-cecc-4781-b2ea-5d0f4ded0373";
+const fmt = (n?: number) => (n == null ? "–" : n.toLocaleString("en-US"));
+
+function Kpi({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="pebble px-6 py-5 text-center">
+      <p className="text-4xl font-black tracking-tight sm:text-5xl">{value}</p>
+      <p className="label mt-1">{label}</p>
+    </div>
+  );
+}
+
+/** The ad is the survey: one tap is the answer. Counts are local to this screen (concept demo). */
+function AdTap({ question, options }: { question: string; options: string[] }) {
+  const [taps, setTaps] = useState<number[]>(() => options.map(() => 0));
+  const total = taps.reduce((a, b) => a + b, 0);
+  return (
+    <div className="space-y-2">
+      <div className="flex items-center gap-2">
+        <span className="label !text-ink-2">The ad is the survey</span>
+        <Badge tone="sample">Sample ad</Badge>
+      </div>
+      <div className="mx-auto max-w-xs rounded-md border-2 border-dashed border-ink bg-white p-4 text-center">
+        <p className="text-sm font-black leading-tight">{question}</p>
+        <div className="mt-3 flex flex-col gap-2">
+          {options.map((o, i) => (
+            <button
+              key={o}
+              onClick={() => setTaps((t) => t.map((x, j) => (j === i ? x + 1 : x)))}
+              className="flex items-center justify-between rounded-md border border-ink/25 bg-lime px-3 py-2 text-sm font-bold active:scale-95"
+            >
+              <span>{o}</span>
+              <span className="font-mono text-xs">{taps[i]}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+      <p className="text-center font-mono text-xs text-muted">
+        {total ? `${total} taps = ${total} answers` : "Tap an answer. The tap is the survey."}
+      </p>
+    </div>
+  );
+}
 
 export default function ExpansionPage() {
   const [region, setRegion] = useState("Raleigh, North Carolina");
@@ -29,11 +73,28 @@ export default function ExpansionPage() {
   const [source, setSource] = useState<"live" | "replay" | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showSite, setShowSite] = useState(false);
+  const [early, setEarly] = useState<{ region: string; kpis: Kpis } | null>(null);
+
+  // Warm Flashpoint (tool list + demographics) while the presenter is talking, so the click is fast.
+  useEffect(() => {
+    fetch("/api/expansion?region=" + encodeURIComponent("Raleigh, North Carolina")).catch(() => {});
+  }, []);
 
   async function run() {
-    setBusy(true); setError(null); setSteps([]); setResult(null); setSource(null);
+    setBusy(true);
+    setError(null);
+    setSteps([]);
+    setResult(null);
+    setSource(null);
+    setShowSite(false);
+    setEarly(null);
     try {
-      const res = await fetch("/api/expansion", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ region }) });
+      const res = await fetch("/api/expansion", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ region }),
+      });
       if (!res.body) throw new Error("no stream");
       const reader = res.body.getReader();
       const dec = new TextDecoder();
@@ -48,8 +109,11 @@ export default function ExpansionPage() {
           if (!line.trim()) continue;
           const ev = JSON.parse(line);
           if (ev.type === "step") setSteps((s) => [...s, ev]);
-          else if (ev.type === "result") { setResult(ev.result); setSource(ev.source); }
-          else if (ev.type === "error") throw new Error(ev.message);
+          else if (ev.type === "kpis") setEarly({ region: ev.region, kpis: ev.kpis });
+          else if (ev.type === "result") {
+            setResult(ev.result);
+            setSource(ev.source);
+          } else if (ev.type === "error") throw new Error(ev.message);
         }
       }
     } catch (e) {
@@ -59,120 +123,125 @@ export default function ExpansionPage() {
     }
   }
 
-  const unknown = result?.sentiment.find((x) => x.label === "Unknown")?.text;
+  const unknown = result?.sentiment.find((x) => x.label === "Unknown");
+  const others = result?.sentiment.filter((x) => x.label !== "Unknown") ?? [];
+
   return (
-    <div className="space-y-10">
+    <div className="space-y-8">
       <section className="space-y-4 pt-2">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="chip px-4 py-1.5 font-mono text-xs uppercase tracking-wider text-ink-2">Expansion dossier</span>
-          <span className="text-faint">/</span>
           <span className="chip px-4 py-1.5 font-mono text-xs uppercase tracking-wider text-ink-2">Store 51</span>
           {source && (
-            <span className={`px-4 py-1.5 font-mono text-xs font-bold uppercase tracking-wider ${source === "live" ? "chip" : "chip-alert"}`}>
+            <span
+              className={`px-4 py-1.5 font-mono text-xs font-bold uppercase tracking-wider ${source === "live" ? "chip" : "chip-alert"}`}
+            >
               {source === "live" ? "Live agent" : "Replay"}
             </span>
           )}
         </div>
-        <h1 className="text-4xl font-black leading-none tracking-tight sm:text-6xl">Open Store 51</h1>
-        <p className="max-w-2xl text-lg leading-relaxed text-ink-2">
-          A region you have never visited. The agent researches the economics and public sentiment, then asks real people the one thing the internet can&apos;t answer.
-        </p>
+        <h1 className="text-4xl font-black leading-none tracking-tight sm:text-6xl">Open Store 51?</h1>
         <div className="sculpt glass flex flex-wrap items-end gap-3 p-5">
           <label className="min-w-[240px] flex-1">
-            <span className="label">Region for Store 51</span>
+            <span className="label">Region</span>
             <input
               value={region}
               onChange={(e) => setRegion(e.target.value)}
               className="mt-1 w-full rounded-xl border border-line bg-card px-4 py-3 text-base font-semibold outline-none focus:border-ink"
             />
           </label>
-          <button onClick={run} disabled={busy} className="btn-lime px-7 py-4 text-base font-black tracking-tight text-ink disabled:opacity-50">
-            {busy ? "Researching…" : "Research this region →"}
+          <button
+            onClick={run}
+            disabled={busy}
+            className="btn-lime px-7 py-4 text-base font-black tracking-tight text-ink disabled:opacity-50"
+          >
+            {busy ? "Researching…" : "Research →"}
           </button>
         </div>
       </section>
 
       {error && <p className="chip-alert p-4 text-sm font-medium">{error}</p>}
 
-      {steps.length > 0 && (
-        <section className="sculpt p-6">
-          <p className="label mb-3">Agent at work</p>
-          <ol className="space-y-3">
-            {steps.map((st, i) => (
-              <li key={i} className="flex gap-3">
-                <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-lime-deep" aria-hidden />
-                <div>
-                  <p className="font-bold">{st.step}</p>
-                  <p className="text-sm text-ink-2">{st.detail}</p>
-                  <p className="font-mono text-xs text-muted">Source: {st.source}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </section>
+      {(busy || (steps.length > 0 && !result)) && (
+        <ol className="flex flex-wrap gap-2" aria-label="Agent progress">
+          {steps.map((st, i) => (
+            <li key={i} className="chip flex items-center gap-2 px-3 py-1.5 text-sm font-bold">
+              <span className="h-2 w-2 rounded-full bg-lime-deep" aria-hidden />
+              {st.step}
+            </li>
+          ))}
+        </ol>
+      )}
+
+      {early && !result && (
+        <div className="grid gap-4 sm:grid-cols-3">
+          <Kpi label="People" value={fmt(early.kpis.population)} />
+          <Kpi label="Median income" value={early.kpis.medianIncome ? `$${fmt(early.kpis.medianIncome)}` : "–"} />
+          <Kpi label="Median age" value={early.kpis.medianAge != null ? String(early.kpis.medianAge) : "–"} />
+        </div>
       )}
 
       {result && (
         <>
           <section className="space-y-3">
-            <div className="flex items-baseline gap-3">
-              <span className="label">Section 01 // Economics</span>
-              {result.toolsUsed?.length ? <span className="chip px-3 py-1 font-mono text-xs">Flashpoint: {result.toolsUsed.join(", ")}</span> : null}
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-xl font-black">{result.region}</span>
+              {result.toolsUsed?.length ? <Badge tone="info">Flashpoint data</Badge> : null}
+              {result.kpis?.lowConfidence && <Badge tone="warn">Low-confidence data</Badge>}
             </div>
-            <div className="pebble p-6 sm:p-8">
-              <p className="text-2xl font-black tracking-tight">{result.region}</p>
-              <p className="mt-2 max-w-3xl text-base leading-relaxed text-ink-2">{result.economics}</p>
+            <div className="grid gap-4 sm:grid-cols-3">
+              <Kpi label="People" value={fmt(result.kpis?.population)} />
+              <Kpi label="Median income" value={result.kpis?.medianIncome ? `$${fmt(result.kpis.medianIncome)}` : "–"} />
+              <Kpi label="Median age" value={result.kpis?.medianAge != null ? String(result.kpis.medianAge) : "–"} />
             </div>
+            <p className="text-lg font-semibold text-ink-2">{result.economics}</p>
+            <ul className="flex flex-wrap gap-2">
+              {others.map((x) => (
+                <li key={x.text} className="chip flex items-center gap-2 px-3 py-1.5 text-sm font-semibold">
+                  <Badge tone={tone[x.label] ?? "neutral"}>{x.label}</Badge>
+                  {x.text}
+                </li>
+              ))}
+            </ul>
           </section>
 
-          <section className="space-y-3">
-            <span className="label">Section 02 // Public sentiment</span>
-            <div className="sculpt p-6 sm:p-8">
-              <ul className="space-y-3">
-                {result.sentiment.map((x) => (
-                  <li key={x.text} className="flex items-start gap-3">
-                    <Badge tone={tone[x.label] ?? "neutral"}>{x.label}</Badge>
-                    <span className="text-base leading-relaxed">{x.text}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </section>
-
-          <section className="amber-card relative overflow-hidden p-6 sm:p-10">
-            <div className="relative space-y-6">
-              <span className="glass inline-flex items-center gap-2 rounded-full px-3 py-1.5 font-mono text-xs font-medium uppercase tracking-widest">
-                <span className="h-2.5 w-2.5 rounded-full bg-ochre" aria-hidden /> The gap // What only people can tell you
-              </span>
-              <h2 className="max-w-3xl text-4xl font-black leading-[1.05] tracking-tight sm:text-5xl">
+          <section className="amber-card relative overflow-hidden p-6 sm:p-8">
+            <div className="relative space-y-5">
+              <h2 className="text-3xl font-black leading-tight tracking-tight sm:text-5xl">
                 &ldquo;The internet doesn&apos;t know.&rdquo;
               </h2>
-              {unknown && <p className="max-w-3xl text-lg font-medium leading-relaxed text-ink/85">{unknown}</p>}
-              <div className="glass sculpt-alt grid gap-6 p-5 sm:p-6 md:grid-cols-[1.2fr_1fr]">
-                <div className="space-y-3">
-                  <p className="label !text-ink-2">The one question for real people</p>
-                  <p className="text-2xl font-black leading-tight">{result.question.text}</p>
-                  <ul className="flex flex-wrap gap-2">
+              {unknown && <p className="text-lg font-semibold text-ink/85">{unknown.text}</p>}
+              <div className="glass sculpt-alt space-y-5 p-5 sm:p-6">
+                <div>
+                  <p className="label !text-ink-2">Ask real people, one question</p>
+                  <p className="mt-1 text-2xl font-black leading-tight">{result.question.text}</p>
+                  <ul className="mt-3 flex flex-wrap gap-2">
                     {result.question.options.map((o) => (
-                      <li key={o} className="chip px-4 py-1.5 text-sm font-bold">{o}</li>
+                      <li key={o} className="chip px-4 py-1.5 text-base font-black">
+                        {o}
+                      </li>
                     ))}
                   </ul>
-                  <p className="font-mono text-xs text-ink-2">
-                    Testing ${result.pricing.low} / ${result.pricing.mid} / ${result.pricing.high}
-                  </p>
-                  <p className="text-sm font-semibold">{result.recommendation}</p>
                 </div>
-                <div className="truth-card flex justify-center p-5">
-                  <QrBlock url={SURVEY_URL} size={170} />
+                <div className="grid gap-5 md:grid-cols-2">
+                  <div className="truth-card flex justify-center p-4">
+                    <QrBlock url={SURVEY_URL} size={150} />
+                  </div>
+                  <div className="sculpt-sm bg-card/80 p-4">
+                    <AdTap question={result.question.text} options={result.question.options} />
+                  </div>
                 </div>
               </div>
             </div>
           </section>
+
+          <div className="flex justify-center">
+            <button onClick={() => setShowSite((s) => !s)} className="chip px-5 py-2 text-sm font-bold">
+              {showSite ? "Hide full site analysis" : "Show full site analysis"}
+            </button>
+          </div>
+          {showSite && <SiteDecision />}
         </>
       )}
-
-      {/* After the agent's research: the site and menu decision from Flashpoint survey + Market Experiment results. */}
-      {result && <SiteDecision />}
     </div>
   );
 }

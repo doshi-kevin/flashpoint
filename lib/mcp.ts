@@ -36,10 +36,26 @@ async function session() {
 }
 
 /** Ask Flashpoint what it can do (the agent discovers its own capabilities). */
+let toolsCache: { at: number; tools: McpTool[] } | null = null;
 export async function listTools(): Promise<McpTool[]> {
+  if (toolsCache && Date.now() - toolsCache.at < 10 * 60_000) return toolsCache.tools;
   const sid = await session();
   const { reply } = await rpc({ jsonrpc: "2.0", id: 2, method: "tools/list", params: {} }, sid);
-  return (reply?.result?.tools ?? []) as McpTool[];
+  const tools = (reply?.result?.tools ?? []) as McpTool[];
+  if (tools.length) toolsCache = { at: Date.now(), tools };
+  return tools;
+}
+
+// Read-only lookups are cached for 15 minutes (and shared by concurrent callers) so a demo re-run is instant.
+const callCache = new Map<string, { at: number; value: Promise<unknown> }>();
+export function callToolCached(name: string, args: Record<string, unknown>): Promise<unknown> {
+  const key = name + JSON.stringify(args).toLowerCase();
+  const hit = callCache.get(key);
+  if (hit && Date.now() - hit.at < 15 * 60_000) return hit.value;
+  const value = callTool(name, args);
+  callCache.set(key, { at: Date.now(), value });
+  value.catch(() => callCache.delete(key));
+  return value;
 }
 
 export async function callTool(name: string, args: Record<string, unknown>): Promise<unknown> {

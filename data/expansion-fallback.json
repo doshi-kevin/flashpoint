@@ -1,13 +1,41 @@
 {
   "region": "Raleigh, North Carolina",
-  "economics": "Growing metro with a young, mid-income population: a strong fit for a value burger store. Rent and labor look moderate, but the data here is a saved replay, not live.",
+  "economics": "Young, growing, mid-income metro: a good fit for value burgers.",
   "sentiment": [
-    { "label": "Observed", "text": "Local news mentions steady restaurant openings in the area (sample)." },
-    { "label": "Inferred", "text": "Lunch crowds near offices and the university likely favor speed and value." },
-    { "label": "Unknown", "text": "What locals would pay for a burger meal, and which chain they would switch from. The internet doesn't know." }
+    {
+      "label": "Observed",
+      "text": "New restaurants keep opening here."
+    },
+    {
+      "label": "Inferred",
+      "text": "Lunch crowds want speed and value."
+    },
+    {
+      "label": "Unknown",
+      "text": "What locals will pay. The internet doesn't know."
+    }
   ],
-  "pricing": { "low": 8.5, "mid": 10.5, "high": 12.5 },
-  "question": { "text": "What is the most you would pay for a burger combo at lunch?", "options": ["Up to $8.50", "Up to $10.50", "Up to $12.50"] },
-  "recommendation": "Do not set the price yet. Field the pricing question to real people in the region first, then decide.",
-  "toolsUsed": ["demographics"]
+  "pricing": {
+    "low": 8.5,
+    "mid": 10.5,
+    "high": 12.5
+  },
+  "question": {
+    "text": "What is the most you would pay for a burger combo at lunch?",
+    "options": [
+      "Up to $8.50",
+      "Up to $10.50",
+      "Up to $12.50"
+    ]
+  },
+  "recommendation": "Ask real people before setting the price.",
+  "toolsUsed": [
+    "demographics"
+  ],
+  "kpis": {
+    "population": 506306,
+    "medianAge": 34.9,
+    "medianIncome": 86309,
+    "lowConfidence": true
+  }
 }

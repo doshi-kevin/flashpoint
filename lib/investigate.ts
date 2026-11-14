@@ -122,6 +122,7 @@ async function ask(client: Anthropic, system: string, payload: unknown, maxToken
   const msg = await client.messages.create(
     {
       model: MODEL,
+      output_config: { effort: "low" },
       max_tokens: maxTokens,
       system,
       messages: [{ role: "user", content: JSON.stringify(payload) }],
