@@ -166,6 +166,7 @@ export async function runInvestigation(
   problem = "",
   emit?: Emit,
 ): Promise<{ result: Investigation; source: "claude" | "fallback" }> {
+  problem = problem.slice(0, 600); // cap input size for every caller (limits LLM cost)
   const trace: TraceStep[] = [];
   const push = (t: TraceStep) => {
     trace.push(t);

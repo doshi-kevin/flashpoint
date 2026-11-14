@@ -14,7 +14,7 @@ npm install
 npm run dev                  # http://localhost:3000
 ```
 
-Without an API key the app still works: `/api/investigate` falls back to `data/fallback-investigation.json` and shows a "Replay" badge.
+Without an API key the app still works: `/api/agent` falls back to `data/fallback-investigation.json` and shows a "Replay" badge.
 
 ## Env vars
 
