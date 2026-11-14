@@ -1,6 +1,6 @@
 "use client";
-// Shows Flashpoint fielding the study: publish -> synthetic predicts -> real responses tick up.
-// Props: sampleSize (final n), onFinished (called once). Replay of saved results; the badge says so.
+// Flashpoint study progress: publish -> synthetic predicts -> real responses tick up.
+// Props: sampleSize (final n), onFinished (called once). Replay of saved results; the lozenge says so.
 import { useEffect, useRef, useState } from "react";
 import SampleBadge from "./SampleBadge";
 import { copy } from "@/content/copy";
@@ -32,35 +32,37 @@ export default function FieldingPanel({ sampleSize, onFinished }: { sampleSize: 
   const count = Math.round(sampleSize * answering);
 
   return (
-    <div>
-      <div className="mb-3 flex items-center justify-between">
-        <p className="eyebrow">{copy.fielding.title}</p>
+    <div className="rounded border border-line bg-panel">
+      <div className="flex items-center justify-between border-b border-line px-4 py-2">
+        <p className="label">{copy.fielding.title}</p>
         <SampleBadge kind="replay" />
       </div>
-      <ul className="space-y-2 text-sm">
-        {copy.fielding.phases.map((label, i) => (
-          <li key={label} className={`flex items-center gap-2 ${i > phase ? "text-muted/60" : ""}`}>
-            {i < phase ? (
-              <span className="text-good" aria-hidden>
-                ✓
-              </span>
-            ) : i === phase ? (
-              <span className="h-2 w-2 animate-pulse rounded-full bg-accent" aria-hidden />
-            ) : (
-              <span className="h-2 w-2 rounded-full bg-line" aria-hidden />
-            )}
-            {label}
-          </li>
-        ))}
-      </ul>
-      <div className="mt-4 flex items-end gap-3">
-        <span className="font-serif text-5xl font-semibold tabular-nums">{count}</span>
-        <span className="pb-1 text-muted">
-          / {sampleSize} {copy.fielding.responses}
-        </span>
-      </div>
-      <div className="mt-2 h-1.5 rounded bg-line">
-        <div className="h-1.5 rounded bg-accent" style={{ width: `${answering * 100}%` }} />
+      <div className="p-4">
+        <ul className="space-y-1.5 text-sm">
+          {copy.fielding.phases.map((label, i) => (
+            <li key={label} className={`flex items-center gap-2 ${i > phase ? "text-muted/60" : ""}`}>
+              {i < phase ? (
+                <span className="text-good" aria-hidden>
+                  ✓
+                </span>
+              ) : i === phase ? (
+                <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-info" aria-hidden />
+              ) : (
+                <span className="h-2.5 w-2.5 rounded-full bg-line" aria-hidden />
+              )}
+              {label}
+            </li>
+          ))}
+        </ul>
+        <div className="mt-4 flex items-baseline gap-2">
+          <span className="text-3xl font-semibold tabular-nums">{count}</span>
+          <span className="text-muted">
+            / {sampleSize} {copy.fielding.responses}
+          </span>
+        </div>
+        <div className="mt-2 h-1.5 rounded bg-soft">
+          <div className="h-1.5 rounded bg-info" style={{ width: `${answering * 100}%` }} />
+        </div>
       </div>
     </div>
   );

@@ -1,27 +1,36 @@
-// Before -> After recommendation, owner and review date. Props: decision (Decision).
+// Before -> After recommendation with owner, success metric and review date. Props: decision (Decision).
 import { copy } from "@/content/copy";
 import type { Decision } from "@/lib/types";
 
 export default function DecisionBanner({ decision: d }: { decision: Decision }) {
   return (
-    <div className="space-y-3">
-      <div className="grid items-stretch gap-3 sm:grid-cols-[1fr_auto_1fr]">
-        <div className="rounded-xl border border-line bg-soft p-4">
-          <p className="eyebrow">{copy.decide.before}</p>
-          <p className="mt-1 text-lg text-muted line-through">{d.before.title}</p>
+    <div className="space-y-4">
+      <div className="grid gap-3 md:grid-cols-2">
+        <div className="rounded border border-line bg-panel p-4">
+          <p className="label">{copy.decision.before}</p>
+          <p className="mt-1 text-base text-muted line-through">{d.before.title}</p>
+          <p className="mt-1 text-sm text-muted">{d.before.why}</p>
         </div>
-        <div className="flex items-center justify-center text-2xl text-accent" aria-hidden>
-          →
-        </div>
-        <div className="rounded-xl border-2 border-accent bg-accent/10 p-4">
-          <p className="eyebrow">{copy.decide.after}</p>
-          <p className="mt-1 font-serif text-xl font-semibold">{d.after.title}</p>
+        <div className="rounded border border-good/40 border-l-4 border-l-good bg-[#f3fff9] p-4">
+          <p className="label">{copy.decision.after}</p>
+          <p className="mt-1 text-base font-semibold">{d.after.title}</p>
+          <p className="mt-1 text-sm text-muted">{d.after.why}</p>
         </div>
       </div>
-      <p className="text-sm text-muted">
-        <strong className="text-fg">{copy.decide.owner}:</strong> {d.owner} ·{" "}
-        <strong className="text-fg">{copy.decide.review}:</strong> {d.reviewDate}
-      </p>
+      <dl className="grid gap-3 rounded border border-line bg-panel p-4 text-sm sm:grid-cols-3">
+        <div>
+          <dt className="label">{copy.decision.owner}</dt>
+          <dd className="mt-0.5">{d.owner}</dd>
+        </div>
+        <div>
+          <dt className="label">{copy.decision.metric}</dt>
+          <dd className="mt-0.5">{d.metric}</dd>
+        </div>
+        <div>
+          <dt className="label">{copy.decision.review}</dt>
+          <dd className="mt-0.5">{d.reviewDate}</dd>
+        </div>
+      </dl>
     </div>
   );
 }

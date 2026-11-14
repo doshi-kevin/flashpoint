@@ -1,11 +1,12 @@
-// Small pill label. Props: children (text), tone ("neutral" | "sample" | "good" | "warn" | "bad").
-// A dot plus the word means status is never shown by colour alone.
+// Status lozenge (Jira style). Props: children (text), tone ("neutral" | "info" | "sample" | "good" | "warn" | "bad").
+// Always uppercase words, so status is never shown by colour alone.
 const tones = {
-  neutral: "border-line text-muted bg-soft",
-  sample: "border-accent/40 text-accent-ink bg-accent/10",
-  good: "border-good/30 text-good bg-good/10",
-  warn: "border-warn/30 text-warn bg-warn/10",
-  bad: "border-accent/40 text-accent-ink bg-accent/10",
+  neutral: "bg-soft text-muted",
+  info: "bg-[#e9f2ff] text-info",
+  sample: "bg-[#fff1ec] text-accent-ink",
+  good: "bg-[#dcfff1] text-good",
+  warn: "bg-[#fff7d6] text-warn",
+  bad: "bg-[#ffeceb] text-[#ae2e24]",
 };
 
 export default function Badge({
@@ -17,9 +18,8 @@ export default function Badge({
 }) {
   return (
     <span
-      className={`inline-flex shrink-0 items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-medium ${tones[tone]}`}
+      className={`inline-block shrink-0 rounded-[3px] px-1.5 py-0.5 text-[11px] font-bold uppercase tracking-wide ${tones[tone]}`}
     >
-      <span className="h-1.5 w-1.5 rounded-full bg-current" aria-hidden />
       {children}
     </span>
   );

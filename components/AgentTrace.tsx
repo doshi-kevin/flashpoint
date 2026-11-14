@@ -1,11 +1,11 @@
 "use client";
-// Shows the agents working. Steps arrive from the server as they finish; each is revealed with a short delay.
+// Agent activity log. Steps arrive from the server as they finish; each is revealed with a short delay.
 // Props: steps (TraceStep[], grows over time), done (stream finished), onFinished (called once when all shown).
 import { useEffect, useRef, useState } from "react";
 import { copy } from "@/content/copy";
 import type { TraceStep } from "@/lib/types";
 
-const STEP_MS = 450;
+const STEP_MS = 350;
 
 export default function AgentTrace({
   steps,
@@ -32,21 +32,21 @@ export default function AgentTrace({
 
   const allShown = shown >= steps.length;
   return (
-    <div>
-      <p className="eyebrow mb-3">{copy.agent.title}</p>
-      <ul className="space-y-3 text-sm">
+    <div className="rounded border border-line bg-panel">
+      <p className="label border-b border-line px-4 py-2">{copy.investigation.log}</p>
+      <ul className="divide-y divide-line text-sm">
         {steps.slice(0, shown).map((s, i) => {
           const working = i === shown - 1 && allShown && !done;
           return (
-            <li key={`${s.step}-${i}`} className="flex gap-3">
+            <li key={`${s.step}-${i}`} className="flex gap-3 px-4 py-2.5">
               {working ? (
-                <span className="mt-1.5 h-2.5 w-2.5 shrink-0 animate-pulse rounded-full bg-accent" aria-hidden />
+                <span className="mt-1.5 h-2.5 w-2.5 shrink-0 animate-pulse rounded-full bg-info" aria-hidden />
               ) : (
                 <span className="mt-0.5 shrink-0 text-good" aria-hidden>
                   ✓
                 </span>
               )}
-              <span>
+              <span className="min-w-0">
                 <span className="font-semibold">{s.step}</span>
                 <span className="text-muted"> · {s.detail}</span>
                 <span className="block text-xs text-muted/80">{s.source}</span>
@@ -54,6 +54,7 @@ export default function AgentTrace({
             </li>
           );
         })}
+        {steps.length === 0 && <li className="px-4 py-3 text-muted">Starting…</li>}
       </ul>
     </div>
   );
