@@ -29,6 +29,7 @@ const fmt = (n?: number) => (n == null ? "–" : n.toLocaleString("en-US"));
 const usd = (n: number) => `$${n.toFixed(2)}`;
 const { fleet, unit, land, say, prices } = caseData;
 const marginPer = prices.map((p) => p - unit.cheeseCost);
+const OFFERS_PER_DAY = 300; // illustrative assumption: cheese offers per store per day
 
 function AgentCard({ name, source, live, children }: { name: string; source: string; live: boolean; children: React.ReactNode }) {
   return (
@@ -140,6 +141,8 @@ export default function ExpansionPage() {
   const rate = [0, 1].map((a) => redeemed[a] / issued[a]);
   const profit100 = [0, 1].map((a) => rate[a] * 100 * marginPer[a]);
   const winner = profit100[1] > profit100[0] ? 1 : 0;
+  const gainPerPerson = Math.abs(profit100[1] - profit100[0]) / 100;
+  const yearly = Math.round((gainPerPerson * OFFERS_PER_DAY * 365 * fleet.stores) / 1000) * 1000;
   const showCase = busy || result || early;
   const unknown = result?.sentiment.find((x) => x.label === "Unknown");
   const others = result?.sentiment.filter((x) => x.label !== "Unknown") ?? [];
@@ -319,7 +322,11 @@ export default function ExpansionPage() {
               <p className="text-xl font-black">
                 They SAY {q.options[0]} ({say.pct[0]}%). They DO pay {usd(prices[winner])}, and it earns {usd(profit100[winner])} per 100 people shown the ad.
               </p>
-              <p className="text-sm font-semibold text-ink-2">{result.recommendation}</p>
+              <p className="mt-3 text-5xl font-black tracking-tight text-moss">${yearly.toLocaleString("en-US")} <span className="text-2xl text-ink-2">per year</span></p>
+              <p className="font-mono text-xs text-muted">
+                {usd(gainPerPerson)} per person × {OFFERS_PER_DAY} a day × 365 days × {fleet.stores} stores. Illustration from sample numbers.
+              </p>
+              <p className="mt-2 text-sm font-semibold text-ink-2">{result.recommendation}</p>
             </div>
           </div>
         </section>
