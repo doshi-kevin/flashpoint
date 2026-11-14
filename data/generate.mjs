@@ -15,7 +15,7 @@ import { fileURLToPath } from "node:url";
 const SEED = 20261114;
 const START = "2026-08-17"; // Monday
 const END = "2026-11-13"; // Friday (data through yesterday; today is Sat 14 Nov 2026)
-const CHAIN = "Crumb & Crust";
+const CHAIN = "Ember Burger Co.";
 
 export const DAYPARTS = ["breakfast", "lunch", "afternoon", "dinner", "late_night"];
 export const DAYPART_HOURS = {
@@ -334,7 +334,7 @@ export function generate() {
     });
   }
 
-  const storeList = stores.map((s) => ({ id: s.id, name: `Store ${s.id}`, chain: CHAIN, area: s.area }));
+  const storeList = stores.map((s) => ({ id: s.id, name: s.id === "14" ? "Ember Burger – Harbor St" : `Store ${s.id}`, chain: CHAIN, area: s.area }));
   const profiles = Object.fromEntries(
     stores.map((s) => [
       s.id,

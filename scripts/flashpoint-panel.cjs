@@ -21,7 +21,7 @@ const parse = (t) => {
   await post({ jsonrpc: "2.0", method: "notifications/initialized" }, x);
   const call = async (id, args) => parse((await post({ jsonrpc: "2.0", id, method: "tools/call", params: { name: "panel", arguments: args } }, x)).t);
   const start = await call(2, { action: "create_and_run", name: "Store 14 lapsed lunch customers", num_respondents: n,
-    research_objective: "Lapsed weekday lunch customers of a bakery-cafe chain store with a drive-thru; understand what would bring them back.", survey_id: surveyId });
+    research_objective: "Lapsed weekday lunch customers of a burger chain store with a drive-thru; understand what would bring them back.", survey_id: surveyId });
   console.log("start:", JSON.stringify(start).slice(0, 600));
   const jobId = start?.result?.job_id || start?.job_id;
   if (!jobId) return;

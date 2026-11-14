@@ -3,7 +3,7 @@
 import Badge from "./Badge";
 
 const signals = [
-  { label: "Observed", text: "Roadworks near the Store 14 entrance on the affected days." },
+  { label: "Observed", text: "Roadworks near the Ember Burger Harbor St entrance on the affected days." },
   { label: "Observed", text: "Rain on several of the days sales dipped." },
   { label: "Inferred", text: "A competitor lunch offer nearby may be pulling the lunch crowd." },
   { label: "Unknown", text: "Why customers who stopped visiting did not come back. The internet doesn't know." },
@@ -28,7 +28,7 @@ const precedents = [
     name: "Subway $5 Footlong (2008 recession)",
     worked: "A simple value offer for value-seeking customers.",
     why: "Price was the clear reason people stayed away.",
-    different: "Store 14's lost customers may care about line speed more than price.",
+    different: "Harbor St's lost customers may care about line speed more than price.",
     test: "Test $1 off against a faster line in the same week.",
   },
   {

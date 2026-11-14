@@ -21,7 +21,7 @@ export default function AdCard({ results }: { results: StudyResults }) {
         behavior, not stars.
       </p>
       <div className="mx-auto max-w-sm rounded-md border-2 border-dashed border-ink p-4 text-center">
-        <p className="text-base font-semibold">We miss you at Store 14. What would bring you back?</p>
+        <p className="text-base font-semibold">We miss you at Ember Burger on Harbor St. What would bring you back?</p>
         <div className="mt-3 flex flex-wrap justify-center gap-2">
           {results.options.map((o, i) => (
             <span key={o} className="rounded-md border border-ink/25 bg-lime px-3 py-1.5 text-sm font-semibold">

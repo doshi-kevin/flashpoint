@@ -1,7 +1,7 @@
 // All user-facing text lives here so it can be edited in one place.
 export const copy = {
   appName: "Economic Pulse",
-  workspace: "Crumb & Crust",
+  workspace: "Ember Burger Co.",
   tagline: "Claude knows what it doesn't know. Flashpoint goes and asks.",
   nav: { cases: "Cases", survey: "Live survey" },
   badges: { sample: "Sample data", replay: "Replay", synthetic: "Synthetic", real: "Real", live: "Live" },

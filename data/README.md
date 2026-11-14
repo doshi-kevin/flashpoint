@@ -9,7 +9,7 @@ node --test data/data.test.mjs  # 20 checks: shapes, reproducibility, realism be
 
 ## The world (all SYNTHETIC, fictional)
 
-**Crumb & Crust**: a 40-unit quick-service burger franchise group in one fictional metro, 5 districts of 8 stores (North Shore, Harbor, Central, Westgate, Eastfield). It's modelled on public US McDonald's-style benchmarks, but every store, number and place is invented. 13 weeks of POS data: **Mon 17 Aug to Fri 13 Nov 2026** (data through yesterday).
+**Ember Burger Co.**: a 40-unit quick-service burger franchise group in one fictional metro, 5 districts of 8 stores (North Shore, Harbor, Central, Westgate, Eastfield). It's modelled on public US McDonald's-style benchmarks, but every store, number and place is invented. 13 weeks of POS data: **Mon 17 Aug to Fri 13 Nov 2026** (data through yesterday).
 
 | Format | Stores | Target AUV | Avg check | Channel mix (transactions) |
 | --- | --- | --- | --- | --- |
