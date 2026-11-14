@@ -1,5 +1,5 @@
 "use client";
-// Top header: brand with amber indicator, chain chip, nav (Cases, Live survey), data label, "Create case", manager badge. No props.
+// Top header: brand with amber indicator, chain chip, nav (Cases, Judge feedback), data label, "Create case", manager badge. No props.
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import CreateCase from "./CreateCase";

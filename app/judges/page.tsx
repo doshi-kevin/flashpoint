@@ -1,43 +1,30 @@
-// Live survey page: QR to NEXT_PUBLIC_JUDGE_SURVEY_URL + synthetic judges vs "You said" from /data/judges.json.
+// Judge feedback page: a QR to a short Flashpoint survey that asks judges about this presentation (for future prospects).
+// URL comes from NEXT_PUBLIC_JUDGE_SURVEY_URL.
 import QrBlock from "@/components/QrBlock";
-import ResultColumn from "@/components/ResultColumn";
-import SampleBadge from "@/components/SampleBadge";
-import { getJudges } from "@/lib/data";
-import { topOption } from "@/lib/metrics";
-import { copy } from "@/content/copy";
+import FlashpointMark from "@/components/FlashpointMark";
 
-export default function SurveyPage() {
-  const j = getJudges();
-  const url = process.env.NEXT_PUBLIC_JUDGE_SURVEY_URL || "https://example.com/judge-survey";
+const URL_ = process.env.NEXT_PUBLIC_JUDGE_SURVEY_URL || "https://flashpointopinions.com";
+
+export default function JudgesPage() {
   return (
     <div className="space-y-8">
-      <div className="flex flex-wrap items-end justify-between gap-3">
-        <div className="space-y-1.5">
-          <h1 className="text-4xl font-black tracking-tight sm:text-5xl">{copy.survey.title}</h1>
-          <p className="max-w-xl text-ink-2">{copy.survey.sub}</p>
-        </div>
-        <SampleBadge kind="replay" />
+      <div className="space-y-2">
+        <p className="label">Judge feedback</p>
+        <h1 className="text-4xl font-black tracking-tight sm:text-6xl">What did you think?</h1>
+        <p className="max-w-2xl text-lg font-semibold text-ink-2">Three quick questions. Your answers tell us what to build for our first customers.</p>
       </div>
-      <p className="max-w-3xl font-serif text-3xl italic leading-snug">{j.question}</p>
-      <div className="grid items-start gap-4 lg:grid-cols-[auto_1fr_1fr]">
-        <div className="sculpt p-6">
-          <QrBlock url={url} size={200} />
+      <div className="amber-card grid items-center gap-8 p-6 sm:p-10 md:grid-cols-[auto_1fr]">
+        <div className="truth-card flex justify-center p-5">
+          <QrBlock url={URL_} size={240} />
         </div>
-        <ResultColumn
-          title={copy.survey.synthetic}
-          options={j.options}
-          values={j.synthetic}
-          highlightIndex={j.options.indexOf(topOption(j, "synthetic"))}
-          variant="synthetic"
-        />
-        <ResultColumn
-          title={copy.survey.real}
-          options={j.options}
-          values={j.real}
-          highlightIndex={j.options.indexOf(topOption(j, "real"))}
-          variant="real"
-          badge="replay"
-        />
+        <div className="space-y-4">
+          <ul className="space-y-2 text-2xl font-black leading-tight">
+            <li>1. Would you use this?</li>
+            <li>2. What convinced you most?</li>
+            <li>3. What would make you a customer?</li>
+          </ul>
+          <FlashpointMark label="Survey run on Flashpoint" />
+        </div>
       </div>
     </div>
   );

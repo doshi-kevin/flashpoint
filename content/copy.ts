@@ -3,7 +3,7 @@ export const copy = {
   appName: "Unknown",
   workspace: "Ember Burger Co.",
   tagline: "Claude knows what it doesn't know. Flashpoint goes and asks.",
-  nav: { cases: "Cases", survey: "Live survey" },
+  nav: { cases: "Cases", survey: "Judge feedback" },
   badges: { sample: "Sample data", replay: "Replay", synthetic: "Synthetic", real: "Real", live: "Live" },
   flashpoint: { mark: "Asked via Flashpoint", launch: "Launch on Flashpoint" },
   persona: { name: "DM Dana V.", role: "District 04" },

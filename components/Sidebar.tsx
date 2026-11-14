@@ -1,5 +1,5 @@
 "use client";
-// Left navigation (app shell). No props. Items: Cases, Live survey. Hidden on phones (TopBar shows the links there).
+// Left navigation (app shell). No props. Items: Store 51 case, Cases, Judge feedback. Hidden on phones (TopBar shows the links there).
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { copy } from "@/content/copy";

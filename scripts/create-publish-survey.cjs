@@ -3,7 +3,7 @@
 const os = require("os"), path = require("path");
 const cfg = require(path.join(os.homedir(), ".claude.json")).mcpServers.flashpoint;
 const [title, question, optsRaw] = process.argv.slice(2);
-const opts = optsRaw.split("|");
+const opts = optsRaw ? optsRaw.split("|") : null;
 const H = { ...cfg.headers, "Content-Type": "application/json", Accept: "application/json, text/event-stream" };
 const post = async (b, x = {}) => { const r = await fetch(cfg.url, { method: "POST", headers: { ...H, ...x }, body: JSON.stringify(b) }); return { r, t: await r.text() }; };
 (async () => {
@@ -19,7 +19,7 @@ const post = async (b, x = {}) => { const r = await fetch(cfg.url, { method: "PO
     const m = [...c.t.matchAll(/data: (.*)/g)].map((y) => JSON.parse(y[1])).find((o) => o.id);
     return JSON.parse(m.result.content[0].text).result;
   };
-  const a = await ask(`Create a DRAFT survey, do not publish or spend. Title: ${title}. One single-choice question Q1: "${question}" Options in order: ${opts.join("; ")}. No other questions.`);
+  const a = await ask(opts ? `Create a DRAFT survey, do not publish or spend. Title: ${title}. One single-choice question Q1: "${question}" Options in order: ${opts.join("; ")}. No other questions.` : `Create a DRAFT survey, do not publish or spend. Title: ${title}. ${question}`);
   console.log("created", a.survey_id);
   const b = await ask("Publish now. Free open link only, no recruitment, no spend, no emails. Yes to publishing without quotas.", a.conversation_id, a.survey_id);
   const c = await ask("confirm", a.conversation_id, a.survey_id);
