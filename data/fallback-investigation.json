@@ -1,11 +1,12 @@
 {
   "hypotheses": [
-    { "claim": "Roadworks on Harbor St are reducing foot and car traffic at lunch.", "supporting": ["Lane closure confirmed in local news", "Drop began the same week roadworks started"], "counter": ["Other stores without roadworks also saw a small dip on rain days"], "status": "Plausible" },
-    { "claim": "A competitor's $5 lunch deal is pulling price-sensitive customers away.", "supporting": ["Reddit post mentions switching", "Deal launched two days after roadworks"], "counter": ["Reviews don't mention price"], "status": "Plausible" },
-    { "claim": "Heavy rain explains the drop.", "supporting": ["Two rain days with lower sales"], "counter": ["Only 2 of 15 weekdays; drop is persistent"], "status": "Weak" },
-    { "claim": "Long lunchtime lines are causing customers to give up.", "supporting": ["Review complains about noon line"], "counter": ["Single anecdotal review"], "status": "Insufficient info" }
+    { "claim": "The Harbor St lane closure is making the lunch drive-thru hard to use, so customers give up.", "supporting": ["Lane closed 10:00-15:00 from 26 Oct (local news)", "The drop starts the day the roadworks began", "Reviews say the drive-thru queue backs onto Harbor St"], "counter": ["A lane closure is not proof customers can't get in", "Public data can't show whether lost regulars would come back once it reopens"], "status": "Plausible" },
+    { "claim": "A rival's $5 lunch deal on Dock Rd is pulling price-sensitive customers away.", "supporting": ["Reddit post mentions switching to the $5 deal"], "counter": ["The deal launched on 2 Nov, a week after the drop began", "One post is anecdotal"], "status": "Weak" },
+    { "claim": "Heavy rain explains the drop.", "supporting": ["Two heavy-rain days in the last three weeks"], "counter": ["Only 2 days, and every store dipped those days then recovered", "The drop is persistent and specific to this store"], "status": "Contradicted" },
+    { "claim": "Local customers are cutting back on eating out.", "supporting": [], "counter": ["Area restaurant card spending is flat month on month", "Nearby comparison stores are not down the same way"], "status": "Contradicted" },
+    { "claim": "Long lunchtime lines are causing customers to give up.", "supporting": ["Review: \"the drive-thru line at noon is brutal now. Gave up.\""], "counter": ["Reviews are self-selected; we don't know how common this is"], "status": "Insufficient info" }
   ],
-  "unknown": "Public data can't tell us why lost regulars actually left, or which single change would bring them back. Price, speed, and convenience all look plausible from the outside.",
+  "unknown": "Public data can't tell us why lost regulars actually left, or which single change would bring them back. Price, speed and convenience all look plausible from the outside.",
   "question": { "text": "What would bring you back to Store 14 for lunch?", "options": ["Extra cheese", "$1 off", "Faster line"] },
-  "rationale": "Three hypotheses (price, access, speed) map to three concrete levers. One question forces a clear trade-off from people who actually stopped visiting."
+  "rationale": "The open suspects map to three concrete levers (a perk, price, speed). One question forces a clear trade-off from people who actually stopped visiting."
 }

@@ -1,0 +1,16 @@
+[
+  {
+    "store": "27",
+    "date": "2026-09-29",
+    "daypart": "breakfast",
+    "issue": "pos_outage",
+    "detail": "Breakfast transactions not recorded (rows are 0); sales did happen. Exclude from baselines."
+  },
+  {
+    "store": "12",
+    "date": "2026-11-05",
+    "daypart": "lunch",
+    "issue": "power_outage",
+    "detail": "Power cut 11:40-13:10. Real lost sales, one day only."
+  }
+]

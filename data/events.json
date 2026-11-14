@@ -1,8 +1,497 @@
 {
+  "1": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "2": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "3": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "4": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "5": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "6": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "7": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "8": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "9": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "10": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "11": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "12": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "13": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
   "14": [
-    { "date": "2026-10-26", "type": "roadworks", "label": "Roadworks begin on Harbor St" },
-    { "date": "2026-10-28", "type": "competitor", "label": "Nearby rival launches $5 lunch deal" },
-    { "date": "2026-11-03", "type": "rain", "label": "Heavy rain" },
-    { "date": "2026-11-10", "type": "rain", "label": "Heavy rain" }
+    {
+      "date": "2026-10-26",
+      "type": "roadworks",
+      "label": "Roadworks begin on Harbor St (one lane closed 10:00-15:00)"
+    },
+    {
+      "date": "2026-11-02",
+      "type": "competitor",
+      "label": "Rival on Dock Rd launches $5 lunch deal"
+    },
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "15": [
+    {
+      "date": "2026-11-02",
+      "type": "competitor",
+      "label": "Rival on Dock Rd launches $5 lunch deal"
+    },
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "16": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "17": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "18": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "19": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "20": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "21": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "22": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "23": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "24": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "25": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "26": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "27": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "28": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "29": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "30": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "31": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "32": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "33": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "34": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "35": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "36": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "37": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "38": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "39": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
+  ],
+  "40": [
+    {
+      "date": "2026-11-03",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    },
+    {
+      "date": "2026-11-10",
+      "type": "rain",
+      "label": "Heavy rain (city-wide)"
+    }
   ]
 }

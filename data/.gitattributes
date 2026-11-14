@@ -1,0 +1,2 @@
+# Generated files must stay byte-identical to data/generate.mjs output on every OS.
+* text eol=lf

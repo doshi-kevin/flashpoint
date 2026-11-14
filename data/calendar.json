@@ -1,0 +1,94 @@
+[
+  {
+    "start": "2026-08-31",
+    "scope": "store:12",
+    "type": "school",
+    "label": "University classes start (campus traffic returns)"
+  },
+  {
+    "start": "2026-09-07",
+    "scope": "chain",
+    "type": "holiday",
+    "label": "Labor Day (commuter stores quiet, highway busy)"
+  },
+  {
+    "start": "2026-09-08",
+    "scope": "city",
+    "type": "school",
+    "label": "Public schools start (weekday breakfast and after-school lift)"
+  },
+  {
+    "start": "2026-09-21",
+    "end": "2026-10-18",
+    "scope": "chain",
+    "type": "promotion",
+    "label": "National LTO \"Harvest Stack\" (lunch and dinner)"
+  },
+  {
+    "start": "2026-10-05",
+    "scope": "chain",
+    "type": "price",
+    "label": "Menu price increase (about +2.2% average check)"
+  },
+  {
+    "start": "2026-10-05",
+    "scope": "district:Eastfield",
+    "type": "economy",
+    "label": "Eastfield Components announces ~400 layoffs, effective 16 Oct"
+  },
+  {
+    "start": "2026-10-12",
+    "scope": "city",
+    "type": "holiday",
+    "label": "Indigenous Peoples' Day (downtown offices partly closed)"
+  },
+  {
+    "start": "2026-10-26",
+    "end": "2026-11-20",
+    "scope": "store:14",
+    "type": "roadworks",
+    "label": "Harbor St resurfacing, one lane closed 10:00-15:00"
+  },
+  {
+    "start": "2026-10-31",
+    "scope": "city",
+    "type": "holiday",
+    "label": "Halloween (Saturday; dinner and late night dip)"
+  },
+  {
+    "start": "2026-11-01",
+    "scope": "city",
+    "type": "clock",
+    "label": "Daylight saving time ends (darker evenings)"
+  },
+  {
+    "start": "2026-11-02",
+    "scope": "store:14,15",
+    "type": "competitor",
+    "label": "Rival on Dock Rd launches $5 lunch deal"
+  },
+  {
+    "start": "2026-11-03",
+    "scope": "city",
+    "type": "weather",
+    "label": "Heavy rain all day"
+  },
+  {
+    "start": "2026-11-05",
+    "scope": "store:12",
+    "type": "outage",
+    "label": "Power cut on University Ave, 11:40-13:10"
+  },
+  {
+    "start": "2026-11-10",
+    "scope": "city",
+    "type": "weather",
+    "label": "Heavy rain all day"
+  },
+  {
+    "start": "2026-11-11",
+    "scope": "city",
+    "type": "holiday",
+    "label": "Veterans Day (some downtown offices closed)"
+  }
+]

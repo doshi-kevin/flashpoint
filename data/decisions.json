@@ -1,9 +1,9 @@
 {
   "14": {
-    "before": { "title": "Run a $1-off lunch promo", "why": "Synthetic customers predicted price was the main lever (62%)." },
-    "after": { "title": "Add a second register and pre-order lane at lunch", "why": "Real lapsed customers said a faster line would bring them back (67%)." },
+    "before": { "title": "Run a $1-off lunch promo", "why": "What synthetic customers predicted (percentages are computed from the study in lib/decision.ts)." },
+    "after": { "title": "Speed up the lunch drive-thru while the lane is closed", "why": "What real lapsed customers said (percentages are computed from the study in lib/decision.ts)." },
     "owner": "Store 14 General Manager",
-    "metric": "Weekday lunch sales back to within 3% of the prior 6-week average",
+    "metric": "Weekday lunch visits and drive-thru service time back in line with comparison stores 9, 10, 16 and 20",
     "reviewDate": "2026-12-05"
   }
 }

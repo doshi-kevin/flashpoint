@@ -1,7 +1,242 @@
 [
-  { "id": "11", "name": "Store 11", "chain": "Crumb & Crust", "area": "Old Town" },
-  { "id": "12", "name": "Store 12", "chain": "Crumb & Crust", "area": "University District" },
-  { "id": "14", "name": "Store 14", "chain": "Crumb & Crust", "area": "Harbor Street" },
-  { "id": "17", "name": "Store 17", "chain": "Crumb & Crust", "area": "Central Station" },
-  { "id": "21", "name": "Store 21", "chain": "Crumb & Crust", "area": "Riverside Park" }
+  {
+    "id": "1",
+    "name": "Store 1",
+    "chain": "Crumb & Crust",
+    "area": "Bayview Ave"
+  },
+  {
+    "id": "2",
+    "name": "Store 2",
+    "chain": "Crumb & Crust",
+    "area": "North Shore Mall"
+  },
+  {
+    "id": "3",
+    "name": "Store 3",
+    "chain": "Crumb & Crust",
+    "area": "Pine Ridge"
+  },
+  {
+    "id": "4",
+    "name": "Store 4",
+    "chain": "Crumb & Crust",
+    "area": "Lakeside Dr"
+  },
+  {
+    "id": "5",
+    "name": "Store 5",
+    "chain": "Crumb & Crust",
+    "area": "Maple Heights"
+  },
+  {
+    "id": "6",
+    "name": "Store 6",
+    "chain": "Crumb & Crust",
+    "area": "Cedar Point"
+  },
+  {
+    "id": "7",
+    "name": "Store 7",
+    "chain": "Crumb & Crust",
+    "area": "Willow Creek"
+  },
+  {
+    "id": "8",
+    "name": "Store 8",
+    "chain": "Crumb & Crust",
+    "area": "Route 9 Travel Plaza"
+  },
+  {
+    "id": "9",
+    "name": "Store 9",
+    "chain": "Crumb & Crust",
+    "area": "Seawall Blvd"
+  },
+  {
+    "id": "10",
+    "name": "Store 10",
+    "chain": "Crumb & Crust",
+    "area": "Marina Blvd"
+  },
+  {
+    "id": "11",
+    "name": "Store 11",
+    "chain": "Crumb & Crust",
+    "area": "Old Town"
+  },
+  {
+    "id": "12",
+    "name": "Store 12",
+    "chain": "Crumb & Crust",
+    "area": "University District"
+  },
+  {
+    "id": "13",
+    "name": "Store 13",
+    "chain": "Crumb & Crust",
+    "area": "Pier Station"
+  },
+  {
+    "id": "14",
+    "name": "Store 14",
+    "chain": "Crumb & Crust",
+    "area": "Harbor Street"
+  },
+  {
+    "id": "15",
+    "name": "Store 15",
+    "chain": "Crumb & Crust",
+    "area": "Lighthouse Sq"
+  },
+  {
+    "id": "16",
+    "name": "Store 16",
+    "chain": "Crumb & Crust",
+    "area": "Wharf Lane"
+  },
+  {
+    "id": "17",
+    "name": "Store 17",
+    "chain": "Crumb & Crust",
+    "area": "Central Station"
+  },
+  {
+    "id": "18",
+    "name": "Store 18",
+    "chain": "Crumb & Crust",
+    "area": "Market Square"
+  },
+  {
+    "id": "19",
+    "name": "Store 19",
+    "chain": "Crumb & Crust",
+    "area": "City Hall Plaza"
+  },
+  {
+    "id": "20",
+    "name": "Store 20",
+    "chain": "Crumb & Crust",
+    "area": "Civic Center"
+  },
+  {
+    "id": "21",
+    "name": "Store 21",
+    "chain": "Crumb & Crust",
+    "area": "Riverside Park"
+  },
+  {
+    "id": "22",
+    "name": "Store 22",
+    "chain": "Crumb & Crust",
+    "area": "Elm & 5th"
+  },
+  {
+    "id": "23",
+    "name": "Store 23",
+    "chain": "Crumb & Crust",
+    "area": "Union Ave"
+  },
+  {
+    "id": "24",
+    "name": "Store 24",
+    "chain": "Crumb & Crust",
+    "area": "Arts District"
+  },
+  {
+    "id": "25",
+    "name": "Store 25",
+    "chain": "Crumb & Crust",
+    "area": "Westgate Commons"
+  },
+  {
+    "id": "26",
+    "name": "Store 26",
+    "chain": "Crumb & Crust",
+    "area": "Sunset Ridge"
+  },
+  {
+    "id": "27",
+    "name": "Store 27",
+    "chain": "Crumb & Crust",
+    "area": "Hillcrest"
+  },
+  {
+    "id": "28",
+    "name": "Store 28",
+    "chain": "Crumb & Crust",
+    "area": "Oak Valley"
+  },
+  {
+    "id": "29",
+    "name": "Store 29",
+    "chain": "Crumb & Crust",
+    "area": "Westgate SuperMart"
+  },
+  {
+    "id": "30",
+    "name": "Store 30",
+    "chain": "Crumb & Crust",
+    "area": "Meadowbrook"
+  },
+  {
+    "id": "31",
+    "name": "Store 31",
+    "chain": "Crumb & Crust",
+    "area": "Route 9 West"
+  },
+  {
+    "id": "32",
+    "name": "Store 32",
+    "chain": "Crumb & Crust",
+    "area": "Fairview"
+  },
+  {
+    "id": "33",
+    "name": "Store 33",
+    "chain": "Crumb & Crust",
+    "area": "Eastfield Industrial Park"
+  },
+  {
+    "id": "34",
+    "name": "Store 34",
+    "chain": "Crumb & Crust",
+    "area": "Foundry Rd"
+  },
+  {
+    "id": "35",
+    "name": "Store 35",
+    "chain": "Crumb & Crust",
+    "area": "Rail Yard"
+  },
+  {
+    "id": "36",
+    "name": "Store 36",
+    "chain": "Crumb & Crust",
+    "area": "Eastfield Center"
+  },
+  {
+    "id": "37",
+    "name": "Store 37",
+    "chain": "Crumb & Crust",
+    "area": "Mill St"
+  },
+  {
+    "id": "38",
+    "name": "Store 38",
+    "chain": "Crumb & Crust",
+    "area": "Canal St"
+  },
+  {
+    "id": "39",
+    "name": "Store 39",
+    "chain": "Crumb & Crust",
+    "area": "Ironworks Ave"
+  },
+  {
+    "id": "40",
+    "name": "Store 40",
+    "chain": "Crumb & Crust",
+    "area": "Eastfield Plaza"
+  }
 ]

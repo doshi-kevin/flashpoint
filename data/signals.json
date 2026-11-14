@@ -1,10 +1,20 @@
 {
   "14": [
-    { "id": "s1", "source": "Local news", "text": "Harbor St resurfacing to run through mid-November; one lane closed at lunchtime.", "label": "Observed" },
-    { "id": "s2", "source": "Weather log", "text": "Two heavy-rain weekdays in the last three weeks.", "label": "Observed" },
-    { "id": "s3", "source": "Reddit r/localfood", "text": "\"The new place on Dock Rd has a $5 sandwich + chips thing, going there instead.\"", "label": "Observed" },
-    { "id": "s4", "source": "Review site", "text": "\"Used to love it but the line at noon is brutal now. Gave up.\"", "label": "Inferred" },
-    { "id": "s5", "source": "Review site", "text": "\"Same great sandwiches, parking is a nightmare with the roadworks.\"", "label": "Inferred" },
+    { "id": "s1", "source": "Local news", "text": "Harbor St resurfacing from 26 Oct to about 20 Nov; one lane closed 10:00-15:00 every day.", "label": "Observed" },
+    { "id": "s2", "source": "Weather log", "text": "Heavy rain city-wide on 3 Nov and 10 Nov; light showers on a few other days.", "label": "Observed" },
+    { "id": "s3", "source": "Reddit r/localfood", "text": "\"The new place on Dock Rd has a $5 sandwich + chips thing, going there instead.\" (posted 4 Nov)", "label": "Observed" },
+    { "id": "s4", "source": "Review site", "text": "\"Used to love it but the drive-thru line at noon is brutal now. Gave up.\"", "label": "Inferred" },
+    { "id": "s5", "source": "Review site", "text": "\"Same great food, but the drive-thru queue backs onto Harbor St since the lane closed.\"", "label": "Inferred" },
+    { "id": "s7", "source": "Local spending index", "text": "Restaurant card spending in the Harbor area is flat month on month: no broad local pullback.", "label": "Observed" },
     { "id": "s6", "source": "Public data", "text": "Why individual regulars stopped coming, and what would bring them back.", "label": "Unknown" }
+  ],
+  "12": [
+    { "id": "s1", "source": "Utility notice", "text": "Unplanned power cut on University Ave, 5 Nov, about 11:40-13:10.", "label": "Observed" },
+    { "id": "s2", "source": "Weather log", "text": "Heavy rain city-wide on 3 Nov and 10 Nov.", "label": "Observed" }
+  ],
+  "36": [
+    { "id": "s1", "source": "Local news", "text": "Eastfield Components announced about 400 layoffs on 5 Oct, effective 16 Oct.", "label": "Observed" },
+    { "id": "s2", "source": "Local spending index", "text": "Restaurant card spending in Eastfield has softened since mid-October.", "label": "Inferred" },
+    { "id": "s3", "source": "Public data", "text": "Whether Eastfield residents are cutting back or switching to cheaper options.", "label": "Unknown" }
   ]
 }
