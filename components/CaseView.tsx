@@ -1,18 +1,21 @@
 "use client";
-// A single case, laid out like a work-tracking issue: header with workflow status + one primary action,
-// tabs (Overview / Investigation / Flashpoint study / Decision) and a Details panel on the right.
+// A single case as an executive canvas: hero KPI, sales waveform, agents at work, the gap centerpiece,
+// the analytical clash (AI prior vs real people) and the decision island. Sections appear as the workflow advances.
 // Props: caseKey, title, initialStoreId, initialCase, problem, autoRun, initialLive.
 // Janvi: restyle JSX/classes freely; keep the stream/fetch code and state as it is (Aditya wires the live integration).
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import CaseFacts, { sign, type Facts } from "./CaseFacts";
+import { sign, type Facts } from "./CaseFacts";
 import AgentTrace from "./AgentTrace";
 import SuspectList from "./SuspectList";
-import UnknownCallout from "./UnknownCallout";
-import QuestionCard from "./QuestionCard";
 import FieldingPanel from "./FieldingPanel";
-import StudyCompare from "./StudyCompare";
-import DecisionBanner from "./DecisionBanner";
+import PrecedentsPanel from "./PrecedentsPanel";
+import AdCard from "./AdCard";
+import WorkflowPath from "./WorkflowPath";
+import Waveform from "./Waveform";
+import GapCenterpiece from "./GapCenterpiece";
+import ClashPanel from "./ClashPanel";
+import ActionIsland from "./ActionIsland";
 import QrBlock from "./QrBlock";
 import Badge from "./Badge";
 import SampleBadge from "./SampleBadge";
@@ -35,9 +38,20 @@ type Props = {
 
 const surveyUrl = process.env.NEXT_PUBLIC_JUDGE_SURVEY_URL || "https://example.com/judge-survey";
 const stageTone = ["neutral", "info", "info", "info", "info", "warn", "good"] as const;
-const primary = "rounded bg-accent px-4 py-2 text-sm font-semibold text-white hover:brightness-95 disabled:opacity-50";
 
 const time = () => new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+
+function SectionHead({ eyebrow, title, aside }: { eyebrow: string; title: string; aside?: React.ReactNode }) {
+  return (
+    <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
+      <div>
+        <p className="label">{eyebrow}</p>
+        <h2 className="mt-1 text-2xl font-extrabold tracking-tight sm:text-3xl">{title}</h2>
+      </div>
+      {aside}
+    </div>
+  );
+}
 
 export default function CaseView({ caseKey, title, problem, initialStoreId, initialCase, autoRun, initialLive = true }: Props) {
   // stage: 0 open, 1 investigating, 2 investigated, 3 in field, 4 study complete, 5 decision ready, 6 approved
@@ -185,132 +199,226 @@ export default function CaseView({ caseKey, title, problem, initialStoreId, init
                   ? { label: copy.actions.approved, onClick: undefined, disabled: true }
                   : null;
 
-  const tabs: { id: Tab; label: string; enabled: boolean }[] = [
-    { id: "overview", label: copy.tabs.overview, enabled: true },
-    { id: "investigation", label: copy.tabs.investigation, enabled: stage >= 1 },
-    { id: "study", label: copy.tabs.study, enabled: stage >= 3 },
-    { id: "decision", label: copy.tabs.decision, enabled: stage >= 5 },
-  ];
+  // Bring the newest section into view when the workflow moves on.
+  const anchors = useRef<Record<Tab, HTMLElement | null>>({ overview: null, investigation: null, study: null, decision: null });
+  useEffect(() => {
+    if (tab !== "overview") anchors.current[tab]?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [tab]);
 
-  const detail = (label: string, value: React.ReactNode) => (
-    <div className="flex items-start justify-between gap-3 border-b border-line py-2 last:border-0">
-      <dt className="label pt-0.5">{label}</dt>
-      <dd className="text-right text-sm">{value}</dd>
-    </div>
+  const facts = caseData?.facts;
+  const actionButton = action && (
+    <button onClick={action.onClick} disabled={action.disabled} className="btn-lime flex items-center gap-2 px-6 py-3.5 text-base font-black tracking-tight">
+      {action.disabled && stage !== 6 && <span className="live-dot h-2 w-2 rounded-full bg-ink" aria-hidden />}
+      {action.label}
+      {!action.disabled && <span aria-hidden>→</span>}
+    </button>
   );
 
   return (
-    <div className="space-y-4">
-      <nav className="text-xs text-muted" aria-label="Breadcrumb">
-        <Link href="/" className="hover:underline">
-          {copy.nav.cases}
-        </Link>{" "}
-        / <span className="text-fg">{caseKey}</span>
-      </nav>
+    <div className="space-y-12">
+      {/* Hero */}
+      <section className="space-y-6">
+        <nav className="flex flex-wrap items-center gap-2" aria-label="Breadcrumb">
+          <Link href="/" className="chip px-3.5 py-1.5 font-mono text-xs uppercase tracking-wider text-ink-2 hover:text-ink">
+            {copy.nav.cases}
+          </Link>
+          <span className="font-mono text-xs text-line-strong" aria-hidden>
+            /
+          </span>
+          <span className="chip px-3.5 py-1.5 font-mono text-xs uppercase tracking-wider text-ink-2">
+            {copy.canvas.ribbon[0]} {caseKey}
+          </span>
+          {facts?.anomaly.flagged && (
+            <>
+              <span className="font-mono text-xs text-line-strong" aria-hidden>
+                /
+              </span>
+              <span className="chip-alert flex items-center gap-2 px-3.5 py-1.5 font-mono text-xs font-medium uppercase tracking-wider text-crimson">
+                <span className="live-dot h-2 w-2 rounded-full bg-crimson" aria-hidden />
+                {copy.canvas.ribbon[1]}
+              </span>
+            </>
+          )}
+        </nav>
 
-      <div className="flex flex-wrap items-start justify-between gap-3">
-        <div className="min-w-0">
-          <h1 className="text-xl font-semibold">{title}</h1>
-          <div className="mt-2 flex flex-wrap items-center gap-2">
-            <Badge tone={stageTone[stage]}>{copy.stages[stage]}</Badge>
-            {inv?.source === "fallback" && <SampleBadge kind="replay" />}
+        <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+          <div className="max-w-xl space-y-3">
+            <h1 className="text-4xl font-black leading-[1.02] tracking-tight sm:text-5xl">
+              {store ? `${store.name} / ${store.area}` : title}
+            </h1>
+            {facts ? (
+              <p className="text-lg leading-relaxed text-ink-2">
+                {facts.visitsVsSpend
+                  ? copy.canvas.visits(facts.visitsVsSpend.visitsPct, facts.visitsVsSpend.ticketPct, facts.comparisonStoresAvgChangePct)
+                  : copy.canvas.others(facts.comparisonStoresAvgChangePct)}
+              </p>
+            ) : (
+              <p className="text-lg leading-relaxed text-ink-2">{problem}</p>
+            )}
           </div>
-        </div>
-        {action && (
-          <button onClick={action.onClick} disabled={action.disabled} className={primary}>
-            {action.label}
-          </button>
-        )}
-      </div>
-
-      <div className="grid gap-4 lg:grid-cols-[1fr_280px]">
-        <div className="min-w-0 space-y-4">
-          <div className="flex gap-1 border-b border-line" role="tablist">
-            {tabs.map((t) => (
-              <button
-                key={t.id}
-                role="tab"
-                aria-selected={tab === t.id}
-                disabled={!t.enabled}
-                onClick={() => setTab(t.id)}
-                className={`-mb-px border-b-2 px-3 py-2 text-sm ${
-                  tab === t.id ? "border-info font-semibold text-info" : "border-transparent text-muted hover:text-fg"
-                } disabled:opacity-40`}
-              >
-                {t.label}
-              </button>
-            ))}
-          </div>
-
-          {error && <p className="rounded border border-[#f8a98f] bg-[#fff8f5] p-3 text-sm text-accent-ink">{error}</p>}
-
-          {tab === "overview" && (
-            <div className="space-y-4">
-              <div className="rounded border border-line bg-panel p-4">
-                <p className="label">Description</p>
-                <p className="mt-1">{problem}</p>
+          {facts && (
+            <div className="pebble self-start px-7 py-6 lg:self-auto">
+              <div className="flex items-baseline gap-4">
+                <span className="relative">
+                  <span className="tabular font-mono text-6xl font-medium tracking-tighter text-crimson sm:text-7xl">
+                    {sign(facts.weekdayLunchSalesChangePct)}
+                  </span>
+                  {facts.anomaly.flagged && (
+                    <span className="live-dot absolute -right-3 -top-1 h-3 w-3 rounded-full bg-crimson shadow-[0_0_8px_rgba(163,49,63,0.6)]" aria-hidden />
+                  )}
+                </span>
+                <span className="flex flex-col">
+                  <span className="font-mono text-sm font-medium uppercase tracking-wider text-crimson">{copy.canvas.kpi}</span>
+                  <span className="font-mono text-xs text-muted">{copy.canvas.window}</span>
+                </span>
               </div>
-              {caseData && <CaseFacts facts={caseData.facts} sales={caseData.sales} events={caseData.events} />}
-              <div className="rounded border border-line bg-panel">
-                <p className="label border-b border-line px-4 py-2">{copy.overview.activity}</p>
-                <ul className="divide-y divide-line text-sm">
-                  {activity.map((a, i) => (
-                    <li key={i} className="flex gap-3 px-4 py-2">
-                      <span className="w-20 shrink-0 font-mono text-xs text-muted">{a.at}</span>
-                      <span>{a.text}</span>
-                    </li>
+              <div className="mt-3 flex flex-wrap justify-between gap-x-6 gap-y-1 border-t border-line/60 pt-3 font-mono text-xs">
+                {facts.anomaly.daysBelowBaselineOfLast7 != null && (
+                  <span className="flex items-center gap-1.5 text-ink-2">
+                    <span className="h-2 w-2 rounded-full bg-crimson" aria-hidden />
+                    {copy.canvas.daysBelow(facts.anomaly.daysBelowBaselineOfLast7)}
+                  </span>
+                )}
+                {facts.gapVsComparisonPts != null && <span className="font-medium text-crimson">{copy.canvas.gap(facts.gapVsComparisonPts)}</span>}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Workflow control strip */}
+        <div className="sculpt-sm glass flex flex-wrap items-center justify-between gap-4 px-5 py-4">
+          <div className="min-w-0 flex-1 space-y-2">
+            <div className="flex flex-wrap items-center gap-2">
+              <Badge tone={stageTone[stage]}>{copy.stages[stage]}</Badge>
+              {inv?.source === "fallback" && <SampleBadge kind="replay" />}
+              {stage === 0 ? (
+                <div className="flex shrink-0 overflow-hidden rounded-full border border-line text-xs" role="group" aria-label="Mode">
+                  {[
+                    { v: true, label: copy.canvas.mode.live },
+                    { v: false, label: copy.canvas.mode.replay },
+                  ].map((o) => (
+                    <button
+                      key={o.label}
+                      type="button"
+                      onClick={() => setLive(o.v)}
+                      aria-pressed={live === o.v}
+                      className={`whitespace-nowrap px-3 py-1 ${live === o.v ? "bg-ink text-paper" : "bg-card text-muted"}`}
+                    >
+                      {o.label}
+                    </button>
                   ))}
-                </ul>
-              </div>
-            </div>
-          )}
-
-          {tab === "investigation" && (
-            <div className="space-y-4">
-              {hasInv && <AgentTrace steps={steps} done={done} onFinished={onTraceDone} />}
-              {traceDone && r && (
-                <>
-                  <SuspectList hypotheses={r.hypotheses} />
-                  <UnknownCallout text={r.unknown} />
-                  <QuestionCard text={r.question.text} options={r.question.options} rationale={r.rationale} />
-                </>
-              )}
-            </div>
-          )}
-
-          {tab === "study" && (
-            <div className="space-y-4">
-              {study && <FieldingPanel sampleSize={study.sampleSize} onFinished={onFieldDone} />}
-              {study && fieldDone && <StudyCompare results={study} />}
-              {noStudy && (
-                <div className="flex flex-col items-center gap-3 rounded border border-line bg-panel p-6 text-center">
-                  <p className="max-w-md text-muted">{copy.study.noStudy}</p>
-                  <QrBlock url={surveyUrl} size={180} />
                 </div>
+              ) : (
+                <span className="font-mono text-xs text-muted">{live ? copy.canvas.mode.live : copy.canvas.mode.replay}</span>
               )}
             </div>
-          )}
-
-          {tab === "decision" && decision && <DecisionBanner decision={decision} />}
+            <WorkflowPath stage={stage} />
+          </div>
+          {actionButton}
         </div>
+        {error && <p className="chip-alert rounded-2xl px-4 py-3 text-sm text-crimson">✕ {error}</p>}
+      </section>
 
-        <aside className="h-fit rounded border border-line bg-panel p-4">
-          <p className="label mb-1">{copy.details.title}</p>
-          <dl>
-            {detail(copy.details.status, <Badge tone={stageTone[stage]}>{copy.stages[stage]}</Badge>)}
-            {detail(copy.details.store, store ? `${store.name} · ${store.area}` : "Not matched")}
-            {caseData &&
-              detail(
-                copy.details.signal,
-                <span className="font-semibold text-accent-ink">{sign(caseData.facts.weekdayLunchSalesChangePct)}</span>,
-              )}
-            {detail(copy.details.source, caseData?.facts.anomaly.flagged ? copy.cases.detectedBy : "Reported by a user")}
-            {r?.verdict && detail(copy.details.verdict, copy.investigation.verdict[r.verdict.label])}
-            {detail(copy.details.agents, "Detective + Challenger")}
-            {detail(copy.details.data, <SampleBadge />)}
-          </dl>
-        </aside>
-      </div>
+      {/* 01 What changed */}
+      {caseData && (
+        <section>
+          <SectionHead
+            eyebrow={copy.canvas.s1.eyebrow}
+            title={copy.canvas.s1.title}
+            aside={
+              <div className="flex flex-wrap items-center gap-4 font-mono text-xs text-ink-2">
+                <span className="flex items-center gap-1.5">
+                  <span className="h-1 w-4 rounded-full bg-crimson" aria-hidden /> {copy.canvas.s1.legendLine}
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <span className="h-0 w-4 border-t-2 border-dashed border-line-strong" aria-hidden /> {copy.canvas.s1.legendPrior}
+                </span>
+                <SampleBadge />
+              </div>
+            }
+          />
+          <div className="sculpt p-5 sm:p-8">
+            <Waveform data={caseData.sales} events={caseData.events} />
+          </div>
+        </section>
+      )}
+
+      {/* 02 Agents at work */}
+      {hasInv && (
+        <section ref={(el) => { anchors.current.investigation = el; }} className="rise-in scroll-mt-24">
+          <SectionHead
+            eyebrow={copy.canvas.s2.eyebrow}
+            title={copy.canvas.s2.title}
+            aside={
+              r?.verdict && (
+                <span className="flex items-center gap-2 text-sm">
+                  <span className="label">{copy.details.verdict}</span>
+                  <Badge tone="designed">{copy.investigation.verdict[r.verdict.label]}</Badge>
+                </span>
+              )
+            }
+          />
+          <div className="sculpt sculpt-alt space-y-5 p-4 sm:p-6">
+            <AgentTrace steps={steps} done={done} onFinished={onTraceDone} />
+            {traceDone && r && (
+              <div className="rise-in space-y-5">
+                {r.verdict && <p className="text-sm text-ink-2">{r.verdict.reason}</p>}
+                <SuspectList hypotheses={r.hypotheses} />
+                <PrecedentsPanel />
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* 03 The gap */}
+      {traceDone && r && (
+        <div className="rise-in">
+          <GapCenterpiece unknown={r.unknown} question={r.question} rationale={r.rationale}>
+            {stage === 2 && <div className="flex justify-end">{actionButton}</div>}
+          </GapCenterpiece>
+        </div>
+      )}
+
+      {/* 04 Analytical clash */}
+      {stage >= 3 && (
+        <section ref={(el) => { anchors.current.study = el; }} className="rise-in scroll-mt-24 space-y-5">
+          <SectionHead eyebrow={copy.canvas.s4.eyebrow} title={copy.canvas.s4.title} />
+          {study && <FieldingPanel sampleSize={study.sampleSize} onFinished={onFieldDone} />}
+          {study && fieldDone && <ClashPanel results={study} />}
+          {study && fieldDone && <AdCard results={study} />}
+          {noStudy && (
+            <div className="sculpt flex flex-col items-center gap-3 p-8 text-center">
+              <p className="max-w-md text-ink-2">{copy.study.noStudy}</p>
+              <QrBlock url={surveyUrl} size={180} />
+            </div>
+          )}
+          {stage === 4 && decision && <div className="flex justify-end">{actionButton}</div>}
+        </section>
+      )}
+
+      {/* 05 Decision */}
+      {stage >= 5 && decision && (
+        <section ref={(el) => { anchors.current.decision = el; }} className="rise-in scroll-mt-24">
+          <SectionHead eyebrow={copy.canvas.s5.eyebrow} title={copy.canvas.s5.title} />
+          <ActionIsland decision={decision} approved={stage === 6} canApprove={stage === 5} onApprove={approve} />
+        </section>
+      )}
+
+      {/* Case log */}
+      <section className="glass sculpt-sm p-5">
+        <p className="label mb-2">{copy.canvas.log}</p>
+        <ul className="space-y-1.5 text-sm">
+          {activity.map((a, i) => (
+            <li key={i} className="flex gap-3">
+              <span className="w-24 shrink-0 font-mono text-xs text-faint" suppressHydrationWarning>
+                {a.at}
+              </span>
+              <span className="text-ink-2">{a.text}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
   );
 }

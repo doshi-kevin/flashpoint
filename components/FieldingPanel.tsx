@@ -1,8 +1,9 @@
 "use client";
 // Flashpoint study progress: publish -> synthetic predicts -> real responses tick up.
-// Props: sampleSize (final n), onFinished (called once). Replay of saved results; the lozenge says so.
+// Props: sampleSize (final n), onFinished (called once). Replay of saved results; the label says so.
 import { useEffect, useRef, useState } from "react";
 import SampleBadge from "./SampleBadge";
+import FlashpointMark from "./FlashpointMark";
 import { copy } from "@/content/copy";
 
 const TOTAL_MS = 4200;
@@ -32,36 +33,39 @@ export default function FieldingPanel({ sampleSize, onFinished }: { sampleSize: 
   const count = Math.round(sampleSize * answering);
 
   return (
-    <div className="rounded border border-line bg-panel">
-      <div className="flex items-center justify-between border-b border-line px-4 py-2">
-        <p className="label">{copy.fielding.title}</p>
+    <div className="rounded-2xl border border-line/80 bg-card/85">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line px-4 py-2.5">
+        <div className="flex items-center gap-3">
+          <p className="label">{copy.fielding.title}</p>
+          <FlashpointMark />
+        </div>
         <SampleBadge kind="replay" />
       </div>
       <div className="p-4">
-        <ul className="space-y-1.5 text-sm">
+        <ul className="space-y-2 text-sm">
           {copy.fielding.phases.map((label, i) => (
-            <li key={label} className={`flex items-center gap-2 ${i > phase ? "text-muted/60" : ""}`}>
+            <li key={label} className={`flex items-center gap-2.5 ${i > phase ? "text-muted/70" : ""}`}>
               {i < phase ? (
-                <span className="text-good" aria-hidden>
+                <span className="w-3 text-moss" aria-hidden>
                   ✓
                 </span>
               ) : i === phase ? (
-                <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-info" aria-hidden />
+                <span className="live-dot ml-0.5 h-2.5 w-2.5 rounded-full bg-ink" aria-hidden />
               ) : (
-                <span className="h-2.5 w-2.5 rounded-full bg-line" aria-hidden />
+                <span className="ml-0.5 h-2.5 w-2.5 rounded-full border border-line-strong" aria-hidden />
               )}
-              {label}
+              <span className={i === phase ? "font-semibold" : ""}>{label}</span>
             </li>
           ))}
         </ul>
-        <div className="mt-4 flex items-baseline gap-2">
-          <span className="text-3xl font-semibold tabular-nums">{count}</span>
-          <span className="text-muted">
+        <div className="mt-5 flex items-baseline gap-2">
+          <span className="tabular font-mono text-5xl font-medium">{count}</span>
+          <span className="font-mono text-sm text-muted">
             / {sampleSize} {copy.fielding.responses}
           </span>
         </div>
-        <div className="mt-2 h-1.5 rounded bg-soft">
-          <div className="h-1.5 rounded bg-info" style={{ width: `${answering * 100}%` }} />
+        <div className="mt-3 h-2 overflow-hidden rounded-sm bg-line" role="progressbar" aria-valuenow={Math.round(answering * 100)} aria-valuemin={0} aria-valuemax={100}>
+          <div className="h-2 rounded-sm bg-lime ring-1 ring-ink/30" style={{ width: `${answering * 100}%` }} />
         </div>
       </div>
     </div>
