@@ -1,11 +1,9 @@
 // The highlighted "The internet doesn't know" moment. Props: text (what public data can't answer).
-import { copy } from "@/content/copy";
-
 export default function UnknownCallout({ text }: { text: string }) {
   return (
-    <div className="rounded-lg border border-accent/60 bg-accent/10 p-4">
-      <h3 className="mb-1 font-serif text-xl font-semibold text-accent">{copy.why.unknownTitle}</h3>
-      <p className="text-cream/90">{text}</p>
+    <div className="rounded-xl border-2 border-accent bg-accent/10 p-5">
+      <p className="eyebrow !text-accent-ink">The internet doesn't know</p>
+      <p className="mt-1 font-serif text-xl leading-snug">{text}</p>
     </div>
   );
 }

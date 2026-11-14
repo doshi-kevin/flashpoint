@@ -21,7 +21,7 @@ Shared, touch rarely and tell the others: `package.json` (add dependencies only 
 - Stay out of `lib/`, `app/api/`, `data/`. In `InvestigationWorkspace.tsx` and `StudyView.tsx`, restyle only; leave the `fetch` and state code alone (Kevin will tell you if its output changes).
 
 ## Kevin: agent and backend
-- Make `/api/investigate` excellent: prompt, strict JSON, parsing, fallback (`lib/investigate.ts`).
+- Make `/api/agent` excellent: prompt, strict JSON, parsing, fallback (`lib/investigate.ts`).
 - Anomaly logic and all numbers in code: baseline, visits vs spend, comparison stores, gap math (`lib/metrics.ts`).
 - Add the "the internet doesn't know" logic and the question designer: when to ask, one neutral question, 3 options.
 - Own the response shapes in `lib/types.ts`. **These are the contract**: if a shape changes, tell Janvi and Adi first.

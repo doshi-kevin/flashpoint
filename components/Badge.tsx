@@ -1,11 +1,11 @@
 // Small pill label. Props: children (text), tone ("neutral" | "sample" | "good" | "warn" | "bad").
 // A dot plus the word means status is never shown by colour alone.
 const tones = {
-  neutral: "border-line text-muted",
-  sample: "border-accent/50 text-accent",
-  good: "border-good/50 text-good",
-  warn: "border-warn/50 text-warn",
-  bad: "border-accent/50 text-accent",
+  neutral: "border-line text-muted bg-soft",
+  sample: "border-accent/40 text-accent-ink bg-accent/10",
+  good: "border-good/30 text-good bg-good/10",
+  warn: "border-warn/30 text-warn bg-warn/10",
+  bad: "border-accent/40 text-accent-ink bg-accent/10",
 };
 
 export default function Badge({
