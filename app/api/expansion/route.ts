@@ -25,13 +25,16 @@ const STATES: Record<string, string> = { alabama: "AL", alaska: "AK", arizona: "
 function abbreviate(loc: string): string | null {
   const m = loc.match(/^(.*?),\s*([A-Za-z ]+)$/);
   const st = m && STATES[m[2].trim().toLowerCase()];
-  return m && st ? `${m[1].trim()}, ${st}` : null;
+  return m && st ? `${m[1].trim()}, ${st}, USA (city proper)` : null;
 }
 /** Other spellings of the same place to try when Flashpoint resolves the first one to a tiny wrong town. */
 function variants(loc: string): string[] {
   const out = new Set<string>();
   const ab = abbreviate(loc);
-  if (ab) out.add(ab);
+  if (ab) {
+    out.add(ab);
+    out.add(ab.replace(", USA (city proper)", ""));
+  }
   out.add(`${loc}, USA (city proper)`);
   out.add(loc);
   return [...out];

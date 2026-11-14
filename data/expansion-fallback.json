@@ -2,16 +2,40 @@
   "region": "Raleigh, North Carolina",
   "economics": "Young, growing, mid-income metro: a good fit for value burgers.",
   "sentiment": [
-    { "label": "Observed", "text": "New restaurants keep opening here." },
-    { "label": "Inferred", "text": "Lunch crowds want speed and value." },
-    { "label": "Unknown", "text": "What locals will really do about extra-cheese pricing." }
+    {
+      "label": "Observed",
+      "text": "New restaurants keep opening here."
+    },
+    {
+      "label": "Inferred",
+      "text": "Lunch crowds want speed and value."
+    },
+    {
+      "label": "Unknown",
+      "text": "What locals will really do about extra-cheese pricing."
+    }
   ],
   "recommendation": "Test it with real people first.",
   "question": {
     "text": "Which would you rather pay for extra cheese on your burger?",
-    "options": ["$1 cheese", "$1.50 cheese", "No extra cheese"]
+    "options": [
+      "$1 cheese",
+      "$1.50 cheese",
+      "No extra cheese"
+    ]
   },
-  "kpis": { "population": 506306, "medianAge": 34.7, "medianIncome": 85395, "lowConfidence": true },
-  "weather": null,
-  "toolsUsed": ["demographics"]
+  "kpis": {
+    "population": 506306,
+    "medianAge": 34.7,
+    "medianIncome": 85395,
+    "lowConfidence": true
+  },
+  "weather": {
+    "avgHighF": 59,
+    "rainyDays": 0,
+    "days": 14
+  },
+  "toolsUsed": [
+    "demographics"
+  ]
 }

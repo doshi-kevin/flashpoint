@@ -196,7 +196,7 @@ export default function ExpansionPage() {
         <section className="space-y-3">
           <p className="label">Agents</p>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <AgentCard name="Land and people" source="Flashpoint demographics" live>
+            <AgentCard name="Land and people" source={source === "replay" ? "Flashpoint demographics (saved)" : "Flashpoint demographics"} live={source !== "replay"}>
               {k ? (
                 <>
                   {fmt(k.population)} <span className="text-base font-bold text-ink-2">people</span>
@@ -208,7 +208,7 @@ export default function ExpansionPage() {
                 <span className="text-muted">…</span>
               )}
             </AgentCard>
-            <AgentCard name="Weather" source="Open-Meteo, next 14 days" live>
+            <AgentCard name="Weather" source={source === "replay" ? "Open-Meteo (saved)" : "Open-Meteo, next 14 days"} live={source !== "replay"}>
               {w ? (
                 <>
                   {w.avgHighF}°F <span className="text-base font-bold text-ink-2">avg high</span>
