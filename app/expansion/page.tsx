@@ -58,79 +58,116 @@ export default function ExpansionPage() {
     }
   }
 
+  const unknown = result?.sentiment.find((x) => x.label === "Unknown")?.text;
   return (
-    <div className="space-y-5">
-      <div>
-        <h1 className="text-xl font-semibold">Open Store 51</h1>
-        <p className="text-sm text-muted">
+    <div className="space-y-10">
+      <section className="space-y-4 pt-2">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="chip px-4 py-1.5 font-mono text-xs uppercase tracking-wider text-ink-2">Expansion dossier</span>
+          <span className="text-faint">/</span>
+          <span className="chip px-4 py-1.5 font-mono text-xs uppercase tracking-wider text-ink-2">Store 51</span>
+          {source && (
+            <span className={`px-4 py-1.5 font-mono text-xs font-bold uppercase tracking-wider ${source === "live" ? "chip" : "chip-alert"}`}>
+              {source === "live" ? "Live agent" : "Replay"}
+            </span>
+          )}
+        </div>
+        <h1 className="text-4xl font-black leading-none tracking-tight sm:text-6xl">Open Store 51</h1>
+        <p className="max-w-2xl text-lg leading-relaxed text-ink-2">
           A region you have never visited. The agent researches the economics and public sentiment, then asks real people the one thing the internet can&apos;t answer.
         </p>
-      </div>
+        <div className="sculpt glass flex flex-wrap items-end gap-3 p-5">
+          <label className="min-w-[240px] flex-1">
+            <span className="label">Region for Store 51</span>
+            <input
+              value={region}
+              onChange={(e) => setRegion(e.target.value)}
+              className="mt-1 w-full rounded-xl border border-line bg-card px-4 py-3 text-base font-semibold outline-none focus:border-ink"
+            />
+          </label>
+          <button onClick={run} disabled={busy} className="btn-lime px-7 py-4 text-base font-black tracking-tight text-ink disabled:opacity-50">
+            {busy ? "Researching…" : "Research this region →"}
+          </button>
+        </div>
+      </section>
 
-      <div className="flex flex-wrap items-end gap-2 rounded border border-line bg-panel p-4">
-        <label className="flex-1 text-sm">
-          <span className="label">Region for Store 51</span>
-          <input value={region} onChange={(e) => setRegion(e.target.value)} className="mt-1 w-full rounded border border-line px-3 py-2" />
-        </label>
-        <button onClick={run} disabled={busy} className="rounded bg-accent px-4 py-2 text-sm font-semibold text-ink disabled:opacity-50">
-          {busy ? "Researching…" : "Research this region"}
-        </button>
-      </div>
-
-      {error && <p className="rounded border border-[#f8a98f] bg-[#fff8f5] p-3 text-sm">{error}</p>}
+      {error && <p className="chip-alert p-4 text-sm font-medium">{error}</p>}
 
       {steps.length > 0 && (
-        <ol className="space-y-2 rounded border border-line bg-panel p-4 text-sm">
-          {steps.map((s, i) => (
-            <li key={i} className="flex flex-col">
-              <span className="font-semibold">{s.step}</span>
-              <span className="text-muted">{s.detail}</span>
-              <span className="text-xs text-muted">Source: {s.source}</span>
-            </li>
-          ))}
-        </ol>
+        <section className="sculpt p-6">
+          <p className="label mb-3">Agent at work</p>
+          <ol className="space-y-3">
+            {steps.map((st, i) => (
+              <li key={i} className="flex gap-3">
+                <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-lime-deep" aria-hidden />
+                <div>
+                  <p className="font-bold">{st.step}</p>
+                  <p className="text-sm text-ink-2">{st.detail}</p>
+                  <p className="font-mono text-xs text-muted">Source: {st.source}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
       )}
 
       {result && (
-        <div className="space-y-4">
-          <div className="flex items-center gap-2">
-            <Badge tone={source === "live" ? "good" : "sample"}>{source === "live" ? "Live agent" : "Replay"}</Badge>
-            {result.toolsUsed?.length ? <Badge tone="info">Flashpoint: {result.toolsUsed.join(", ")}</Badge> : null}
-          </div>
-          <section className="rounded border border-line bg-panel p-4">
-            <p className="label">Economics</p>
-            <p className="mt-1 text-sm">{result.economics}</p>
-          </section>
-          <section className="space-y-2 rounded border border-line bg-panel p-4">
-            <p className="label">Public sentiment</p>
-            {result.sentiment.map((s) => (
-              <p key={s.text} className="flex items-start gap-2 text-sm">
-                <Badge tone={tone[s.label] ?? "neutral"}>{s.label}</Badge>
-                <span>{s.text}</span>
-              </p>
-            ))}
-          </section>
-          <section className="rounded border border-[#f8a98f] border-l-4 border-l-accent bg-[#fff8f5] p-4">
-            <p className="label !text-accent-ink">The internet doesn&apos;t know</p>
-            <p className="mt-1 text-base font-semibold">{result.question.text}</p>
-            <ul className="mt-2 flex flex-wrap gap-2 text-sm">
-              {result.question.options.map((o) => (
-                <li key={o} className="rounded border border-line bg-white px-3 py-1">{o}</li>
-              ))}
-            </ul>
-            <p className="mt-2 text-xs text-muted">
-              Price range the agent is testing: ${result.pricing.low} / ${result.pricing.mid} / ${result.pricing.high}
-            </p>
-          </section>
-          <section className="grid gap-4 rounded border border-line bg-panel p-4 md:grid-cols-[auto_1fr]">
-            <QrBlock url={SURVEY_URL} size={160} />
-            <div className="text-sm">
-              <p className="label">Ask real people with Flashpoint</p>
-              <p className="mt-1">{result.recommendation}</p>
-              <p className="mt-2 text-xs text-muted">Scan to answer. Responses are collected by Flashpoint and read back by the agent.</p>
+        <>
+          <section className="space-y-3">
+            <div className="flex items-baseline gap-3">
+              <span className="label">Section 01 // Economics</span>
+              {result.toolsUsed?.length ? <span className="chip px-3 py-1 font-mono text-xs">Flashpoint: {result.toolsUsed.join(", ")}</span> : null}
+            </div>
+            <div className="pebble p-6 sm:p-8">
+              <p className="text-2xl font-black tracking-tight">{result.region}</p>
+              <p className="mt-2 max-w-3xl text-base leading-relaxed text-ink-2">{result.economics}</p>
             </div>
           </section>
-        </div>
+
+          <section className="space-y-3">
+            <span className="label">Section 02 // Public sentiment</span>
+            <div className="sculpt p-6 sm:p-8">
+              <ul className="space-y-3">
+                {result.sentiment.map((x) => (
+                  <li key={x.text} className="flex items-start gap-3">
+                    <Badge tone={tone[x.label] ?? "neutral"}>{x.label}</Badge>
+                    <span className="text-base leading-relaxed">{x.text}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+
+          <section className="amber-card relative overflow-hidden p-6 sm:p-10">
+            <div className="relative space-y-6">
+              <span className="glass inline-flex items-center gap-2 rounded-full px-3 py-1.5 font-mono text-xs font-medium uppercase tracking-widest">
+                <span className="h-2.5 w-2.5 rounded-full bg-ochre" aria-hidden /> The gap // What only people can tell you
+              </span>
+              <h2 className="max-w-3xl text-4xl font-black leading-[1.05] tracking-tight sm:text-5xl">
+                &ldquo;The internet doesn&apos;t know.&rdquo;
+              </h2>
+              {unknown && <p className="max-w-3xl text-lg font-medium leading-relaxed text-ink/85">{unknown}</p>}
+              <div className="glass sculpt-alt grid gap-6 p-5 sm:p-6 md:grid-cols-[1.2fr_1fr]">
+                <div className="space-y-3">
+                  <p className="label !text-ink-2">The one question for real people</p>
+                  <p className="text-2xl font-black leading-tight">{result.question.text}</p>
+                  <ul className="flex flex-wrap gap-2">
+                    {result.question.options.map((o) => (
+                      <li key={o} className="chip px-4 py-1.5 text-sm font-bold">{o}</li>
+                    ))}
+                  </ul>
+                  <p className="font-mono text-xs text-ink-2">
+                    Testing ${result.pricing.low} / ${result.pricing.mid} / ${result.pricing.high}
+                  </p>
+                  <p className="text-sm font-semibold">{result.recommendation}</p>
+                </div>
+                <div className="truth-card flex justify-center p-5">
+                  <QrBlock url={SURVEY_URL} size={170} />
+                </div>
+              </div>
+            </div>
+          </section>
+        </>
       )}
     </div>
   );
