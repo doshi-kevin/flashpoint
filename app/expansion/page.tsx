@@ -265,7 +265,7 @@ export default function ExpansionPage() {
                   <Badge tone="sample">Sample ad</Badge>
                 </div>
                 <p className="text-sm font-semibold text-ink-2">
-                  Each person sees <b>one</b> price, picked at random. They never choose between prices. We count who redeems.
+                  Each person sees <b>one</b> price, picked at random. They never choose between prices. We count who actually pays it.
                 </p>
                 <div className="mx-auto max-w-xs rounded-md border-2 border-dashed border-ink bg-white p-4 text-center">
                   {shown === null ? (
@@ -274,10 +274,10 @@ export default function ExpansionPage() {
                     </button>
                   ) : (
                     <>
-                      <p className="text-sm font-black leading-tight">Extra cheese near Store 51</p>
+                      <p className="text-sm font-black leading-tight">Extra cheese near Store 51. Show this code at the register.</p>
                       <p className="my-2 text-4xl font-black">{usd(prices[shown])}</p>
                       <button onClick={() => tap(shown)} className="w-full rounded-md border border-ink/25 bg-lime px-3 py-3 text-lg font-black active:scale-95">
-                        Get my coupon
+                        Get my code
                       </button>
                     </>
                   )}
@@ -288,9 +288,9 @@ export default function ExpansionPage() {
                       <li key={c.code} className="flex items-center justify-between rounded border border-line bg-card px-3 py-1 font-mono text-xs">
                         <span>{c.code} · {usd(prices[c.arm])}</span>
                         {c.redeemed ? (
-                          <span className="font-bold text-moss">Redeemed ✓</span>
+                          <span className="font-bold text-moss">Paid ✓</span>
                         ) : (
-                          <button onClick={() => redeem(c.code)} className="font-bold underline">Redeem at register</button>
+                          <button onClick={() => redeem(c.code)} className="font-bold underline">Pays at register</button>
                         )}
                       </li>
                     ))}
@@ -298,7 +298,7 @@ export default function ExpansionPage() {
                 )}
                 <table className="w-full text-left text-sm">
                   <thead className="label">
-                    <tr><th>Coupon</th><th>Used</th><th>Rate</th><th>Profit/100</th></tr>
+                    <tr><th>Price</th><th>Paid</th><th>Rate</th><th>Profit per 100 shown</th></tr>
                   </thead>
                   <tbody className="font-bold">
                     {[0, 1].map((a) => (
@@ -311,13 +311,13 @@ export default function ExpansionPage() {
                     ))}
                   </tbody>
                 </table>
-                <p className="font-mono text-xs text-muted">Each coupon has its own ID, so every redemption is a tracked conversion.</p>
+                <p className="font-mono text-xs text-muted">Not a discount: the code holds the price. Paying it at the register is a real purchase, traced by ID.</p>
               </div>
             </div>
 
             <div className="glass sculpt-sm p-4 text-center">
               <p className="text-xl font-black">
-                They SAY {q.options[0]} ({say.pct[0]}%). They DO redeem {usd(prices[winner])} and it earns {usd(profit100[winner])} per 100 coupons.
+                They SAY {q.options[0]} ({say.pct[0]}%). They DO pay {usd(prices[winner])}, and it earns {usd(profit100[winner])} per 100 people shown the ad.
               </p>
               <p className="text-sm font-semibold text-ink-2">{result.recommendation}</p>
             </div>
