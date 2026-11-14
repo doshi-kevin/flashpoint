@@ -316,7 +316,19 @@ export default function CaseView({ caseKey, title, problem, initialStoreId, init
           </div>
           {actionButton}
         </div>
-        {error && <p className="chip-alert rounded-2xl px-4 py-3 text-sm text-crimson">✕ {error}</p>}
+        {(facts && !facts.anomaly.flagged) || (error && /normal range/i.test(error)) ? (
+          <div className="glass sculpt-sm flex flex-wrap items-center justify-between gap-3 p-4">
+            <div>
+              <p className="text-lg font-black">This store is doing fine.</p>
+              <p className="text-sm font-semibold text-ink-2">Nothing to fix here. The bigger question is Kevin&apos;s next store.</p>
+            </div>
+            <Link href="/expansion" className="btn-lime px-5 py-3 text-base font-black text-ink">
+              Open the Store 51 case →
+            </Link>
+          </div>
+        ) : (
+          error && <p className="chip-alert rounded-2xl px-4 py-3 text-sm text-crimson">✕ {error}</p>
+        )}
       </section>
 
       {/* 01 What changed */}
