@@ -1,0 +1,9 @@
+{
+  "14": {
+    "question": "What would bring you back to Store 14 for lunch?",
+    "options": ["Extra cheese", "$1 off", "Faster line"],
+    "synthetic": [18, 62, 20],
+    "real": [9, 24, 67],
+    "sampleSize": 120
+  }
+}

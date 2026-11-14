@@ -1,0 +1,7 @@
+{
+  "question": "Which matters most in a demo: a polished UI, a clever idea, or a working product?",
+  "options": ["Polished UI", "Clever idea", "Working product"],
+  "synthetic": [20, 35, 45],
+  "real": [10, 25, 65],
+  "sampleSize": 0
+}
