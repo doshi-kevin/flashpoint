@@ -1,4 +1,4 @@
-// Shared types for Economic Pulse.
+// Shared types for Unknown.
 export type Store = { id: string; name: string; chain: string; area: string };
 export type SalesPoint = { date: string; sales: number };
 export type StoreEvent = { date: string; type: "rain" | "roadworks" | "competitor"; label: string };

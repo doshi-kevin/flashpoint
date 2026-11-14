@@ -1,8 +1,8 @@
-# Economic Pulse
+# Unknown
 
 **Forum Product Management Club hackathon · Track: Economic Signals · Sponsor: Flashpoint.AI**
 
-> Dashboards tell you which store is struggling. Economic Pulse asks the people who know why.
+> Dashboards tell you which store is struggling. Unknown asks the people who know why.
 
 Last updated: 14 Nov 2026. This file collects everything the team has worked out so far: the research on Flashpoint, the product idea, the user experience, the build plan, the pitch, and the Claude Code build prompt.
 
@@ -127,7 +127,7 @@ Webhooks are documented for panel providers and Stripe, not for survey responses
 - Testimonial industries: financial services, research consultancies, a political research firm, a full-service research agency, a major US bank, an enterprise software company. **No named customers.**
 - One case study: a weight-loss brand ("Yo-yo dieters"), on market experiments.
 - Podcast examples: lactose-free ice cream, a liberal arts college, car insurance in an emerging market.
-- **No mention of restaurants, retail, franchises, multi-location businesses or customer experience** on the homepage or blog teasers. Economic Pulse would be a **new industry and a new usage pattern** for them.
+- **No mention of restaurants, retail, franchises, multi-location businesses or customer experience** on the homepage or blog teasers. Unknown would be a **new industry and a new usage pattern** for them.
 - Their messaging matches ours: blog post "There are no people inside the model" argues a synthetic answer is not a real observation; May 2026 post announced MCP and API access so agents can reach real people.
 
 ### Pricing (from flashpoint.ai/pricing)
@@ -141,7 +141,7 @@ Webhooks are documented for panel providers and Stripe, not for survey responses
 
 ## 3. The idea
 
-**Economic Pulse** is a hyperlocal economic signal tool for multi-location businesses: restaurant chains, retail chains, franchise groups.
+**Unknown** is a hyperlocal economic signal tool for multi-location businesses: restaurant chains, retail chains, franchise groups.
 
 When a store's sales move, it works out whether the cause is:
 1. **the local economy** (are people in this area spending less?),
@@ -179,7 +179,7 @@ Every store is a sensor of its neighbourhood's economy. Separating economy from 
 | 2. Local market | Are they spending elsewhere? | Competitor offers, plus Flashpoint asking where they go instead |
 | 3. The store | Is it something about us? | Store data, plus Flashpoint asking staff and customers |
 
-**Pitch line:** "Economic Pulse reads a neighbourhood's economy through the stores in it. When sales move, it works out whether the cause is the local economy, the local market or the store, by asking the people who live and work there."
+**Pitch line:** "Unknown reads a neighbourhood's economy through the stores in it. When sales move, it works out whether the cause is the local economy, the local market or the store, by asking the people who live and work there."
 
 **Closing line:** "Across a chain, every store becomes a daily reading of its neighbourhood's spending: a street-level economic signal no government statistic gives you."
 
@@ -573,7 +573,7 @@ About 3.5 minutes. Fill **[N]** and **[X]** with real Survey A results. Never es
 
 **[0:40, Problem]** "Meet Dana. She's a district manager responsible for eight restaurants. Monday morning, store #14 is in red: lunch is down 18% for nine days. Her dashboard tells her which store is struggling. It doesn't tell her why. So she does what most managers do. She runs a discount."
 
-**[1:00, Is it the economy?]** "Economic Pulse starts with the economy. Are people in this neighbourhood spending less? The nearby comparison stores are flat, and local people aren't telling us they're cutting back. So it's not the local economy. It's this store."
+**[1:00, Is it the economy?]** "Unknown starts with the economy. Are people in this neighbourhood spending less? The nearby comparison stores are flat, and local people aren't telling us they're cutting back. So it's not the local economy. It's this store."
 
 **[1:20, The suspects]** "Three suspects. Rain: it rained at dinner, not lunch. A competitor's offer: it started a week after the drop. Access: there's a building permit on the block, but a permit isn't proof. The system says what it doesn't know: can customers actually reach the front door?"
 
@@ -585,12 +585,12 @@ About 3.5 minutes. Fill **[N]** and **[X]** with real Survey A results. Never es
 
 **[3:05, Bigger picture]** "Across a chain, every store becomes a daily reading of its neighbourhood's economy: a street-level economic signal no government statistic can give you."
 
-**[3:20, Honesty and close]** *(Honesty slide.)* "To be clear: store #14 is fictional and its sales data is synthetic. The survey answers, and your answers in this room, are real. Dashboards tell you which store is struggling. Economic Pulse asks the people who know why."
+**[3:20, Honesty and close]** *(Honesty slide.)* "To be clear: store #14 is fictional and its sales data is synthetic. The survey answers, and your answers in this room, are real. Dashboards tell you which store is struggling. Unknown asks the people who know why."
 
 ### Five slides
 
 1. The Monday guess (real Survey A number as hook)
-2. Economic Pulse: economy → market → store, asked through Flashpoint
+2. Unknown: economy → market → store, asked through Flashpoint
 3. Live demo
 4. Flashpoint at the core: the evidence ladder and price of certainty
 5. Honesty slide and path to a pilot
@@ -676,20 +676,20 @@ Email developers@flashpoint.ai and ask at the event:
 Paste this into Claude Code at the start of the build.
 
 ````markdown
-# Build brief: Economic Pulse (3-hour hackathon build)
+# Build brief: Unknown (3-hour hackathon build)
 
 You are helping a small team build a hackathon demo in 3 hours. Prioritise a working, reliable demo over completeness. Work in the milestones below, show me progress after each, and keep everything simple enough to run locally with one command.
 
 ## 1. The idea
 
-Economic Pulse is a hyperlocal economic signal tool for multi-location businesses (restaurant chains, retail, franchises). When a store's sales move, it works out whether the cause is:
+Unknown is a hyperlocal economic signal tool for multi-location businesses (restaurant chains, retail, franchises). When a store's sales move, it works out whether the cause is:
 1. the local economy (are people in this area spending less?),
 2. the local market (are they spending somewhere else?), or
 3. the store itself (is it something about this store?).
 
 It does this by asking the people who know, through Flashpoint.AI (our sponsor), then recommends an action and a way to measure it.
 
-Tagline: "Dashboards tell you which store is struggling. Economic Pulse asks the people who know why."
+Tagline: "Dashboards tell you which store is struggling. Unknown asks the people who know why."
 
 Hackathon track: Economic Signals (hyperlocal sentiment and economic research). Every store is a sensor of its neighbourhood's economy.
 

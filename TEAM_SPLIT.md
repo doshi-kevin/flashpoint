@@ -48,4 +48,4 @@ Shared, touch rarely and tell the others: `package.json` (add dependencies only 
 - Kevin's API output -> `lib/types.ts` -> Janvi renders it.
 
 ## Heads-up: two directions in the repo
-`janvi.md` describes **Casefile** (commercial real estate, "temporary vs structural" verdict); `adi.md` and the current code are **Economic Pulse** (store sales). The scaffold follows Economic Pulse. Decide as a team before building more, because Casefile would change the data, the copy and the agent prompt.
+`janvi.md` describes **Casefile** (commercial real estate, "temporary vs structural" verdict); `adi.md` and the current code are **Unknown** (store sales). The scaffold follows Unknown. Decide as a team before building more, because Casefile would change the data, the copy and the agent prompt.

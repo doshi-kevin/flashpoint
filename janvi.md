@@ -167,7 +167,7 @@ Flashpoint is a research platform. You describe a research goal; it plans the st
 - **The "why":** WhyLine, Because, Root
 - **Place:** StreetSignal, Corner
 - **Unreachable voices:** Unheard, Walkaway, Last Visit
-- **Original:** Economic Pulse (clear but generic; "Pulse" is common)
+- **Original:** Unknown (clear but generic; "Pulse" is common)
 
 Check names for existing products before committing.
 
@@ -193,7 +193,7 @@ Agents find the riskiest assumptions in a PM's plan, the PM approves which to te
 - Competitors: assumption-finding tools (Microsoft Lacuna agent, PM prompt skills) stop at a list; AI interview tools (Outset, Listen Labs, Strella, GetWhy, Maze) run studies you design but don't find your blind spots; synthetic users are directional only.
 - Moved on: wanted an idea not built on ThinFile's themes, and a stronger economic angle.
 
-### 5. Economic Pulse: why is one store losing sales? (store level)
+### 5. Unknown: why is one store losing sales? (store level)
 - **User:** Raj, a franchise owner with 6 stores.
 - **Story:** a Subway near Lincoln Center, 4.5 stars, lunch sales down 18%. Suspects: unfriendly service, charging for extras that competitors give free, construction (noise, scaffolding), no cell network. **Verdict:** scaffolding killed the cell signal, so card and app payments fail. Fix: a signal booster and a pickup shelf, not a discount.
 - **Key insights we keep:**

@@ -1,4 +1,4 @@
-# Economic Pulse: pitch, structure and script
+# Unknown: pitch, structure and script
 
 Written for: judges and Flashpoint staff. Presenters: Aditya (opens) and Kevin (demo).
 
@@ -42,7 +42,7 @@ Written for: judges and Flashpoint staff. Presenters: Aditya (opens) and Kevin (
 
 **Aditya (opens):** "Hey, meet my friend Kevin. Kevin runs fifty burger stores. Next month he opens number fifty-one, in a city he has never set foot in. He doesn't know the neighborhood, he doesn't know what people there think of burger chains, and he has no idea what to charge. Today he'd guess, or pay a consultant and wait weeks. A wrong guess costs him a lease."
 
-**Kevin:** "So I opened Economic Pulse and typed one thing: Raleigh, North Carolina."
+**Kevin:** "So I opened Unknown and typed one thing: Raleigh, North Carolina."
 
 *(Click Research this region. The steps appear.)*
 

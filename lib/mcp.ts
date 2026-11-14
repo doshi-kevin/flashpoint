@@ -29,7 +29,7 @@ async function rpc(body: object, sid?: string) {
 async function session() {
   const init = await rpc({
     jsonrpc: "2.0", id: 1, method: "initialize",
-    params: { protocolVersion: "2025-03-26", capabilities: {}, clientInfo: { name: "economic-pulse", version: "1" } },
+    params: { protocolVersion: "2025-03-26", capabilities: {}, clientInfo: { name: "unknown", version: "1" } },
   });
   await rpc({ jsonrpc: "2.0", method: "notifications/initialized" }, init.sid);
   return init.sid;

@@ -1,4 +1,4 @@
-# Economic Pulse
+# Unknown
 
 When a store's sales drop, an AI agent investigates, admits what public data can't explain, and designs a one-question study to ask real people (via Flashpoint.AI).
 

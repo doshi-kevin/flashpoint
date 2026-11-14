@@ -1,6 +1,6 @@
-# Merged plan: Economic Pulse x Casefile
+# Merged plan: Unknown x Casefile
 
-Both `adi.md` (Economic Pulse) and `janvi.md` (Casefile) tell the same story. This file is the one version we build.
+Both `adi.md` (Unknown) and `janvi.md` (Casefile) tell the same story. This file is the one version we build.
 
 > **Data tells you what. People tell you why.** Claude knows what it doesn't know. Flashpoint goes and asks.
 
@@ -13,9 +13,9 @@ Both `adi.md` (Economic Pulse) and `janvi.md` (Casefile) tell the same story. Th
 6. Honest labels: every claim has a source, uncertainty is words not fake percentages, demo data is labelled.
 
 ## The mix (what we build)
-- **Product name and demo world:** **Economic Pulse**, store level (fictional sandwich chain, Store 14). It is what the code already does and it is simple to demo.
+- **Product name and demo world:** **Unknown**, store level (fictional sandwich chain, Store 14). It is what the code already does and it is simple to demo.
 - **Casefile's best parts, kept:** the detective framing ("open the case, collect clues, name suspects, check alibis, question witnesses, close the case"), a **Challenger** agent that tries to clear suspects, and a **temporary vs structural** verdict.
-- **Economic Pulse's best parts, kept:** code computes every number, the evidence ladder (store data, then staff, then customers, then a panel), the synthetic-vs-real contrast, the review-integrity idea, and the coupon base for lapsed customers (designed, not run).
+- **Unknown's best parts, kept:** code computes every number, the evidence ladder (store data, then staff, then customers, then a panel), the synthetic-vs-real contrast, the review-integrity idea, and the coupon base for lapsed customers (designed, not run).
 - **Judges as witnesses:** QR on the closing slide; their answers are the live "real people said" column.
 - **Stretch (only if time):** the "why" map (taps on a photo cluster on one spot).
 - **Dropped:** commercial real estate as the main story (Casefile) and investment alpha. Casefile can be one sentence in the pitch ("same engine works for a shopping street").

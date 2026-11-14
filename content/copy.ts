@@ -1,6 +1,6 @@
 // All user-facing text lives here so it can be edited in one place.
 export const copy = {
-  appName: "Economic Pulse",
+  appName: "Unknown",
   workspace: "Ember Burger Co.",
   tagline: "Claude knows what it doesn't know. Flashpoint goes and asks.",
   nav: { cases: "Cases", survey: "Live survey" },
