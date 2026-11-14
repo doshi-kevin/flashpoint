@@ -29,8 +29,9 @@ Without an API key the app still works: `/api/agent` falls back to `data/fallbac
 
 ## Screens
 
-1. `/` One page. A judge types a business problem (or picks an example). Live Claude agents (Detective + Challenger) investigate, streaming each step; the page shows suspects, "the internet doesn't know", and the one question to ask. "Send to real people on Flashpoint" shows the study (replay of saved results for Store 14) and the decision. "Instant replay" mode skips Claude.
-2. `/judges` Closing slide: QR + synthetic judges vs "You said".
+1. `/` Cases list (Jira-style): auto-detected cases (anomaly rule) and a store-health table. "Create case" in the top bar lets anyone describe a problem.
+2. `/case/[id]` (e.g. `/case/14`) and `/case/new`: one case with a workflow status (Open → Investigating → Investigated → In field → Study complete → Decision ready → Approved), tabs (Overview, Investigation, Flashpoint study, Decision) and a Details panel. Live Claude agents (Detective + Challenger) stream their steps; "Replay" mode skips Claude.
+3. `/judges` Live survey: QR + synthetic judges vs "You said".
 
 ## File map
 
@@ -58,3 +59,10 @@ Leave `lib/`, `app/api/`, and `data/` alone.
 
 - Mock/replayed views carry a "Sample data" or "Replay" badge (`components/SampleBadge.tsx`).
 - This Next.js version enables Cache Components; dynamic `[storeId]` pages set `export const instant = false`.
+
+## Integration handoff (Aditya)
+
+- **Flashpoint (real study):** `lib/flashpoint.ts` (`FlashpointAdapter`, `FLASHPOINT_MODE=live`). The Study tab calls `GET /api/study/[storeId]`; return real `synthetic` and `real` percentages and it renders with no UI change. The fielding animation is a replay (`components/FieldingPanel.tsx`); swap it for real progress when live.
+- **Agents:** `lib/investigate.ts` (prompts, Detective + Challenger) streamed by `app/api/agent/route.ts`. Needs `ANTHROPIC_API_KEY` in `.env.local`.
+- **Data:** `data/*.json` (sales, events, signals, study results, decisions, judges).
+- **UI state:** `components/CaseView.tsx` (stream/fetch + workflow stages). Don't move the fetch calls.

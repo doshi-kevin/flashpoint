@@ -5,12 +5,12 @@ import { copy } from "@/content/copy";
 
 export default function QrBlock({ url, size = 256 }: { url: string; size?: number }) {
   return (
-    <div className="flex flex-col items-center gap-3">
-      <div className="rounded-xl border border-line bg-white p-4">
+    <div className="flex flex-col items-center gap-2">
+      <div className="rounded border border-line bg-white p-3">
         <QRCodeSVG value={url} size={size} />
       </div>
-      <p className="font-serif text-xl">{copy.judges.scan}</p>
-      <p className="text-xs text-muted">{url}</p>
+      <p className="text-sm font-semibold">{copy.survey.scan}</p>
+      <p className="max-w-[220px] break-all text-center text-xs text-muted">{url}</p>
     </div>
   );
 }

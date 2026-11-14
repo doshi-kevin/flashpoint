@@ -1,4 +1,4 @@
-// "Sample data" / "Replay" badge shown on any mock or replayed view. Props: kind ("sample" | "replay").
+// "Sample data" / "Replay" lozenge shown on any mock or replayed view. Props: kind ("sample" | "replay").
 import Badge from "./Badge";
 import { copy } from "@/content/copy";
 

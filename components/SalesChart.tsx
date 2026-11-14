@@ -15,7 +15,7 @@ export default function SalesChart({ data, events }: { data: SalesPoint[]; event
             <XAxis dataKey="date" tick={{ fontSize: 10, fill: "#6a665c" }} stroke="#e4e0d6" minTickGap={30} />
             <YAxis domain={["auto", "auto"]} tick={{ fontSize: 10, fill: "#6a665c" }} stroke="#e4e0d6" width={40} />
             <Tooltip />
-            <Line type="monotone" dataKey="sales" stroke="#121110" strokeWidth={2} dot={false} />
+            <Line type="monotone" dataKey="sales" stroke="#172b4d" strokeWidth={2} dot={false} />
             {events.map((e) => (
               <ReferenceLine key={e.date + e.type} x={e.date} stroke={eventColor[e.type]} strokeDasharray="4 2" />
             ))}
