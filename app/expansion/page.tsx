@@ -123,9 +123,13 @@ export default function ExpansionPage() {
   }
 
   // The ad: a tap issues a coupon with its own ID; redeeming that coupon at the register is the conversion.
+  // Which single price the NEXT person is shown. Random assignment, so the price is the only thing that differs.
+  const [shown, setShown] = useState<0 | 1 | null>(null);
+  const nextPerson = () => setShown(Math.random() < 0.5 ? 0 : 1);
   function tap(arm: 0 | 1) {
     const code = `EMB51-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
     setCoupons((c) => [{ code, arm, redeemed: false }, ...c].slice(0, 40));
+    setShown(null);
   }
   const redeem = (code: string) => setCoupons((c) => c.map((x) => (x.code === code ? { ...x, redeemed: true } : x)));
 
@@ -260,15 +264,23 @@ export default function ExpansionPage() {
                   <p className="text-xl font-black">What they DO</p>
                   <Badge tone="sample">Sample ad</Badge>
                 </div>
+                <p className="text-sm font-semibold text-ink-2">
+                  Each person sees <b>one</b> price, picked at random. They never choose between prices. We count who redeems.
+                </p>
                 <div className="mx-auto max-w-xs rounded-md border-2 border-dashed border-ink bg-white p-4 text-center">
-                  <p className="text-sm font-black leading-tight">Extra cheese near Store 51. Grab your coupon.</p>
-                  <div className="mt-3 grid grid-cols-2 gap-2">
-                    {[0, 1].map((a) => (
-                      <button key={a} onClick={() => tap(a as 0 | 1)} className="rounded-md border border-ink/25 bg-lime px-3 py-3 text-lg font-black active:scale-95">
-                        {usd(prices[a])} cheese
+                  {shown === null ? (
+                    <button onClick={nextPerson} className="w-full rounded-md border border-ink/25 bg-soft px-3 py-3 text-base font-black active:scale-95">
+                      Show the ad to the next person
+                    </button>
+                  ) : (
+                    <>
+                      <p className="text-sm font-black leading-tight">Extra cheese near Store 51</p>
+                      <p className="my-2 text-4xl font-black">{usd(prices[shown])}</p>
+                      <button onClick={() => tap(shown)} className="w-full rounded-md border border-ink/25 bg-lime px-3 py-3 text-lg font-black active:scale-95">
+                        Get my coupon
                       </button>
-                    ))}
-                  </div>
+                    </>
+                  )}
                 </div>
                 {coupons.length > 0 && (
                   <ul className="max-h-28 space-y-1 overflow-auto">
