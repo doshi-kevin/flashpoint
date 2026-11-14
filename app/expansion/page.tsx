@@ -78,7 +78,7 @@ export default function ExpansionPage() {
 
   // Warm Flashpoint (tool list + demographics) while the presenter is talking, so the click is fast.
   useEffect(() => {
-    fetch("/api/expansion?region=" + encodeURIComponent("Raleigh, North Carolina")).catch(() => {});
+    fetch("/api/expansion").catch(() => {});
   }, []);
 
   async function run() {

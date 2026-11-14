@@ -49,12 +49,12 @@ function pickKpis(out: unknown) {
   };
 }
 
-/** GET ?region=... warms the caches (tool list and demographics) so the live run is fast. Safe: read-only. */
-export async function GET(req: Request) {
-  const region = (new URL(req.url).searchParams.get("region") ?? "").trim().slice(0, 80);
+/** GET warms the caches for ONE fixed demo region (no user input, so it can't be used as a proxy). */
+const WARM_REGION = "Raleigh, North Carolina";
+export async function GET() {
   try {
     await listTools();
-    if (region) await callToolCached("demographics", { location: abbreviate(region) ?? region });
+    await callToolCached("demographics", { location: abbreviate(WARM_REGION) ?? WARM_REGION });
     return Response.json({ warmed: true });
   } catch {
     return Response.json({ warmed: false });

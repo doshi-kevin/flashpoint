@@ -52,6 +52,9 @@ export function callToolCached(name: string, args: Record<string, unknown>): Pro
   const key = name + JSON.stringify(args).toLowerCase();
   const hit = callCache.get(key);
   if (hit && Date.now() - hit.at < 15 * 60_000) return hit.value;
+  // Bounded cache: drop expired entries, and the oldest one when full.
+  for (const [k, v] of callCache) if (Date.now() - v.at >= 15 * 60_000) callCache.delete(k);
+  if (callCache.size >= 50) callCache.delete(callCache.keys().next().value as string);
   const value = callTool(name, args);
   callCache.set(key, { at: Date.now(), value });
   value.catch(() => callCache.delete(key));
